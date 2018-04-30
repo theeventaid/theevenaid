@@ -5,17 +5,16 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "artists")
-public class event_tickets {
+@Table(name = "tickets")
+public class Ticket {
 
     @Id
     @GeneratedValue
     @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
-    @Id
-    @Column
-    private long user_id;
+    @OneToOne
+    private User user;
 
     @Column(nullable = false)
     private BigDecimal price;
@@ -27,16 +26,14 @@ public class event_tickets {
     private String name;
 
 
-    public event_tickets(long id,long user_id, BigDecimal price, Timestamp purchased_on, String name) {
+    public Ticket(long id, long user_id, BigDecimal price, Timestamp purchased_on, String name) {
         this.id = id;
-        this.user_id = user_id;
         this.price = price;
         this.purchased_on = purchased_on;
         this.name = name;
     }
 
-    public event_tickets(long user_id, BigDecimal price, Timestamp purchased_on, String name) {
-        this.user_id = user_id;
+    public Ticket(long user_id, BigDecimal price, Timestamp purchased_on, String name) {
         this.price = price;
         this.purchased_on = purchased_on;
         this.name = name;
@@ -50,12 +47,12 @@ public class event_tickets {
         this.id = id;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public BigDecimal getPrice() {
