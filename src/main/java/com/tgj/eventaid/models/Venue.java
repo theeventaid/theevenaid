@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "venues")
-public class venues {
+public class Venue {
 
     @Id
     @GeneratedValue
@@ -25,7 +25,7 @@ public class venues {
     @Column(nullable = false)
     private String contract_location;
 
-    public venues(long id,BigDecimal costs, String address, boolean contract, String contract_location) {
+    public Venue(long id, BigDecimal costs, String address, boolean contract, String contract_location) {
         this.id = id;
         this.costs = costs;
         this.address = address;
@@ -33,7 +33,7 @@ public class venues {
         this.contract_location = contract_location;
     }
 
-    public venues(BigDecimal costs, String address, boolean contract, String contract_location) {
+    public Venue(BigDecimal costs, String address, boolean contract, String contract_location) {
         this.costs = costs;
         this.address = address;
         this.contract = contract;
