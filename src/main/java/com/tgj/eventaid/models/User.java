@@ -36,6 +36,8 @@ public class User {
     @Column(nullable = false)
     private boolean owner;
 
+    public User() {}
+
     public User(String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;

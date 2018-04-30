@@ -25,6 +25,8 @@ public class Venue {
     @Column(nullable = false)
     private String contract_location;
 
+    public Venue() {}
+
     public Venue(long id, BigDecimal costs, String address, boolean contract, String contract_location) {
         this.id = id;
         this.costs = costs;

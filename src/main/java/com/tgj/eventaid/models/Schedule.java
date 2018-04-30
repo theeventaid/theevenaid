@@ -31,6 +31,8 @@ public class Schedule {
     @OneToOne
     private Artist artist;
 
+    public Schedule() {}
+
     public Schedule(long id, long event_id, Time start_time, Time end_time, String subject, String location) {
         this.id= id;
         this.start_time = start_time;

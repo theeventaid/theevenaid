@@ -26,6 +26,8 @@ public class Budget {
     @Column(nullable = false)
     private Integer event_id;
 
+    public Budget() {}
+
     public Budget(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
         this.id = id;
         this.event_budget = event_budget;

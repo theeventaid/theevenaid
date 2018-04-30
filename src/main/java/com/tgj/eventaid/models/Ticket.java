@@ -25,6 +25,7 @@ public class Ticket {
     @Column(nullable = false)
     private String name;
 
+    public Ticket() {}
 
     public Ticket(long id, long user_id, BigDecimal price, Timestamp purchased_on, String name) {
         this.id = id;

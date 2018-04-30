@@ -30,6 +30,8 @@ public class Event {
     @Column(nullable = false)
     private Integer venue_id;
 
+    public Event() {}
+
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
         this.id = id;
         this.name = name;

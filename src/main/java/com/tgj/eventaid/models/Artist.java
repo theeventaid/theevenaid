@@ -31,6 +31,8 @@ public class Artist {
     @Column
     private String notes;
 
+    public Artist() {}
+
     public Artist(long id, String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes) {
         this.id = id;
         this.firstname = firstname;
