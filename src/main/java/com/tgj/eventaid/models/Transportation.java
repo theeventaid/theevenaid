@@ -12,8 +12,9 @@ public class Transportation {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
-    private long artists_id;
+    @OneToOne  // relationship to events.id
+    @JoinColumn (name = "artist_id")
+    private Artists artist_id;
 
     @Column(nullable = false)
     private Date pickup;
@@ -27,8 +28,7 @@ public class Transportation {
     @Column(nullable = false)
     private double uber_cost;
 
-    // artist_id is foreign key to artists.id
-
+    // finished setting table logic
 
     public long getId() {
         return id;
@@ -36,14 +36,6 @@ public class Transportation {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getArtists_id() {
-        return artists_id;
-    }
-
-    public void setArtists_id(long artists_id) {
-        this.artists_id = artists_id;
     }
 
     public Date getPickup() {
@@ -76,5 +68,13 @@ public class Transportation {
 
     public void setUber_cost(double uber_cost) {
         this.uber_cost = uber_cost;
+    }
+
+    public Artists getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(Artists artist_id) {
+        this.artist_id = artist_id;
     }
 }

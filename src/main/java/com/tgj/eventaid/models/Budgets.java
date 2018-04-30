@@ -22,22 +22,23 @@ public class Budgets {
     @Column(nullable = false)
     private BigDecimal target_profit;
 
-    @Column(nullable = false)
-    private Integer event_id;  // relationship to events.id
+    @ManyToOne  // relationship to events.id
+    @JoinColumn (name = "event_id")
+    private Events event;
 
-    public Budgets(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
+    public Budgets(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Events event) {
         this.id = id;
         this.event_budget = event_budget;
         this.target_spending = target_spending;
         this.target_profit = target_profit;
-        this.event_id = event_id;
+        this.event= event;
     }
 
-    public Budgets(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
+    public Budgets(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Events event) {
         this.event_budget = event_budget;
         this.target_spending = target_spending;
         this.target_profit = target_profit;
-        this.event_id = event_id;
+        this.event = event;
     }
 
     public long getId() {
@@ -72,11 +73,11 @@ public class Budgets {
         this.target_profit = target_profit;
     }
 
-    public Integer getEvent_id() {
-        return event_id;
+    public Events getEvent() {
+        return event;
     }
 
-    public void setEvent_id(Integer event_id) {
-        this.event_id = event_id;
+    public void setEvent(Events event) {
+        this.event = event;
     }
 }
