@@ -38,6 +38,13 @@ public class User {
 
     public User() {}
 
+    public User(User copy) {
+        id=copy.id;
+        email=copy.email;
+        password=copy.password;
+
+    }
+
     public User(String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;
