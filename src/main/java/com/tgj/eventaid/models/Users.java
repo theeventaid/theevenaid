@@ -2,6 +2,7 @@ package com.tgj.eventaid.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -35,7 +36,11 @@ public class Users {
     @Column(nullable = false)
     private boolean owner;
 
-    // users.id must be foreign key to users_events.user_id, and event_tickets.user_id
+    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Tickets class)
+    private List<Tickets> eventTickets;
+
+//    @ManyToMany (mappedBy = "event_id")
+//    private List<Events> event_id;
 
     // This is useful to insert users
     public Users(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
@@ -118,19 +123,27 @@ public class Users {
         this.telephone = telephone;
     }
 
-    public String getCreatedon() {
-        return created_on;
-    }
-
-    public void setCreatedon(String created_on) {
-        this.created_on = created_on;
-    }
-
     public boolean isOwner() {
         return owner;
     }
 
     public void setOwner(boolean owner) {
         this.owner = owner;
+    }
+
+    public String getCreated_on() {
+        return created_on;
+    }
+
+    public void setCreated_on(String created_on) {
+        this.created_on = created_on;
+    }
+
+    public List<Tickets> getEventTickets() {
+        return eventTickets;
+    }
+
+    public void setEventTickets(List<Tickets> eventTickets) {
+        this.eventTickets = eventTickets;
     }
 }

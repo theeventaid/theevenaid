@@ -12,8 +12,8 @@ public class Schedules {
     @GeneratedValue
     private long id;
 
-    @OneToOne
-    private Events event_id;
+//    @OneToOne
+//    private Events event_id;
 
     @Column(nullable = false)
     private Time start_time;
@@ -27,7 +27,12 @@ public class Schedules {
     @Column(nullable = false)
     private String location;
 
-    @OneToOne
+    @ManyToOne  // relationship to events.id
+    @JoinColumn (name = "event_id")
+    private Events event_id;
+
+    @ManyToOne  // relationship to events.id
+    @JoinColumn (name = "artist_id")
     private Artists artist_id;
 
     // artist_id is foreign key to artists.id, and event_id is foreign key to events.id

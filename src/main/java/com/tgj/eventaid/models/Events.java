@@ -2,6 +2,7 @@ package com.tgj.eventaid.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -26,12 +27,20 @@ public class Events {
     @Column(nullable = false)
     private String url;
 
-    @Column(nullable = false)
-    private Integer venue_id;
+    @OneToOne  // relationship to events.id
+    @JoinColumn (name = "venue_id")
+    private Venues venue_id;
 
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
+    @ManyToMany
+    @JoinTable(
+            name = "users_events",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<Users> users;
 
-    public Events(long id, String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    public Events(long id, String name, Date start_date, Date end_date, String location, String url, Venues venue_id) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -41,7 +50,7 @@ public class Events {
         this.venue_id = venue_id;
     }
 
-    public Events(String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    public Events(String name, Date start_date, Date end_date, String location, String url, Venues venue_id) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -98,11 +107,19 @@ public class Events {
         this.url = url;
     }
 
-    public Integer getVenue_id() {
+    public Venues getVenue_id() {
         return venue_id;
     }
 
-    public void setVenue_id(Integer venue_id) {
+    public void setVenue_id(Venues venue_id) {
         this.venue_id = venue_id;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 }
