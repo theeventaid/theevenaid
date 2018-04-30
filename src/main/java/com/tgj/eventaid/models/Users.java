@@ -2,14 +2,14 @@ package com.tgj.eventaid.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
     @Column(nullable = false)
@@ -31,32 +31,31 @@ public class User {
     private String telephone;
 
     @Column(nullable = false)
-    private String createdon;
+    private String created_on;
 
     @Column(nullable = false)
     private boolean owner;
 
-    public User() {}
+    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Tickets class)
+    private List<Tickets> eventTickets;
 
-    public User(User copy) {
-        id=copy.id;
-        email=copy.email;
-        password=copy.password;
+//    @ManyToMany (mappedBy = "event_id")
+//    private List<Events> event_id;
 
-    }
-
-    public User(String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
+    // This is useful to insert users
+    public Users(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.createdon = createdon;
+        this.created_on = created_on;
         this.owner = owner;
     }
 
-    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
+    // This is useful to get a full user obj
+    public Users(long id, String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,7 +63,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.createdon = createdon;
+        this.created_on = created_on;
         this.owner = owner;
     }
 
@@ -124,19 +123,27 @@ public class User {
         this.telephone = telephone;
     }
 
-    public String getCreatedon() {
-        return createdon;
-    }
-
-    public void setCreatedon(String createdon) {
-        this.createdon = createdon;
-    }
-
     public boolean isOwner() {
         return owner;
     }
 
     public void setOwner(boolean owner) {
         this.owner = owner;
+    }
+
+    public String getCreated_on() {
+        return created_on;
+    }
+
+    public void setCreated_on(String created_on) {
+        this.created_on = created_on;
+    }
+
+    public List<Tickets> getEventTickets() {
+        return eventTickets;
+    }
+
+    public void setEventTickets(List<Tickets> eventTickets) {
+        this.eventTickets = eventTickets;
     }
 }
