@@ -26,6 +26,7 @@ public class Budgets {
     @JoinColumn (name = "event_id")
     private Events event;
 
+
     public Budgets(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Events event) {
         this.id = id;
         this.event_budget = event_budget;

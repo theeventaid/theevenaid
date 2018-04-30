@@ -40,7 +40,9 @@ public class Events {
     )
     private List<Users> users;
 
+
     public Events(long id, String name, Date start_date, Date end_date, String location, String url, Venues venue_id) {
+
         this.id = id;
         this.name = name;
         this.start_date = start_date;
