@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-    @Table(name = "events")
-public class events {
+@Table(name = "events")
+public class Event {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class events {
     @Column(nullable = false)
     private Integer venue_id;
 
-    public events(long id,String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -40,7 +40,7 @@ public class events {
         this.venue_id = venue_id;
     }
 
-    public events(String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
