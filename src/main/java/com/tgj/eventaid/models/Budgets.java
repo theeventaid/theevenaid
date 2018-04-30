@@ -7,11 +7,10 @@ import java.text.DecimalFormat;
 
 @Entity
 @Table(name = "budgets")
-public class Budget {
+public class Budgets {
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
     @Column(nullable = false)
@@ -24,9 +23,9 @@ public class Budget {
     private BigDecimal target_profit;
 
     @Column(nullable = false)
-    private Integer event_id;
+    private Integer event_id;  // relationship to events.id
 
-    public Budget(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
+    public Budgets(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
         this.id = id;
         this.event_budget = event_budget;
         this.target_spending = target_spending;
@@ -34,7 +33,7 @@ public class Budget {
         this.event_id = event_id;
     }
 
-    public Budget(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
+    public Budgets(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Integer event_id) {
         this.event_budget = event_budget;
         this.target_spending = target_spending;
         this.target_profit = target_profit;

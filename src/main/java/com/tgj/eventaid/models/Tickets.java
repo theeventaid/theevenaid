@@ -5,16 +5,15 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "tickets")
-public class Ticket {
+@Table(name = "event_tickets")
+public class Tickets {
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
-    @OneToOne
-    private User user;
+    @Column(nullable = false)
+    private long user_id;
 
     @Column(nullable = false)
     private BigDecimal price;
@@ -23,20 +22,26 @@ public class Ticket {
     private Timestamp purchased_on;
 
     @Column(nullable = false)
-    private String name;
+    private long event_id;
 
+    @OneToOne  // must add a foreign key to user_id from event_tickets
+    private Users user;
 
-    public Ticket(long id, long user_id, BigDecimal price, Timestamp purchased_on, String name) {
+    // users_events will be a pivot table between events and users on user_id and events_id
+
+    // This is useful to insert users
+    public Tickets(long id, long user_id, BigDecimal price, Timestamp purchased_on, long event_id) {
         this.id = id;
         this.price = price;
         this.purchased_on = purchased_on;
-        this.name = name;
+        this.event_id = event_id;
     }
 
-    public Ticket(long user_id, BigDecimal price, Timestamp purchased_on, String name) {
+    // This is useful to get a full user obj
+    public Tickets(long user_id, BigDecimal price, Timestamp purchased_on, long event_id) {
         this.price = price;
         this.purchased_on = purchased_on;
-        this.name = name;
+        this.event_id = event_id;
     }
 
     public long getId() {
@@ -47,11 +52,11 @@ public class Ticket {
         this.id = id;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
@@ -71,11 +76,19 @@ public class Ticket {
         this.purchased_on = purchased_on;
     }
 
-    public String getName() {
-        return name;
+    public long getUser_id() {
+        return user_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
+    }
+
+    public long getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(long event_id) {
+        this.event_id = event_id;
     }
 }
