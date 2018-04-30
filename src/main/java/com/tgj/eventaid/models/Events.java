@@ -5,11 +5,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "events")
-public class Event {
+public class Events {
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
     @Column(nullable = false)
@@ -30,7 +29,9 @@ public class Event {
     @Column(nullable = false)
     private Integer venue_id;
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    // id must be in relationship to the users_events pivot table, and event_id on event_tickets
+
+    public Events(long id, String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -40,7 +41,7 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-    public Event(String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
+    public Events(String name, Date start_date, Date end_date, String location, String url, Integer venue_id) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;

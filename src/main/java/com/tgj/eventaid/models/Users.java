@@ -5,11 +5,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "INT(12) UNSIGNED")
     private long id;
 
     @Column(nullable = false)
@@ -31,23 +30,27 @@ public class User {
     private String telephone;
 
     @Column(nullable = false)
-    private String createdon;
+    private String created_on;
 
     @Column(nullable = false)
     private boolean owner;
 
-    public User(String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
+    // users.id must be foreign key to users_events.user_id, and event_tickets.user_id
+
+    // This is useful to insert users
+    public Users(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.createdon = createdon;
+        this.created_on = created_on;
         this.owner = owner;
     }
 
-    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, String createdon, boolean owner) {
+    // This is useful to get a full user obj
+    public Users(long id, String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -55,7 +58,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.telephone = telephone;
-        this.createdon = createdon;
+        this.created_on = created_on;
         this.owner = owner;
     }
 
@@ -116,11 +119,11 @@ public class User {
     }
 
     public String getCreatedon() {
-        return createdon;
+        return created_on;
     }
 
-    public void setCreatedon(String createdon) {
-        this.createdon = createdon;
+    public void setCreatedon(String created_on) {
+        this.created_on = created_on;
     }
 
     public boolean isOwner() {
