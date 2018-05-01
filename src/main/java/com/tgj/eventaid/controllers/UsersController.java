@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UsersController {
-
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+//
+//    private UserRepository userRepository;
+//    private PasswordEncoder passwordEncoder;
 
 //    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 //        this.userRepository = userRepository;
@@ -23,16 +23,16 @@ public class UsersController {
 
     @GetMapping("/register")
     public String showSignupForm(Model model) {
-//        model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
         return "/register";
     }
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
+//
+//    @PostMapping("/sign-up")
+//    public String saveUser(@ModelAttribute User user) {
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
 //        saveUser(user);
 //        userRepository.save(user);
-        return "redirect:/index";
-    }
+//        return "redirect:/index";
+//    }
 }
