@@ -43,6 +43,8 @@ public class Users {
 //    private List<Events> event_id;
 
     // This is useful to insert users
+
+
     public Users(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -65,6 +67,18 @@ public class Users {
         this.telephone = telephone;
         this.created_on = created_on;
         this.owner = owner;
+    }
+
+    public Users(Users copy) {
+        this.id = copy.id;
+        this.firstname = copy.firstname;
+        this.lastname = copy.lastname;
+        this.address = copy.address;
+        this.email = copy.email;
+        this.password = copy.password;
+        this.telephone = copy.telephone;
+        this.created_on = copy.created_on;
+        this.owner = copy.owner;
     }
 
     public long getId() {
