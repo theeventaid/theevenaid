@@ -66,6 +66,20 @@ public class Users {
         this.created_on = created_on;
         this.owner = owner;
     }
+    public Users(){
+
+    }
+    public Users(Users copy) {
+        this.id = id; // This line is SUPER important! Many things won't work if it's absent
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+        this.created_on = created_on;
+        this.owner = owner;
+    }
 
     public long getId() {
         return id;

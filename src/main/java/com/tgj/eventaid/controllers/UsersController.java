@@ -1,8 +1,9 @@
 package com.tgj.eventaid.controllers;
 
-
+import com.tgj.eventaid.models.Users;
 import com.tgj.eventaid.Repositories.UserRepository;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +17,25 @@ public class UsersController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-//    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-//        this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
-    @GetMapping("/register")
-    public String showSignupForm(Model model) {
-//        model.addAttribute("user", new User());
-        return "/register";
+    @Autowired
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
+        @GetMapping("/register")
+        public String showSignupForm (Model model){
+            model.addAttribute("user", new Users());
+            return "/register";
+        }
+
+        @PostMapping("/register")
+        public String saveUser (@ModelAttribute Users user){
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
 //        saveUser(user);
-//        userRepository.save(user);
-        return "redirect:/index";
+        userRepository.save(user);
+            return "redirect:/index";
+        }
     }
-}
+
