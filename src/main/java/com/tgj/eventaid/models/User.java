@@ -1,12 +1,11 @@
 package com.tgj.eventaid.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue
@@ -36,14 +35,30 @@ public class Users {
     @Column(nullable = false)
     private boolean owner;
 
-    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Tickets class)
-    private List<Tickets> eventTickets;
+    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
+    private List<Ticket> eventTickets;
 
 //    @ManyToMany (mappedBy = "event_id")
-//    private List<Events> event_id;
+//    private List<Event> event_id;
+
+    public User() {}
+
+    // Security Config
+    public User(User copy) {
+        id = copy.id;
+        firstname = copy.firstname;
+        lastname = copy.lastname;
+        address = copy.address;
+        email = copy.email;
+        password = copy.password;
+        telephone = copy.telephone;
+        created_on = copy.created_on;
+        owner = copy.owner;
+        eventTickets = copy.eventTickets;
+    }
 
     // This is useful to insert users
-    public Users(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
+    public User(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -55,7 +70,7 @@ public class Users {
     }
 
     // This is useful to get a full user obj
-    public Users(long id, String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
+    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -139,11 +154,11 @@ public class Users {
         this.created_on = created_on;
     }
 
-    public List<Tickets> getEventTickets() {
+    public List<Ticket> getEventTickets() {
         return eventTickets;
     }
 
-    public void setEventTickets(List<Tickets> eventTickets) {
+    public void setEventTickets(List<Ticket> eventTickets) {
         this.eventTickets = eventTickets;
     }
 }

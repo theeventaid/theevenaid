@@ -3,11 +3,10 @@ package com.tgj.eventaid.models;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 @Entity
 @Table(name = "budgets")
-public class Budgets {
+public class Budget {
 
     @Id
     @GeneratedValue
@@ -24,10 +23,10 @@ public class Budgets {
 
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
-    private Events event;
+    private Event event;
 
 
-    public Budgets(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Events event) {
+    public Budget(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Event event) {
         this.id = id;
         this.event_budget = event_budget;
         this.target_spending = target_spending;
@@ -35,7 +34,7 @@ public class Budgets {
         this.event= event;
     }
 
-    public Budgets(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Events event) {
+    public Budget(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Event event) {
         this.event_budget = event_budget;
         this.target_spending = target_spending;
         this.target_profit = target_profit;
@@ -74,11 +73,11 @@ public class Budgets {
         this.target_profit = target_profit;
     }
 
-    public Events getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Events event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 }

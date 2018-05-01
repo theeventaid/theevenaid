@@ -14,7 +14,7 @@ public class Transportation {
 
     @OneToOne  // relationship to events.id
     @JoinColumn (name = "artist_id")
-    private Artists artist_id;
+    private Artist artist_id;
 
     @Column(nullable = false)
     private Date pickup;
@@ -70,11 +70,11 @@ public class Transportation {
         this.uber_cost = uber_cost;
     }
 
-    public Artists getArtist_id() {
+    public Artist getArtist_id() {
         return artist_id;
     }
 
-    public void setArtist_id(Artists artist_id) {
+    public void setArtist_id(Artist artist_id) {
         this.artist_id = artist_id;
     }
 }

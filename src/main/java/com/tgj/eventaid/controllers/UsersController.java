@@ -1,8 +1,8 @@
 package com.tgj.eventaid.controllers;
 
 
-import com.tgj.eventaid.Repositories.UserRepository;
-import org.apache.catalina.User;
+import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class UsersController {
 
     @GetMapping("/register")
     public String showSignupForm(Model model) {
-//        model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
         return "/register";
     }
 
