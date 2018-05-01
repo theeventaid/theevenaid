@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "events")
-public class Events {
+public class Event {
 
     @Id
     @GeneratedValue
@@ -29,7 +29,7 @@ public class Events {
 
     @OneToOne  // relationship to events.id
     @JoinColumn (name = "venue_id")
-    private Venues venue_id;
+    private Venue venue_id;
 
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
     @ManyToMany
@@ -38,10 +38,10 @@ public class Events {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<Users> users;
+    private List<User> users;
 
 
-    public Events(long id, String name, Date start_date, Date end_date, String location, String url, Venues venue_id) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
         this.id = id;
         this.name = name;
@@ -52,7 +52,7 @@ public class Events {
         this.venue_id = venue_id;
     }
 
-    public Events(String name, Date start_date, Date end_date, String location, String url, Venues venue_id) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -109,19 +109,19 @@ public class Events {
         this.url = url;
     }
 
-    public Venues getVenue_id() {
+    public Venue getVenue_id() {
         return venue_id;
     }
 
-    public void setVenue_id(Venues venue_id) {
+    public void setVenue_id(Venue venue_id) {
         this.venue_id = venue_id;
     }
 
-    public List<Users> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<Users> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }

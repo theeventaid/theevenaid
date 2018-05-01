@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "event_tickets")
-public class Tickets {
+public class Ticket {
 
     @Id
     @GeneratedValue
@@ -20,16 +20,16 @@ public class Tickets {
 
     @ManyToOne  // must add a foreign key to user_id from event_tickets
     @JoinColumn (name = "user_id")
-    private Users user_id;
+    private User user_id;
 
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
-    private Events event_id;
+    private Event event_id;
 
     // users_events will be a pivot table between events and users on user_id and events_id
 
     // This is useful to insert users
-    public Tickets(long id, Users user_id, BigDecimal price, Timestamp purchased_on, Events event_id) {
+    public Ticket(long id, User user_id, BigDecimal price, Timestamp purchased_on, Event event_id) {
         this.id = id;
         this.price = price;
         this.purchased_on = purchased_on;
@@ -37,7 +37,7 @@ public class Tickets {
     }
 
     // This is useful to get a full user obj
-    public Tickets(Users user_id, BigDecimal price, Timestamp purchased_on, Events event_id) {
+    public Ticket(User user_id, BigDecimal price, Timestamp purchased_on, Event event_id) {
         this.price = price;
         this.purchased_on = purchased_on;
         this.event_id = event_id;
@@ -67,19 +67,19 @@ public class Tickets {
         this.purchased_on = purchased_on;
     }
 
-    public Users getUser_id() {
+    public User getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Users user_id) {
+    public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
 
-    public Events getEvent_id() {
+    public Event getEvent_id() {
         return event_id;
     }
 
-    public void setEvent_id(Events event_id) {
+    public void setEvent_id(Event event_id) {
         this.event_id = event_id;
     }
 }

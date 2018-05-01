@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header('Create an Account')">
+    <meta charset="UTF-8" />
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<main class ="container">
+    <h1 class="center">Create an account</h1>
+    <form class ="center" th:action="@{/register}" method="POST" th:object="${user}">
+        <label for="email">Email</label>
+        <input id="email"  name ="email" th:field="*{email}" />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" th:field="*{password}" />
+
+        <label for="firstname">First Name</label>
+        <input id="firstname" name="firstname" th:field="*{firstname}" />
+
+        <label for="lastname">Last Name</label>
+        <input id="lastname" name="lastname" th:field="*{lastname}" />
+
+        <label for="telephone">Telephone</label>
+        <input id="telephone"  name = "telephone" th:field="*{telephone}" />
+
+        <label for="address">Address</label>
+        <input id="address"  name = "address" th:field="*{address}" />
+
+        <div>Are you an Organizer?<br/>
+        Yes <input type="radio" name="owner_yes" value="true"/>
+        No <input type="radio" name="owner_no" value="false"/>
+        </div>
+
+        <input value="Sign up" type="submit" />
+    </form>
+</main>
+</body>
+</html>

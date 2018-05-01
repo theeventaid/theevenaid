@@ -6,14 +6,14 @@ import java.sql.Time;
 
 @Entity
 @Table(name = "schedules")
-public class Schedules {
+public class Schedule {
 
     @Id
     @GeneratedValue
     private long id;
 
 //    @OneToOne
-//    private Events event_id;
+//    private Event event_id;
 
     @Column(nullable = false)
     private Time start_time;
@@ -29,15 +29,15 @@ public class Schedules {
 
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
-    private Events event_id;
+    private Event event_id;
 
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "artist_id")
-    private Artists artist_id;
+    private Artist artist_id;
 
     // artist_id is foreign key to artists.id, and event_id is foreign key to events.id
 
-    public Schedules(long id, long event_id, Time start_time, Time end_time, String subject, String location) {
+    public Schedule(long id, long event_id, Time start_time, Time end_time, String subject, String location) {
         this.id= id;
         this.start_time = start_time;
         this.end_time = end_time;
@@ -45,7 +45,7 @@ public class Schedules {
         this.location = location;
     }
 
-    public Schedules(long event_id, Time start_time, Time end_time, String subject, String location) {
+    public Schedule(long event_id, Time start_time, Time end_time, String subject, String location) {
         this.start_time = start_time;
         this.end_time = end_time;
         this.subject = subject;
@@ -60,11 +60,11 @@ public class Schedules {
         this.id = id;
     }
 
-    public Events getEvent_id() {
+    public Event getEvent_id() {
         return event_id;
     }
 
-    public void setEvent_id(Events event_id) {
+    public void setEvent_id(Event event_id) {
         this.event_id = event_id;
     }
 
@@ -100,11 +100,11 @@ public class Schedules {
         this.location = location;
     }
 
-    public Artists getArtist_id() {
+    public Artist getArtist_id() {
         return artist_id;
     }
 
-    public void setArtist_id(Artists artist_id) {
+    public void setArtist_id(Artist artist_id) {
         this.artist_id = artist_id;
     }
 }

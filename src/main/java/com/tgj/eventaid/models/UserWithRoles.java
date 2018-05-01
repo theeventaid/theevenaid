@@ -2,20 +2,25 @@ package com.tgj.eventaid.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UsersWIthRoles extends Users implements UserDetailsService {
+public class UserWithRoles extends User implements UserDetails {
 
-    public UserWithRoles(Users user) {
-        super(user);  // Call the copy constructor defined in User
+    public UserWithRoles(User user) {
+        super(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
+        String roles = "";
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
     @Override
