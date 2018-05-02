@@ -1,7 +1,8 @@
-package com.tgj.eventaid.services;
+package com.tgj.eventaid.Services;
+
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.models.UserWithRoles;
-import com.tgj.eventaid.repositories.UserRepository;
+import com.tgj.eventaid.Repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

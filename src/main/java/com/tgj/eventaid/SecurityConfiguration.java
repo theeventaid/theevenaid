@@ -1,6 +1,6 @@
 package com.tgj.eventaid;
 
-import com.tgj.eventaid.services.UserDetailsLoader;
+import com.tgj.eventaid.Services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
