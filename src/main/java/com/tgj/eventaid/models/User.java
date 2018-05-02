@@ -43,7 +43,7 @@ public class User {
 //    private List<Event> event_id;
 
     public User() {}
-
+//
     // Security Config
     public User(User copy) {
         id = copy.id;
@@ -88,6 +88,18 @@ public class User {
 //        this.telephone = telephone;
 //        this.created_on = created_on;
 //        this.owner = owner;
+//    }
+
+//    public User(User copy) {
+//        this.id = copy.id;
+//        this.firstname = copy.firstname;
+//        this.lastname = copy.lastname;
+//        this.address = copy.address;
+//        this.email = copy.email;
+//        this.password = copy.password;
+//        this.telephone = copy.telephone;
+//        this.created_on = copy.created_on;
+//        this.owner = copy.owner;
 //    }
 
     public long getId() {

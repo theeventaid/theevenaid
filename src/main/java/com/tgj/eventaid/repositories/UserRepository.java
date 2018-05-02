@@ -1,4 +1,4 @@
-package com.tgj.eventaid.Repositories;
+package com.tgj.eventaid.repositories;
 
 import com.tgj.eventaid.models.User;
 import org.springframework.data.repository.CrudRepository;

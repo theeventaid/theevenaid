@@ -1,8 +1,8 @@
 package com.tgj.eventaid.controllers;
 
-
 import com.tgj.eventaid.models.User;
-import com.tgj.eventaid.Repositories.UserRepository;
+import com.tgj.eventaid.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,7 @@ public class UsersController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -26,7 +27,7 @@ public class UsersController {
     @GetMapping("/register")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
-        return "/register";
+        return "/users/register";
     }
 
         @PostMapping("/register")
@@ -49,4 +50,3 @@ public class UsersController {
         return "/index";
         }
     }
-

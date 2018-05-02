@@ -1,8 +1,8 @@
-package com.tgj.eventaid.Services;
+package com.tgj.eventaid.services;
 
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.models.UserWithRoles;
-import com.tgj.eventaid.Repositories.UserRepository;
+import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
-
     private final UserRepository users;
 
     public UserDetailsLoader(UserRepository users) {
