@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
+<head th:fragment="head(title)">
     <meta charset="UTF-8" />
-    <title></title>
+    <title th:text="${title}"></title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}"/>
 
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/css/main.css"/>
-    <link rel="stylesheet" href="/static/css/fadein.css"/>
-    <link rel="stylesheet" href="/static/css/register.css"/>
-    <link rel="stylesheet" href="/static/css/events.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fadein.css}"/>
+    <link rel="stylesheet" th:href="@{/css/register.css}"/>
+    <link rel="stylesheet" th:href="@{/css/events.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 
@@ -96,10 +96,10 @@
 <!--SCRIPTS-->
 
 <div th:fragment="scripts">
-    <script src="/static/js/jquery-2.2.4.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/primary.js"></script>
-    <script src="/static/js/effects.js"></script>
+    <script th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/primary.js}"></script>
+    <script th:src="@{/js/effects.js}"></script>
 </div>
 
 </body>
