@@ -27,7 +27,7 @@ body{
 
 .bg {
     /* The image used */
-    background-image: url("static/img/cheerful-club-concert-2143.jpg");
+    background-image: url("/img/cheerful-club-concert-2143.jpg");
 
     /* Full height */
     height: 100%;
