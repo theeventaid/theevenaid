@@ -12,11 +12,12 @@
     <link rel="stylesheet" th:href="@{/css/register.css}"/>
     <link rel="stylesheet" th:href="@{/css/events.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" />
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light container-fluid" >
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light container-fluid bg-navbar-white" >
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,7 +51,7 @@
                                                class="form-control form-control-sm" type="password"
                                                name="password"/>
                                     </div>
-                                    <div class="g-recaptcha" data-theme="light" data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                    <div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>

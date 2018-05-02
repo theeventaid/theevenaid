@@ -1,6 +1,24 @@
 body{
     text-align: center;
+    font-family: 'Oswald', sans-serif;
 }
+
+#recaptcha{
+    transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;
+}
+
+.bg-navbar-white{
+    background-color:  white ;
+    color: white;
+}
+
+#test {
+    margin-top: 5em;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+/* possible colors for app navbar  #5dacaf  ,  #1e52a2  ,  #1e52a2  ,  #244b9d  ,   #547db3*/
 
 
 
