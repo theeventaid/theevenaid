@@ -1,6 +1,7 @@
 package com.tgj.eventaid.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,8 +30,8 @@ public class User {
     @Column(nullable = false)
     private String telephone;
 
-    @Column(nullable = false)
-    private String created_on;
+    @Column
+    private LocalDateTime created_on;
 
     @Column(nullable = false)
     private boolean owner;
@@ -44,54 +45,62 @@ public class User {
     public User() {}
 //
     // Security Config
-//    public User(User copy) {
-//        id = copy.id;
-//        firstname = copy.firstname;
-//        lastname = copy.lastname;
-//        address = copy.address;
-//        email = copy.email;
-//        password = copy.password;
-//        telephone = copy.telephone;
-//        created_on = copy.created_on;
-//        owner = copy.owner;
-//        eventTickets = copy.eventTickets;
+    public User(User copy) {
+        id = copy.id;
+        firstname = copy.firstname;
+        lastname = copy.lastname;
+        address = copy.address;
+        email = copy.email;
+        password = copy.password;
+        telephone = copy.telephone;
+        created_on = copy.created_on;
+        owner = copy.owner;
+        eventTickets = copy.eventTickets;
+    }
+//    public User(String firstname, String lastname,String email, String password, String telephone) {
+//        this.firstname =firstname;
+//        this.lastname = lastname;
+//        this.email = email;
+//        this.password =password;
+//        this.telephone =telephone;
+//    }
+//
+//    // This is useful to insert users
+//    public User(String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner) {
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.address = address;
+//        this.email = email;
+//        this.password = password;
+//        this.telephone = telephone;
+//        this.created_on = created_on;
+//        this.owner = owner;
+//    }
+//
+//    // This is useful to get a full user obj
+//    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner) {
+//        this.id = id;
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.address = address;
+//        this.email = email;
+//        this.password = password;
+//        this.telephone = telephone;
+//        this.created_on = created_on;
+//        this.owner = owner;
 //    }
 
-    public User(String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-        this.created_on = created_on;
-        this.owner = owner;
-    }
-
-    // This is useful to get a full user obj
-    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, String created_on, boolean owner) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-        this.created_on = created_on;
-        this.owner = owner;
-    }
-
-    public User(User copy) {
-        this.id = copy.id;
-        this.firstname = copy.firstname;
-        this.lastname = copy.lastname;
-        this.address = copy.address;
-        this.email = copy.email;
-        this.password = copy.password;
-        this.telephone = copy.telephone;
-        this.created_on = copy.created_on;
-        this.owner = copy.owner;
-    }
+//    public User(User copy) {
+//        this.id = copy.id;
+//        this.firstname = copy.firstname;
+//        this.lastname = copy.lastname;
+//        this.address = copy.address;
+//        this.email = copy.email;
+//        this.password = copy.password;
+//        this.telephone = copy.telephone;
+//        this.created_on = copy.created_on;
+//        this.owner = copy.owner;
+//    }
 
     public long getId() {
         return id;
@@ -157,11 +166,11 @@ public class User {
         this.owner = owner;
     }
 
-    public String getCreated_on() {
+    public LocalDateTime getCreated_on() {
         return created_on;
     }
 
-    public void setCreated_on(String created_on) {
+    public void setCreated_on(LocalDateTime created_on) {
         this.created_on = created_on;
     }
 
