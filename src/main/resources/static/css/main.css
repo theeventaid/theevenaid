@@ -2,33 +2,7 @@ body{
     text-align: center;
 }
 
-
-
-/*.nopadding {*/
-/*padding: 0 !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
-/*.paddingRight{*/
-/*padding-right: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
-/*.paddingLeft{*/
-/*padding-left: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
-/*.paddingMiddle{*/
-/*padding-left: 1% !important;*/
-/*padding-right: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
 .bg {
-    /* The image used */
-    background-image: url("/img/cheerful-club-concert-2143.jpg");
-
     /* Full height */
     height: 100%;
 
@@ -37,52 +11,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-/* Fading animation */
-/*.fade {*/
-/*-webkit-animation-name: fade;*/
-/*-webkit-animation-duration: 4.5s;*/
-/*animation-name: fade;*/
-/*animation-duration: 4.5s;*/
-/*}*/
-
-/*!* On hover, add a black background color with a little bit see-through *!*/
-/*.prev:hover, .next:hover {*/
-/*background-color: rgba(0,0,0,0.8);*/
-/*}*/
-
-/*!* Next & previous buttons *!*/
-/*.prev, .next {*/
-/*cursor: pointer;*/
-/*position: absolute;*/
-/*top: 50%;*/
-/*width: auto;*/
-/*margin-top: -22px;*/
-/*padding: 16px;*/
-/*color: white;*/
-/*font-weight: bold;*/
-/*font-size: 18px;*/
-/*transition: 0.6s ease;*/
-/*border-radius: 0 3px 3px 0;*/
-/*}*/
-
-/*footer {*/
-/*display: block;*/
-/*}*/
-
-/*.main-title{*/
-/*margin-top: 1.5%;*/
-/*}*/
-
-/*.controls{*/
-/*text-align: center;*/
-/*}*/
-
-/*#bgimage-main{*/
-/*opacity: 0;*/
-/*}*/
-
-/*!* Styling for fade-in home title*!*/
 
 @media(max-width: 544px) {
     .navbar .navbar-nav>.nav-item {
