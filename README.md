@@ -29,3 +29,6 @@
 # Debatable Features
 - [ ] Hotel Booking - _Can't find any free APIs that can do booking, just listings._
 - [ ] Flight Tracking - _Found a free API, doesn't appear to be maintained so it may be more effort than it's worth._
+
+# Website Mockup
+- [ ] https://s3.us-east-2.amazonaws.com/theeventaid/index.html

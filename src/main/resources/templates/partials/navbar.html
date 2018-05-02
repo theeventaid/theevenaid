@@ -13,31 +13,24 @@
     <link rel="stylesheet" th:href="@{/css/events.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
-
 <body>
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light container-fluid">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light container-fluid" >
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="navbar-brand" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="/">Learn More</a>
+                <a class="navbar-brand" href="/">Members' Posts</a>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <a class="navbar-brand" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="/">Stories</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="/">Contact Us</a>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
@@ -60,7 +53,7 @@
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                                     </div>
                                     <div class="form-group text-center">
-                                        <small><a id="forgot-password" href="">Forgot password?</a></small>
+                                        <small><a id="forgot-password" href="/resetpassword">Forgot password?</a></small>
                                     </div>
                                 </form>
                             </li>
@@ -76,13 +69,13 @@
                 <form style="visibility: hidden" id="logout" method="post" action="#" th:action="@{/logout}"></form>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" href="/posts/create" th:href="@{#}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Create Post
                 </a>
                 <form style="visibility: hidden" id="create" method="post" action="#" th:action="@{/create}"></form>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="/" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" href="/profile" th:href="@{#}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Profile
                 </a>
                 <form style="visibility: hidden" id="profile" method="post" action="#" th:action="@{/profile}"></form>

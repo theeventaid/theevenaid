@@ -1,36 +1,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="partials/navbar:: head"/>-->
 <head th:replace="partials/navbar :: head('The Event Aid')"/>
 
 <body>
 
-<div id="bgimage-main" class="bg container-fluid">
+    <div id="bgimage-main" class="bg container-fluid">
 
-    <nav th:replace="partials/navbar :: navbar"/>
+        <nav style="color: white" th:replace="partials/navbar :: navbar" />
 
-    <header class="container-fluid">
-        <div class="row">
-            <div id="test" class="col-sm-12 main-title">
-                <h1>The Event Aid</h1>
-                <h3>a music festival event manager</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <div class="active-cyan-3 active-cyan-4 mb-4">
-                    <form th:action="@{/}" method="get">
-                        <input class="form-control search-transparency btn-outline-dark" type="text" placeholder="Search" id="search-box-main" name="search"/>
-                        <button style="display: none"></button>
-                    </form>
+            <header class="container-fluid">
+                <div class="row">
+                    <div id="test" class="col-sm-12 main-title">
+                        <h1>THE EVENT AID</h1>
+                        <h2>A Music Festival Event Manager</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4"></div>
-        </div>
-    </header>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <div class="active-cyan-3 active-cyan-4 mb-4">
+                            <form th:action="@{/postsearch}" method="get">
+                                <input class="form-control search-transparency btn-outline-dark" type="text" placeholder="Search" id="search-box-main" name="search">
+                                </input>
+                                <button style="display: none"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </header>
+    </div>
 
-</div>
-
-<div th:replace="partials/navbar :: scripts"/>
+<div th:replace="partials/navbar :: scripts" />
 
 </body>
 </html>
