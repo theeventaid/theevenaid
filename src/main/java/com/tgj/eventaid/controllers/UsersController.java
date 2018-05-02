@@ -26,7 +26,7 @@ public class UsersController {
     @GetMapping("/register")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
-        return "/register";
+        return "/users/register";
     }
 
         @PostMapping("/register")
