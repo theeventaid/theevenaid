@@ -10,9 +10,16 @@ public class PaymentsController {
 
     private TicketsRepository ticketsDao;
 
+//    @GetMapping("/purchase")
+//    public String index(Model model) {
+//        model.addAttribute("tickets", ticketsDao.findAll());
+//        return "/events/tickets/purchase";
+//    }
+
+    // Stripe info will be here
+
     @GetMapping("/purchase")
-    public String index(Model model) {
-        model.addAttribute("tickets", ticketsDao.findAll());
-        return "/events/tickets/purchase";
+    public String purchase(){
+        return "events/tickets/purchase";
     }
 }
