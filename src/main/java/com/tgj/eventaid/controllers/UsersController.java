@@ -30,23 +30,17 @@ public class UsersController {
         return "/users/register";
     }
 
-        @PostMapping("/register")
-        public String saveUser (@ModelAttribute User user){
-            System.out.println("Get Here");
-            System.out.println(user.getEmail());
-            System.out.println(user.getTelephone());
-//            String hash = passwordEncoder.encode(user.getPassword());
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setCreated_on(LocalDateTime.now());
-            System.out.println(user.getPassword());
-//        saveUser(user);
-            System.out.println(user);
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreated_on(LocalDateTime.now());
         userRepository.save(user);
-            return "redirect:/index";
-        }
-
-        @GetMapping("/index")
-        public String showIndexPage () {
-        return "/index";
-        }
+        return "redirect:/";
     }
+}
+
+//        @GetMapping("/index")
+//        public String showIndexPage () {
+//        return "/index";
+//        }
+//    }

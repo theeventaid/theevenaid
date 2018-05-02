@@ -32,20 +32,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/")
-                    .permitAll()
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                .permitAll()
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/login?logout")
+                .logout()
+                .logoutSuccessUrl("/login?logout")
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/", "/events")
-                    .permitAll()
+                .authorizeRequests()
+                .antMatchers("/", "/events")
+                .permitAll()
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/events/create", "/events/manage")
-                    .authenticated()
+                .authorizeRequests()
+                .antMatchers("/events/create", "/events/manage")
+                .authenticated()
         ;
     }
 }
