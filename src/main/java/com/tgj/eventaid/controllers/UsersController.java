@@ -43,5 +43,10 @@ public class UsersController {
         userRepository.save(user);
             return "redirect:/index";
         }
+
+        @GetMapping("/index")
+        public String showIndexPage () {
+        return "/index";
+        }
     }
 

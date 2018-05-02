@@ -1,6 +1,6 @@
 package com.tgj.eventaid.controllers;
 
-import com.tgj.eventaid.repositories.TicketsRepository;
+import com.tgj.eventaid.Repositories.TicketsRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
