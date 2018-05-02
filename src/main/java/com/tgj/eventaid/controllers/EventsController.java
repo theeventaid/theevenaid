@@ -1,6 +1,5 @@
 package com.tgj.eventaid.controllers;
 
-
 import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,5 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class EventsController {
 
-
+    @GetMapping("/")
+    public String getIndex() {
+        return "index";
+    }
 }

@@ -1,7 +1,6 @@
 package com.tgj.eventaid;
 
 import com.tgj.eventaid.services.UserDetailsLoader;
-import com.tgj.eventaid.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,37 +25,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(usersLoader) // How to find users by their username
-                .passwordEncoder(passwordEncoder()) // How to encode and verify passwords
-        ;
+        auth.userDetailsService(usersLoader).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /* Login configuration */
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/") // user's home page, it can be any URL
-                .permitAll() // Anyone can go to the login page
-                /* Logout configuration */
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value
-                /* Pages that can be viewed without having to log in | This is what the user is allowed to see or do  */
+                    .logout()
+                    .logoutSuccessUrl("/login?logout")
                 .and()
-                .authorizeRequests()
-                .antMatchers("/", "/register") // anyone can see the home and the ads pages
-                .permitAll()
-                /* Pages that require athentication */
+                    .authorizeRequests()
+                    .antMatchers("/", "/events")
+                    .permitAll()
                 .and()
-                .authorizeRequests()
-//                .antMatchers(
-//                        "/register", // only authenticated users can create ads
-//                        "/register" // only authenticated users can edit ads
-//                )
-//                .authenticated()
+                    .authorizeRequests()
+                    .antMatchers("/events/create", "/events/manage")
+                    .authenticated()
         ;
     }
 }

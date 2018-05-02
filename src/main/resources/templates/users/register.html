@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="Partials/header :: header('Single Post Page')">
+<head th:replace="partials/header :: header('Single Post Page')">
     <meta charset="UTF-8" />
 </head>
 <body>
-<div th:replace="Partials/navbar :: navbar"></div>
+<div th:replace="partials/navbar :: navbar"></div>
 <main class ="container">
     <h1>Create an account</h1>
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
@@ -20,10 +20,10 @@
         <label for="lastname">Last Name</label>
         <input id="lastname" th:field="*{lastname}" />
 
-        <label for=telephone>Telephone</label>
-        <input id=telephone th:field="*{telephone}" />
+        <label for="telephone">Telephone</label>
+        <input id="telephone" th:field="*{telephone}" />
 
-        <input name="owner" value="true" th:feild="*{owner}" type="checkbox" >
+        <input name="owner" value="true" th:field="*{owner}" type="checkbox" />
 
         <input value="Sign me up!" type="submit" />
     </form>

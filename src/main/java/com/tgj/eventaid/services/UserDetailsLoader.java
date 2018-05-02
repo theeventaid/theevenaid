@@ -1,11 +1,8 @@
 package com.tgj.eventaid.services;
 
-import com.tgj.eventaid.models.Users;
+import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.models.UserWithRoles;
-import com.tgj.eventaid.Repositories.UserRepository;
-import com.tgj.eventaid.Repositories.UserRepository;
-import com.tgj.eventaid.models.UserWithRoles;
-import com.tgj.eventaid.models.Users;
+import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,19 +10,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
-    private UserRepository usersDao;
+    private final UserRepository users;
 
-    public UserDetailsLoader(UserRepository usersDao) {
-        this.usersDao = usersDao;
+    public UserDetailsLoader(UserRepository users) {
+        this.users = users;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Users user = usersDao.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("No email: %s found", email));
+        User user = users.findByEmail(email);
+        if(user == null) {
+            throw new UsernameNotFoundException(String.format("User '%s' not found!", email));
         }
-        UserWithRoles userWithRoles = new UserWithRoles(user);
-        return userWithRoles;
+        return new UserWithRoles(user);
     }
 }

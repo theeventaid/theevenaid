@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "venues")
-public class Venues {
+public class Venue {
 
     @Id
     @GeneratedValue
@@ -26,7 +26,7 @@ public class Venues {
 
     // venues.id is foreign key to events.venue_id
 
-    public Venues(long id, BigDecimal costs, String address, boolean contract, String contract_location) {
+    public Venue(long id, BigDecimal costs, String address, boolean contract, String contract_location) {
         this.id = id;
         this.costs = costs;
         this.address = address;
@@ -34,7 +34,7 @@ public class Venues {
         this.contract_location = contract_location;
     }
 
-    public Venues(BigDecimal costs, String address, boolean contract, String contract_location) {
+    public Venue(BigDecimal costs, String address, boolean contract, String contract_location) {
         this.costs = costs;
         this.address = address;
         this.contract = contract;

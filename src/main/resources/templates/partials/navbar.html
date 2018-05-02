@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8" />
-    <title></title>
+    <title>Home</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico"/>
 
-    <link rel="stylesheet" href="/Static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/Static/css/main.css"/>
-    <link rel="stylesheet" href="/Static/css/fadein.css"/>
-    <link rel="stylesheet" href="/Static/css/register.css"/>
-    <link rel="stylesheet" href="/Static/css/events.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/static/css/fadein.css"/>
+    <link rel="stylesheet" href="/static/css/register.css"/>
+    <link rel="stylesheet" href="/static/css/events.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 
@@ -28,16 +28,10 @@
                 <a class="navbar-brand" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="/">Learn More</a>
+                <a class="navbar-brand" href="/">Members' Posts</a>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <a class="navbar-brand" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="/">Stories</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="/">Contact Us</a>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
@@ -60,7 +54,7 @@
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                                     </div>
                                     <div class="form-group text-center">
-                                        <small><a id="forgot-password" href="">Forgot password?</a></small>
+                                        <small><a id="forgot-password" href="/resetpassword">Forgot password?</a></small>
                                     </div>
                                 </form>
                             </li>
@@ -76,13 +70,13 @@
                 <form style="visibility: hidden" id="logout" method="post" action="#" th:action="@{/logout}"></form>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" href="/posts/create" th:href="@{#}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Create Post
                 </a>
                 <form style="visibility: hidden" id="create" method="post" action="#" th:action="@{/create}"></form>
             </li>
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="/" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" href="/profile" th:href="@{#}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Profile
                 </a>
                 <form style="visibility: hidden" id="profile" method="post" action="#" th:action="@{/profile}"></form>
@@ -96,10 +90,10 @@
 <!--SCRIPTS-->
 
 <div th:fragment="scripts">
-    <script src="/Static/js/jquery-2.2.4.min.js"></script>
-    <script src="/Static/js/bootstrap.min.js"></script>
-    <script src="/Static/js/primary.js"></script>
-    <script src="/Static/js/effects.js"></script>
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/primary.js"></script>
+    <script src="/static/js/effects.js"></script>
 </div>
 
 </body>

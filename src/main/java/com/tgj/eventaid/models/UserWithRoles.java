@@ -3,17 +3,18 @@ package com.tgj.eventaid.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 
-public class UserWithRoles extends Users implements UserDetails {
+public class UserWithRoles extends User implements UserDetails {
 
-    public UserWithRoles(Users user) {
+    public UserWithRoles(User user) {
         super(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
+        String roles = "";  // Since we're not using the authorization part of the component
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
