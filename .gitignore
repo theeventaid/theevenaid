@@ -4,3 +4,4 @@ build/
 out/
 *.iml
 application.properties
+.DS_Store
