@@ -12,8 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/register.css}"/>
     <link rel="stylesheet" th:href="@{/css/events.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"/>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" />
 </head>
 <body>
 
@@ -53,9 +52,6 @@
                                                class="form-control form-control-sm" type="password"
                                                name="password"/>
                                     </div>
-                                    <div id="recaptcha" class="g-recaptcha" data-theme="light"
-                                         data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
-
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                                     </div>
@@ -71,7 +67,7 @@
             </li>
 
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" th:href="@{/logout}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
                 </a>
                 <form style="visibility: hidden" id="logout" method="post" action="#" th:action="@{/logout}"></form>
