@@ -1,5 +1,7 @@
 package com.tgj.eventaid.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +42,6 @@ public class Event {
     )
     private List<User> users;
 
-
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
         this.id = id;
@@ -59,6 +60,9 @@ public class Event {
         this.location = location;
         this.url = url;
         this.venue_id = venue_id;
+    }
+    public Event() {
+
     }
 
     public long getId() {

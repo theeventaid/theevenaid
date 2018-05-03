@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <form class ="center" th:action="@{/event}" method="POST" th:object="${event}">
+                <form class ="center" th:action="@{/events/create}" th:method="POST" th:object="${event}">
                     <fieldset class="registration-Transparency container-fluid">
                         <div id="legend">
                             <legend style="font-size: 2.5em">Create</legend>
@@ -27,7 +27,7 @@
                             <!-- Start Date -->
                             <label class="control-label"  for="start_date">Start Date</label>
                             <div class="controls">
-                                <input type="text" id="start_date" name="start_date" placeholder="" class="input-xlarge" th:field="*{start_date}"/>
+                                <input type="date"  placeholder="" class="input-xlarge" th:field="*{start_date}"/>
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                             <!-- End Date -->
                             <label class="control-label" for="end_date">End Date</label>
                             <div class="controls">
-                                <input type="text" id="end_date" name="end_date" placeholder="" class="input-xlarge" th:field="*{end_date}"/>
+                                <input type="date" placeholder="" class="input-xlarge" th:field="*{end_date}"/>
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                             <label class="control-label" for="url">URL</label>
                             <div class="controls">
                                 <input type="text" id="url" name="url" placeholder="" class="input-xlarge" th:field="*{url}"/>
-                                <p class="help-block">Please provide your mobile number</p>
+
                             </div>
                         </div>
 
