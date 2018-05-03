@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<main class="container">
+    <h3><span th:text="${user.firstname}"></span></h3>
+    <!--<p><span th:text="${user.last_name}"></span></p>-->
+
+</main>
+</body>
+</html>
