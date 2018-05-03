@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head('Create an Event')"></head>
+
+<body>
+
+<div class="register-bg">
+    <nav th:replace="partials/navbar :: navbar" />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <form class ="center" th:action="@{/events/create}" th:method="POST" th:object="${event}">
+                    <fieldset class="registration-Transparency container-fluid">
+                        <div id="legend">
+                            <legend style="font-size: 2.5em">Create</legend>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Name -->
+                            <label class="control-label" for="name">Name</label>
+                            <div class="controls">
+                                <input type="text" id="name" name="name" class="input-xlarge" th:field="*{name}"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Start Date -->
+                            <label class="control-label"  for="start_date">Start Date</label>
+                            <div class="controls">
+                                <input type="date"  placeholder="" class="input-xlarge" th:field="*{start_date}"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- End Date -->
+                            <label class="control-label" for="end_date">End Date</label>
+                            <div class="controls">
+                                <input type="date" placeholder="" class="input-xlarge" th:field="*{end_date}"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Location-->
+                            <label class="control-label" for="location">Location</label>
+                            <div class="controls">
+                                <input id="location" name="location" placeholder="" class="input-xlarge" th:field="*{location}"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- URL -->
+                            <label class="control-label" for="url">URL</label>
+                            <div class="controls">
+                                <input type="text" id="url" name="url" placeholder="" class="input-xlarge" th:field="*{url}"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button class="btn btn-primary">Create</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="partials/navbar :: scripts" />
+
+</body>
+</html>
