@@ -65,7 +65,7 @@
             </li>
 
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <a class="navbar-brand" th:href="@{/logout}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
                 </a>
                 <form style="visibility: hidden" id="logout" method="post" action="#" th:action="@{/logout}"></form>
