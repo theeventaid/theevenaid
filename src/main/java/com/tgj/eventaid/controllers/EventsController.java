@@ -3,6 +3,8 @@ package com.tgj.eventaid.controllers;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.repositories.EventsRepository;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -53,11 +55,12 @@ public class EventsController {
     @PostMapping("/events/create")
     public String saveEvent(@ModelAttribute Event event) {
 
-        System.out.println(event.getStart_date());
-        System.out.println(event.getEnd_date());
+//        System.out.println(event.getStart_date());
+//        System.out.println(event.getEnd_date());
 //        event.setStart_date(start_date);
 //        event.setEnd_date(end_date);
         System.out.println("event.getId() = " + event.getId());
+        event.setUser((com.tgj.eventaid.models.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         eventsRepository.save(event);
         return "redirect:/";
     }

@@ -83,7 +83,7 @@
                 </li>
             </div>
             <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a class="navbar-brand" th:href="@{users/profile/{id}(id=${#authentication.principal.id})}" onclick="$('#form').submit();">
+                <a class="navbar-brand" th:href="@{/profile/{id}(id=${#authentication.principal.id})}" onclick="$('#form').submit();">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Profile
                 </a>
                 <form style="visibility: hidden" id="profile" method="get" action="#" th:action="@{/profile}"></form>
