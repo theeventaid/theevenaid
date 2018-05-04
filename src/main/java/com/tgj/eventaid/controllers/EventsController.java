@@ -9,6 +9,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,13 @@ public class EventsController {
     @GetMapping("/")
     public String getIndex() {
         return "index";
+    }
+
+    @GetMapping("/events")
+    public String getAll(Model model) {
+        Iterable<Event> events = eventsRepository.findAll();
+        model.addAttribute("events", events);
+        return "events/all";
     }
 
     @GetMapping("/events/{id}")

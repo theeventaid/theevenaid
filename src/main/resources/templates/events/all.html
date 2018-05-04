@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="partials/navbar :: head('All Events')"></th:block>
+    <style>
+        @keyframes scale-in {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .panel {
+            box-shadow: 3px 3px 6px #B4B4B4;
+            border-radius: 6px;
+            animation: .2s cubic-bezier(0.64, 0.57, 0.67, 1.53) 0s 1 scale-in;
+            margin: 8px;
+        }
+
+        .panel-front .panel-heading .panel-title img {
+            border-radius: 6px 6px 0 0;
+            width: 100%;
+        }
+
+        .panel-front .panel-body {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <th:block th:each="event : ${events}">
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="panel panel-default panel-front">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><img th:src="@{/img/turntable.jpg}" alt="Event Image"/></h4>
+                    </div>
+                    <div class="panel-body">
+                        <h4 th:text="${event.name}"></h4>
+                        <div class="text-right">
+                            <a th:href="@{/events/__${event.id}__}" class="btn btn-info btn-sm" role="button">View Event Page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+<script th:replace="partials/navbar :: scripts"></script>
+</body>
+</html>
