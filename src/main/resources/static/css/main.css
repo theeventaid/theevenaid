@@ -36,7 +36,7 @@ body {
 
 #bgimage-main{
     opacity: 0;
-    background: url("../img/club.jpg") center no-repeat;
+    background: url("../img/concert.jpg") center no-repeat;
     background-size: cover;
 }
 
