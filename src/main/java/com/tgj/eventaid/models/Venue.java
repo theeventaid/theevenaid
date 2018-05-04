@@ -26,6 +26,8 @@ public class Venue {
 
     // venues.id is foreign key to events.venue_id
 
+    public Venue() {}
+
     public Venue(long id, BigDecimal costs, String address, boolean contract, String contract_location) {
         this.id = id;
         this.costs = costs;

@@ -1,7 +1,7 @@
-body{
+body {
     text-align: center;
-    font-family: 'Oswald', sans-serif;
 }
+
 /*styling for recaptcha on login*/
 #recaptcha{
     transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;
@@ -75,17 +75,23 @@ body{
     background-size: cover;
 }
 
+.navbar {
+    font-family: 'Oswald', sans-serif;
+}
+
 /* for extra small devices less than 544px*/
 @media(min-width: 544px) {
     .navbar .navbar-nav>.nav-item {
         float: none;
         margin-left: .1rem;
     }
+
     .navbar .navbar-nav {
-        float:none !important;
+        float: none !important;
     }
-    .navbar .collapse.in, .navbar .collapsing  {
-        clear:both;
+
+    .navbar .collapse.in, .navbar .collapsing {
+        clear: both;
     }
     #test {
         margin-top: 70em;

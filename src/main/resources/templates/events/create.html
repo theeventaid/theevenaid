@@ -103,13 +103,11 @@
     }
 
     function handleFilestack(response){
-        // /*<![CDATA[*/  $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' +response.filesUploaded['0'].url +  '" />');  /*]]>*/
     $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' +response.filesUploaded['0'].url +  '" />');
     $('#posts').append('<div class="container">');
     $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%\" />');
     $('#posts').append('</div>');
 
-    // document.getElementById('upload').innerText = response.filesUploaded['0'].handle;
     document.getElementById('upload').dataset.handler = response.url;
 }
 

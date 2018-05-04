@@ -36,6 +36,9 @@ public class Event {
     @JoinColumn (name = "venue_id")
     private Venue venue_id;
 
+    @ManyToOne
+    private User user;
+
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
     @ManyToMany
     @JoinTable(
@@ -45,7 +48,10 @@ public class Event {
     )
     private List<User> users;
 
+
     // get an event object
+    public Event () {}
+
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
         this.id = id;
@@ -68,26 +74,12 @@ public class Event {
         this.media_location = media_location;
     }
 
-//    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location) {
-//        this.name = name;
-//        this.start_date = start_date;
-//        this.end_date = end_date;
-//        this.location = location;
-//        this.url = url;
-//        this.venue_id = venue_id;
-//        this.media_location = media_location;
-//    }
-
     public String getMedia_location() {
         return media_location;
     }
 
     public void setMedia_location(String media_location) {
         this.media_location = media_location;
-    }
-
-    public Event() {
-
     }
 
     public long getId() {
@@ -152,5 +144,13 @@ public class Event {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
