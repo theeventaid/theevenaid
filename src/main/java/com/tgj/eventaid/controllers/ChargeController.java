@@ -5,10 +5,12 @@ import com.stripe.model.Charge;
 import com.tgj.eventaid.models.ChargeRequest;
 import com.tgj.eventaid.services.StripeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Controller
 public class ChargeController {
 
     @Autowired

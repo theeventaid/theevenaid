@@ -4,18 +4,6 @@
 <body>
 <h1>Purchase your event tickets below </h1>
 
-<!--<form action="/purchase" method="POST">-->
-    <!--<script-->
-            <!--src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
-            <!--data-key="pk_test_JOi24iTAcvWaKo4qsgS18JEz"-->
-            <!--data-amount="999"-->
-            <!--data-name="Theeventaid"-->
-            <!--data-description="Widget"-->
-            <!--data-image="https://stripe.com/img/documentation/checkout/marketplace.png"-->
-            <!--data-locale="auto">-->
-    <!--</script>-->
-<!--</form>-->
-
 <form th:action="@{/checkout}" method="post">
     <input type="hidden"
            name="${_csrf.parameterName}"
