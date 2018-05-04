@@ -12,7 +12,7 @@
         <th:block th:each="event : ${events}">
             <div class="col-xs-12 col-sm-6 col-lg-4">
                 <div class="card">
-                    <img class="card-img-top" th:src="@{/img/turntable.jpg}" alt="Event Banner"/>
+                    <img class="card-img-top" th:src="${event.name}" alt="Event Banner"/>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${event.name}"></h5>
                         <h6 class="card-subtitle mb-2 text-muted"
