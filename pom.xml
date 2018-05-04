@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>theeventaid</name>
-	<description>Demo project for Spring Boot</description>
+	<name>The Event Aid</name>
+	<description>Event Manager For Music Festivals</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -59,6 +59,15 @@
 			<scope>test</scope>
 		</dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
@@ -74,6 +83,16 @@
             <artifactId>stripe-java</artifactId>
             <version>5.35.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.maps</groupId>
+            <artifactId>google-maps-services</artifactId>
+            <version>0.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.uber.sdk</groupId>
+            <artifactId>uber-rides</artifactId>
+            <version>0.8.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -84,6 +103,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
