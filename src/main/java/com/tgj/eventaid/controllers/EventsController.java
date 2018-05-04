@@ -38,9 +38,8 @@ public class EventsController {
 
     @GetMapping("/events/{id}")
     public String getEvent(@PathVariable Long id, Model model) {
-        Event testEvent = new Event();
-        testEvent.setName("This is a test event.");
-        model.addAttribute(testEvent);
+        Event event = eventsRepository.findOne(id);
+        model.addAttribute("event", event);
         return "events/index";
     }
 
