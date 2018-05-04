@@ -1,6 +1,7 @@
 package com.tgj.eventaid.controllers;
 
 import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +20,13 @@ public class UsersController {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    private EventsRepository eventsRepository;
 
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.eventsRepository =eventsRepository;
     }
 
     @GetMapping("/register")
@@ -42,7 +45,9 @@ public class UsersController {
 
     @GetMapping("/profile/{id}")
     public String showProfile(@PathVariable Long id, Model model){
+        System.out.println("get here");
         User user = userRepository.findOne(id);
+        System.out.println(user);
         model.addAttribute("user", user);
         return "users/profile";
     }
