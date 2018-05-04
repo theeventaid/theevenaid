@@ -34,13 +34,13 @@ public class EventsController {
     }
 
     @PostMapping("/events/create")
-    public String saveEvent(@ModelAttribute Event event){
-
+    public String saveEvent(@ModelAttribute Event event, @RequestParam ("upload") String picture){
+        event.setMedia_location(picture);
         System.out.println(event.getStart_date());
         System.out.println(event.getEnd_date());
-//        event.setStart_date(start_date);
-//        event.setEnd_date(end_date);
+        System.out.println(event.getMedia_location());
         System.out.println("event.getId() = " + event.getId());
+
         eventsRepository.save(event);
         return "redirect:/";
     }
@@ -50,4 +50,18 @@ public class EventsController {
         dateFormat.setLenient(false);
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "users/upload";
+    }
+
+    @PostMapping("/upload")
+    public String uploadFile(@ModelAttribute Event event) {
+
+        return "/";
+    }
+
+
+
 }

@@ -27,6 +27,9 @@ public class Event {
     private String location;
 
     @Column(nullable = false)
+    private String media_location;
+
+    @Column(nullable = false)
     private String url;
 
     @OneToOne  // relationship to events.id
@@ -42,6 +45,7 @@ public class Event {
     )
     private List<User> users;
 
+    // get an event object
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
         this.id = id;
@@ -53,14 +57,35 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
+    // insert new event
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.location = location;
         this.url = url;
         this.venue_id = venue_id;
+        this.media_location = media_location;
     }
+
+//    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location) {
+//        this.name = name;
+//        this.start_date = start_date;
+//        this.end_date = end_date;
+//        this.location = location;
+//        this.url = url;
+//        this.venue_id = venue_id;
+//        this.media_location = media_location;
+//    }
+
+    public String getMedia_location() {
+        return media_location;
+    }
+
+    public void setMedia_location(String media_location) {
+        this.media_location = media_location;
+    }
+
     public Event() {
 
     }
