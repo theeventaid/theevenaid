@@ -33,6 +33,9 @@ public class Event {
     @JoinColumn (name = "venue_id")
     private Venue venue_id;
 
+    @ManyToOne
+    private User user;
+
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
     @ManyToMany
     @JoinTable(
@@ -127,5 +130,13 @@ public class Event {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head('Profile')"></head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <main class="container">
-    <h3><span th:text="${user.firstname}"></span></h3>
+    <h2><span th:text="${user.firstname}"></span></h2>
     <!--<p><span th:text="${user.last_name}"></span></p>-->
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+    <h3 class="nav-item" th:if="${#authentication.principal.owner}">
+        Events I've Created
+    </h3>
+        <div th:unless="${#authentication.principal.owner}">
+    <h3>Events I'm attending</h3>
+        </div>
+    <div th:each= "event : ${user.events}">
+        <div th:text ="${event.location}"></div>
+
+    </div>
+    </div>
+
 
 </main>
 </body>

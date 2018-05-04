@@ -39,6 +39,9 @@ public class User {
     @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
     private List<Ticket> eventTickets;
 
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
+
 //    @ManyToMany (mappedBy = "event_id")
 //    private List<Event> event_id;
 
@@ -56,6 +59,7 @@ public class User {
         created_on = copy.created_on;
         owner = copy.owner;
         eventTickets = copy.eventTickets;
+        events = copy.events;
     }
 //    public User(String firstname, String lastname,String email, String password, String telephone) {
 //        this.firstname =firstname;
@@ -180,5 +184,13 @@ public class User {
 
     public void setEventTickets(List<Ticket> eventTickets) {
         this.eventTickets = eventTickets;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
