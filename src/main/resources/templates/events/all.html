@@ -11,14 +11,6 @@
     <div class="row">
         <th:block th:each="event : ${events}">
             <div class="col-xs-12 col-sm-6 col-lg-4">
-                <!--<div class="thumbnail border rounded" style="animation: .2s cubic-bezier(0.64, 0.57, 0.67, 1.53) 0s 1 scale-in;">-->
-                    <!--<img width="100%" th:src="@{/img/turntable.jpg}" alt="Event Image"/>-->
-                    <!--<div class="caption">-->
-                        <!--<h3 th:text="${event.name}"></h3>-->
-                        <!--<p class="text-muted" th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></p>-->
-                        <!--<p><a th:href="@{/events/__${event.id}__}" class="btn btn-outline-primary" role="button">View Event</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="card">
                     <img class="card-img-top" th:src="@{/img/turntable.jpg}" alt="Event Banner"/>
                     <div class="card-body">
