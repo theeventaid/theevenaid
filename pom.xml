@@ -93,6 +93,11 @@
             <artifactId>uber-rides</artifactId>
             <version>0.8.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.uber.sdk</groupId>
+            <artifactId>uber-core-oauth-client-adapter</artifactId>
+            <version>0.8.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
