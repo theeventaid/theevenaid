@@ -36,17 +36,20 @@ public class User {
     @Column(nullable = false)
     private boolean owner;
 
-    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
+    @OneToMany(mappedBy = "user_id")
+    // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
     private List<Ticket> eventTickets;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Event> events;
 
 //    @ManyToMany (mappedBy = "event_id")
 //    private List<Event> event_id;
 
-    public User() {}
-//
+    public User() {
+    }
+
+    //
     // Security Config
     public User(User copy) {
         id = copy.id;

@@ -30,7 +30,7 @@ public class Event {
     private String url;
 
     @OneToOne  // relationship to events.id
-    @JoinColumn (name = "venue_id")
+    @JoinColumn(name = "venue_id")
     private Venue venue_id;
 
     @ManyToOne
@@ -45,7 +45,12 @@ public class Event {
     )
     private List<User> users;
 
-    public Event () {}
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    public Event() {
+    }
 
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
@@ -137,5 +142,13 @@ public class Event {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

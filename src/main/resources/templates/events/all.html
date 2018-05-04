@@ -3,30 +3,6 @@
 <head>
     <th:block th:include="partials/navbar :: head('All Events')"></th:block>
     <style>
-        @keyframes scale-in {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        .panel {
-            box-shadow: 3px 3px 6px #B4B4B4;
-            border-radius: 6px;
-            animation: .2s cubic-bezier(0.64, 0.57, 0.67, 1.53) 0s 1 scale-in;
-            margin: 8px;
-        }
-
-        .panel-front .panel-heading .panel-title img {
-            border-radius: 6px 6px 0 0;
-            width: 100%;
-        }
-
-        .panel-front .panel-body {
-            padding: 16px;
-        }
     </style>
 </head>
 <body>
@@ -35,15 +11,22 @@
     <div class="row">
         <th:block th:each="event : ${events}">
             <div class="col-xs-12 col-sm-6 col-lg-4">
-                <div class="panel panel-default panel-front">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><img th:src="@{/img/turntable.jpg}" alt="Event Image"/></h4>
-                    </div>
-                    <div class="panel-body">
-                        <h4 th:text="${event.name}"></h4>
-                        <div class="text-right">
-                            <a th:href="@{/events/__${event.id}__}" class="btn btn-info btn-sm" role="button">View Event Page</a>
-                        </div>
+                <!--<div class="thumbnail border rounded" style="animation: .2s cubic-bezier(0.64, 0.57, 0.67, 1.53) 0s 1 scale-in;">-->
+                    <!--<img width="100%" th:src="@{/img/turntable.jpg}" alt="Event Image"/>-->
+                    <!--<div class="caption">-->
+                        <!--<h3 th:text="${event.name}"></h3>-->
+                        <!--<p class="text-muted" th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></p>-->
+                        <!--<p><a th:href="@{/events/__${event.id}__}" class="btn btn-outline-primary" role="button">View Event</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="card">
+                    <img class="card-img-top" th:src="@{/img/turntable.jpg}" alt="Event Banner"/>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${event.name}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"
+                            th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                        <br/>
+                        <a class="btn btn-outline-primary" role="button" th:href="@{/events/__${event.id}__}">Details</a>
                     </div>
                 </div>
             </div>
