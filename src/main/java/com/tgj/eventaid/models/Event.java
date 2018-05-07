@@ -3,6 +3,7 @@ package com.tgj.eventaid.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.xml.soap.Text;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,12 @@ public class Event {
 
     @Column(nullable = false)
     private String location;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private int tickets_available;
 
     @Column(nullable = false)
     private String media_location;
@@ -54,8 +61,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
-
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -63,10 +69,13 @@ public class Event {
         this.location = location;
         this.url = url;
         this.venue_id = venue_id;
+        this.media_location = media_location;
+        this.tickets_available = tickets_available;
+        this.description = description;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -74,6 +83,24 @@ public class Event {
         this.url = url;
         this.venue_id = venue_id;
         this.media_location = media_location;
+        this.tickets_available = tickets_available;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getTickets_available() {
+        return tickets_available;
+    }
+
+    public void setTickets_available(int tickets_available) {
+        this.tickets_available = tickets_available;
     }
 
     public String getMedia_location() {

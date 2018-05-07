@@ -25,7 +25,7 @@ public class Budget {
     @JoinColumn (name = "event_id")
     private Event event;
 
-
+    // display object
     public Budget(long id, BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Event event) {
         this.id = id;
         this.event_budget = event_budget;
@@ -34,12 +34,15 @@ public class Budget {
         this.event= event;
     }
 
+    //insert object
     public Budget(BigDecimal event_budget, BigDecimal target_spending, BigDecimal target_profit, Event event) {
         this.event_budget = event_budget;
         this.target_spending = target_spending;
         this.target_profit = target_profit;
         this.event = event;
     }
+
+    public Budget(){}
 
     public long getId() {
         return id;

@@ -50,7 +50,7 @@ public class UsersController {
     public String showProfile(@PathVariable Long id, Model model){
         System.out.println("get here");
         User user = userRepository.findOne(id);
-        System.out.println(user);
+        System.out.println(user.getId());
         model.addAttribute("user", user);
         return "users/profile";
     }
