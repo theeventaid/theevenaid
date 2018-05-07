@@ -6,13 +6,6 @@ body {
 #recaptcha{
     transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;
 }
-
-/*navbar white  P.S  we want just the letters to turn white*/
-/*.bg-navbar-white{*/
-    /*background-color:  white ;*/
-    /*color: white;*/
-/*}*/
-
 .navbar-custom a { color: white !important; }
 
 /*Styling for font.  Mockup font is League Gothic*/
@@ -20,6 +13,19 @@ body {
     margin-top: 5em;
     font-family: 'Oswald', sans-serif;
 }
+
+/*navbar white  P.S  we want just the letters to turn white*/
+    @media (min-width: 375px) and (max-width: 767.98px) {
+        .bg-navbar-white {
+            background-color: white;
+            color: white;
+        }
+        .mobile-color {
+            fill: white !important;
+            color: white;
+            zoom: 900%;
+        }
+    }
 
 #test h1{
     opacity: 0;
@@ -78,114 +84,115 @@ body {
 }
 
 .navbar {
-    font-family: 'Oswald', sans-serif;
+    /*font-family: 'Oswald', sans-serif;*/
 }
 
 /* for extra small devices less than 544px*/
-@media(min-width: 544px) {
-    .navbar .navbar-nav>.nav-item {
-        float: none;
-        margin-left: .1rem;
-    }
+/*@media(min-width: 544px) {*/
 
-    .navbar .navbar-nav {
-        float: none !important;
-    }
+    /*.navbar .navbar-nav>.nav-item {*/
+        /*float: none;*/
+        /*margin-left: .1rem;*/
+    /*}*/
 
-    .navbar .collapse.in, .navbar .collapsing {
-        clear: both;
-    }
-    #test {
-        margin-top: 70em;
-        font-family: 'Oswald', sans-serif;
-    }
+    /*.navbar .navbar-nav {*/
+        /*float: none !important;*/
+    /*}*/
 
-    #test h1{
-        opacity: 0;
-        margin-top: 25px;
-        font-size: 100px;
-        text-align: center;
-        -webkit-text-stroke: 2px white;
-    }
+    /*.navbar .collapse.in, .navbar .collapsing {*/
+        /*clear: both;*/
+    /*}*/
+    /*#test {*/
+        /*margin-top: 70em;*/
+        /*font-family: 'Oswald', sans-serif;*/
+    /*}*/
 
-    #test h2{
-        opacity: 0;
-        margin-top: 8px;
-        font-size: x-large;
-        text-align: center;
-    }
-}
+    /*#test h1{*/
+        /*opacity: 0;*/
+        /*margin-top: 25px;*/
+        /*font-size: 100px;*/
+        /*text-align: center;*/
+        /*-webkit-text-stroke: 2px white;*/
+    /*}*/
 
-/* for small devices less than 768 */
-@media(min-width: 767px) {
-    #test {
-        margin-top: 30%;
-        font-family: 'Oswald', sans-serif;
-        zoom: 150%;
-    }
+    /*#test h2{*/
+        /*opacity: 0;*/
+        /*margin-top: 8px;*/
+        /*font-size: x-large;*/
+        /*text-align: center;*/
+    /*}*/
+/*}*/
 
-    #test h1{
-        opacity: 0;
-        margin-top: 25px;
-        font-size: 100px;
-        text-align: center;
-        -webkit-text-stroke: 2px white;
-    }
+/*!* for small devices less than 768 *!*/
+/*@media(min-width: 767px) {*/
+    /*#test {*/
+        /*margin-top: 30%;*/
+        /*font-family: 'Oswald', sans-serif;*/
+        /*zoom: 150%;*/
+    /*}*/
 
-    #test h2{
-        opacity: 0;
-        margin-top: 8px;
-        font-size: x-large;
-        text-align: center;
-    }
-}
+    /*#test h1{*/
+        /*opacity: 0;*/
+        /*margin-top: 25px;*/
+        /*font-size: 100px;*/
+        /*text-align: center;*/
+        /*-webkit-text-stroke: 2px white;*/
+    /*}*/
 
-/* for medium devices less than 992 */
-@media(min-width: 992px) {
-    #test {
-        margin-top: 40%;
-        font-family: 'Oswald', sans-serif;
-        zoom: 100%;
-    }
+    /*#test h2{*/
+        /*opacity: 0;*/
+        /*margin-top: 8px;*/
+        /*font-size: x-large;*/
+        /*text-align: center;*/
+    /*}*/
+/*}*/
 
-    #test h1{
-        opacity: 0;
-        margin-top: 25px;
-        font-size: 100px;
-        text-align: center;
-        -webkit-text-stroke: 2px white;
-    }
+/*!* for medium devices less than 992 *!*/
+/*@media(min-width: 992px) {*/
+    /*#test {*/
+        /*margin-top: 40%;*/
+        /*font-family: 'Oswald', sans-serif;*/
+        /*zoom: 100%;*/
+    /*}*/
 
-    #test h2{
-        opacity: 0;
-        margin-top: 8px;
-        font-size: x-large;
-        text-align: center;
-    }
-}
+    /*#test h1{*/
+        /*opacity: 0;*/
+        /*margin-top: 25px;*/
+        /*font-size: 100px;*/
+        /*text-align: center;*/
+        /*-webkit-text-stroke: 2px white;*/
+    /*}*/
 
-/* for large devices less than 1200*/
-@media(min-width: 1200px) {
-    #test {
-        margin-top: 10%;
-        font-family: 'Oswald', sans-serif;
-        zoom: 100%;
-    }
+    /*#test h2{*/
+        /*opacity: 0;*/
+        /*margin-top: 8px;*/
+        /*font-size: x-large;*/
+        /*text-align: center;*/
+    /*}*/
+/*}*/
 
-    #test h1{
-        opacity: 0;
-        margin-top: 25px;
-        font-size: 100px;
-        text-align: center;
-        -webkit-text-stroke: 2px white;
-    }
+/*!* for large devices less than 1200*!*/
+/*@media(min-width: 1200px) {*/
+    /*#test {*/
+        /*margin-top: 10%;*/
+        /*font-family: 'Oswald', sans-serif;*/
+        /*zoom: 100%;*/
+    /*}*/
 
-    #test h2{
-        opacity: 0;
-        margin-top: 8px;
-        font-size: x-large;
-        text-align: center;
-    }
-}
+    /*#test h1{*/
+        /*opacity: 0;*/
+        /*margin-top: 25px;*/
+        /*font-size: 100px;*/
+        /*text-align: center;*/
+        /*-webkit-text-stroke: 2px white;*/
+    /*}*/
+
+    /*#test h2{*/
+        /*opacity: 0;*/
+        /*margin-top: 8px;*/
+        /*font-size: x-large;*/
+        /*text-align: center;*/
+    /*}*/
+/*}*/
 
 /*  else is extra large */
