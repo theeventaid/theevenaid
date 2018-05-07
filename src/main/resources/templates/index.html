@@ -3,38 +3,25 @@
 <!--<head th:replace="partials/navbar:: head"/>-->
 <head th:replace="partials/navbar :: head('The Event Aid')"/>
 
-<body>
+<body class="fade-in" style="background: #000;">
+<img th:src="@{/img/concert.jpg}" alt="" class="bg-cover"/>
 
-    <div id="bgimage-main" class="bg container-fluid">
+<nav th:replace="partials/navbar :: navbar"/>
 
-        <nav style="color: white" th:replace="partials/navbar :: navbar" />
-
-            <header class="container-fluid">
-                <div class="row">
-                    <div id="test" class="col-sm-12 main-title">
-                        <!--logo goes here-->
-                        <!--<h1>THE EVENT AID</h1>-->
-                        <!--<h2>A Music Festival Event Manager</h2>-->
-                        <img th:src="@{img/Event_Aid_logo.png}" alt=""></img>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <div class="active-cyan-3 active-cyan-4 mb-4">
-                            <form th:action="@{/postsearch}" method="get">
-                                <input class="form-control search-transparency btn-outline-dark" type="text" placeholder="Search Events" id="search-box-main" name="search">
-                                </input>
-                                <button style="display: none"></button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-sm-4"></div>
-                </div>
-            </header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4 offset-lg-4">
+            <img class="mw-100" th:src="@{img/Event_Aid_logo.png}" alt=""/>
+            <form th:action="@{/search}" th:method="post">
+                <input class="form-control text-center bg-tr-dark border-dark" type="text"
+                       placeholder="Search Events" name="query"/>
+                <button style="display: none"></button>
+            </form>
+        </div>
     </div>
+</div>
 
-<div th:replace="partials/navbar :: scripts" />
+<div th:replace="partials/navbar :: scripts"/>
 
 </body>
 </html>

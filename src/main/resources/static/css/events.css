@@ -25,15 +25,3 @@ footer {
     display: block;
 }
 
-@keyframes scale-in {
-    from {
-        transform: scale(0);
-    }
-    to {
-        transform: scale(1);
-    }
-}
-
-.card {
-    margin-top: 16px;
-}

@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head('Profile')"></head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
-<main class="container">
-    <h2><span th:text="${user.firstname}"></span></h2>
-    <!--<p><span th:text="${user.last_name}"></span></p>-->
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <h3 class="nav-item" th:if="${#authentication.principal.owner}">
-            Events I've Created
-        </h3>
-        <div th:unless="${#authentication.principal.owner}">
-            <h3>Events I'm attending</h3>
-        </div>
-        <div th:each="event : ${user.getEvents()}">
+
+<h2><span th:text="${user.firstname}"></span></h2>
+<!--<p><span th:text="${user.last_name}"></span></p>-->
+<div class="container">
+    <th:block th:if="${#authentication.principal.owner}">
+        <h3>Events I've Created</h3>
+        <div th:each="event : ${user.events}">
             <p th:text="${event.name}"></p>
             <p th:text="${event.start_date}"></p>
             <p th:text="${event.end_date}"></p>
             <p th:text="${event.location}"></p>
             <p th:href="${event.url}"></p>
         </div>
-    </div>
-</main>
+    </th:block>
+    <th:block th:unless="${#authentication.principal.owner}">
+        <h3>Events I'm Attending</h3>
+        <div th:each="ticket : ${user.eventTickets}">
+            <p th:text="${ticket.event_id.name}"></p>
+            <p th:text="${ticket.event_id.start_date}"></p>
+            <p th:text="${ticket.event_id.end_date}"></p>
+            <p th:text="${ticket.event_id.location}"></p>
+            <p th:href="${ticket.event_id.url}"></p>
+        </div>
+    </th:block>
+</div>
+
 </body>
 </html>
