@@ -1,7 +1,9 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Budget;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -21,12 +24,14 @@ public class UsersController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private EventsRepository eventsRepository;
+    private BudgetRepository budgetRepository;
 
     @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.eventsRepository =eventsRepository;
+        this.budgetRepository = budgetRepository;
     }
 
     @GetMapping("/register")
@@ -48,7 +53,13 @@ public class UsersController {
     @GetMapping("/profile/{id}")
     public String showProfile(@PathVariable Long id, Model model){
         User user = userRepository.findOne(id);
+        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+        Budget budget = budgetRepository.findOne(id);
         model.addAttribute("user", user);
+        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
+        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
+        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+//        model.addAttribute("budget", budget);
         return "users/profile";
     }
 

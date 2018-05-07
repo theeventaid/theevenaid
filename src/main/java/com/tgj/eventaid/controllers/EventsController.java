@@ -82,7 +82,7 @@ public class EventsController {
         budget.setTarget_spending(target_spending);
         budgetRepository.save(budget);
 
-        return "redirect:/events";
+        return "redirect:/profile";
     }
 
     @InitBinder
