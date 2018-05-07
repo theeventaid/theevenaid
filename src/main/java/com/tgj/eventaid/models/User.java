@@ -61,6 +61,11 @@ public class User {
         eventTickets = copy.eventTickets;
         events = copy.events;
     }
+//
+//    public User(String email, String password) {
+//        this.email = email;
+//        this.password = password;
+//    }
 //    public User(String firstname, String lastname,String email, String password, String telephone) {
 //        this.firstname =firstname;
 //        this.lastname = lastname;
