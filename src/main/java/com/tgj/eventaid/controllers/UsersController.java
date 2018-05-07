@@ -46,6 +46,13 @@ public class UsersController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile/{id}")
+    public String showProfileId(@PathVariable Long id, Model model) {
+        User user = userRepository.findById(id);
+        model.addAttribute("user", user);
+        return "users/profile";
+    }
+
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
