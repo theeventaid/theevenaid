@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -48,11 +47,43 @@ public class UsersController {
 
     @GetMapping("/profile/{id}")
     public String showProfile(@PathVariable Long id, Model model){
-        System.out.println("get here");
         User user = userRepository.findOne(id);
-        System.out.println(user);
         model.addAttribute("user", user);
         return "users/profile";
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPassword(Model model) {
+        System.out.println("get here");
+        User user = new User();
+        model.addAttribute("user", user);
+        return "/users/reset_password";
+    }
+
+    @PostMapping("/reset-password")
+    public String setNewPassword(@RequestParam(name = "email", required = false) String email,
+                                 @RequestParam(name= "password", required = false) String newPassword,
+                                 @RequestParam(name= "newPasswordConfirm") String passwordConfirm) {
+
+        System.out.println("get here too");
+        System.out.println(email);
+        System.out.println(newPassword); // not getting this
+        System.out.println(passwordConfirm);
+        User existingUser = userRepository.findByEmail(email);
+        System.out.println(existingUser.getFirstname());
+
+//        if(!passwordConfirm.equals(user.getPassword())) {
+//            errors.rejectValue("password", "user.password", "Your passwords must match");
+//        }
+//
+//        if(errors.hasErrors()) {
+//            model.addAttribute("errors", errors);
+//            model.addAttribute("user", user);
+//            return "users/reset_password";
+//        }
+        existingUser.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(existingUser);
+        return "redirect:/ ";
     }
 }
 
