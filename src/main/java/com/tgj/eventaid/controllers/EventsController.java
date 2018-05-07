@@ -49,6 +49,13 @@ public class EventsController {
         return "events/all";
     }
 
+    @PostMapping("/search")
+    public String searchEvents(@RequestParam String query, Model model) {
+        Iterable<Event> events = eventsRepository.findAllLikeName(query);
+        model.addAttribute("events", events);
+        return "events/all";
+    }
+
     @GetMapping("/events/{id}")
     public String getEvent(@PathVariable Long id, Model model) {
         Event event = eventsRepository.findOne(id);
@@ -99,8 +106,6 @@ public class EventsController {
 
     @PostMapping("/upload")
     public String uploadFile(@ModelAttribute Event event) {
-
         return "/";
     }
-
 }

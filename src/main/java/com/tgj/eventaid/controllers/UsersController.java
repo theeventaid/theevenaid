@@ -5,6 +5,7 @@ import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class UsersController {
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.eventsRepository =eventsRepository;
+        this.eventsRepository = eventsRepository;
     }
 
     @GetMapping("/register")
@@ -45,9 +46,11 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/profile/{id}")
-    public String showProfile(@PathVariable Long id, Model model){
-        User user = userRepository.findOne(id);
+    @GetMapping("/profile")
+    public String showProfile(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user == null)
+            return "redirect://";
         model.addAttribute("user", user);
         return "users/profile";
     }

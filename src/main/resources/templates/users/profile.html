@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head('Profile')"></head>
 <link rel="stylesheet" th:href="@{/css/profile.css}" />
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
     <div class="container-fluid">
         <img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}"  alt="" />
-        <nav th:replace="partials/navbar :: navbar"></nav>
             <main class="container">
                 <h2><span th:text="${user.firstname}+' '+${user.lastname}"></span></h2>
                     <div th:if="${#authorization.expression('isAuthenticated()')}">
