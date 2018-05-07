@@ -36,17 +36,20 @@ public class User {
     @Column(nullable = false)
     private boolean owner;
 
-    @OneToMany (mappedBy = "user_id") // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
+    @OneToMany(mappedBy = "user_id")
+    // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
     private List<Ticket> eventTickets;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Event> events;
 
 //    @ManyToMany (mappedBy = "event_id")
 //    private List<Event> event_id;
 
-    public User() {}
-//
+    public User() {
+    }
+
+    //
     // Security Config
     public User(User copy) {
         id = copy.id;
@@ -61,55 +64,6 @@ public class User {
         eventTickets = copy.eventTickets;
         events = copy.events;
     }
-//
-//    public User(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
-//    public User(String firstname, String lastname,String email, String password, String telephone) {
-//        this.firstname =firstname;
-//        this.lastname = lastname;
-//        this.email = email;
-//        this.password =password;
-//        this.telephone =telephone;
-//    }
-//
-//    // This is useful to insert users
-//    public User(String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner) {
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.address = address;
-//        this.email = email;
-//        this.password = password;
-//        this.telephone = telephone;
-//        this.created_on = created_on;
-//        this.owner = owner;
-//    }
-//
-//    // This is useful to get a full user obj
-//    public User(long id, String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner) {
-//        this.id = id;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.address = address;
-//        this.email = email;
-//        this.password = password;
-//        this.telephone = telephone;
-//        this.created_on = created_on;
-//        this.owner = owner;
-//    }
-
-//    public User(User copy) {
-//        this.id = copy.id;
-//        this.firstname = copy.firstname;
-//        this.lastname = copy.lastname;
-//        this.address = copy.address;
-//        this.email = copy.email;
-//        this.password = copy.password;
-//        this.telephone = copy.telephone;
-//        this.created_on = copy.created_on;
-//        this.owner = copy.owner;
-//    }
 
     public long getId() {
         return id;

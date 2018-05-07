@@ -27,10 +27,13 @@ public class Event {
     private String location;
 
     @Column(nullable = false)
+    private String media_location;
+
+    @Column(nullable = false)
     private String url;
 
     @OneToOne  // relationship to events.id
-    @JoinColumn (name = "venue_id")
+    @JoinColumn(name = "venue_id")
     private Venue venue_id;
 
     @ManyToOne
@@ -45,7 +48,11 @@ public class Event {
     )
     private List<User> users;
 
-    public Event () {}
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    public Event() {}
 
     public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
 
@@ -58,13 +65,23 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id) {
+    // insert new event
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
         this.location = location;
         this.url = url;
         this.venue_id = venue_id;
+        this.media_location = media_location;
+    }
+
+    public String getMedia_location() {
+        return media_location;
+    }
+
+    public void setMedia_location(String media_location) {
+        this.media_location = media_location;
     }
 
     public long getId() {
@@ -137,5 +154,13 @@ public class Event {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

@@ -40,9 +40,8 @@ public class EventsController {
 
     @GetMapping("/events/{id}")
     public String getEvent(@PathVariable Long id, Model model) {
-        Event testEvent = new Event();
-        testEvent.setName("This is a test event.");
-        model.addAttribute(testEvent);
+        Event event = eventsRepository.findOne(id);
+        model.addAttribute("event", event);
         return "events/index";
     }
 
@@ -53,13 +52,8 @@ public class EventsController {
     }
 
     @PostMapping("/events/create")
-    public String saveEvent(@ModelAttribute Event event) {
-
-//        System.out.println(event.getStart_date());
-//        System.out.println(event.getEnd_date());
-//        event.setStart_date(start_date);
-//        event.setEnd_date(end_date);
-        System.out.println("event.getId() = " + event.getId());
+    public String saveEvent(@ModelAttribute Event event, @RequestParam ("upload") String picture){
+        event.setMedia_location(picture);
         event.setUser((com.tgj.eventaid.models.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         eventsRepository.save(event);
         return "redirect:/";
@@ -71,4 +65,16 @@ public class EventsController {
         dateFormat.setLenient(false);
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "users/upload";
+    }
+
+    @PostMapping("/upload")
+    public String uploadFile(@ModelAttribute Event event) {
+
+        return "/";
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
@@ -38,6 +39,8 @@ public class UsersController {
     public String saveUser(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreated_on(LocalDateTime.now());
+
+
         userRepository.save(user);
         return "redirect:/";
     }
@@ -84,8 +87,3 @@ public class UsersController {
     }
 }
 
-//        @GetMapping("/index")
-//        public String showIndexPage () {
-//        return "/index";
-//        }
-//    }
