@@ -2,33 +2,40 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head('Profile')"></head>
+<link rel="stylesheet" th:href="@{/css/profile.css}" />
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
-
-<h2><span th:text="${user.firstname}"></span></h2>
-<!--<p><span th:text="${user.last_name}"></span></p>-->
-<div class="container">
-    <th:block th:if="${#authentication.principal.owner}">
-        <h3>Events I've Created</h3>
-        <div th:each="event : ${user.events}">
-            <p th:text="${event.name}"></p>
-            <p th:text="${event.start_date}"></p>
-            <p th:text="${event.end_date}"></p>
-            <p th:text="${event.location}"></p>
-            <p th:href="${event.url}"></p>
-        </div>
-    </th:block>
-    <th:block th:unless="${#authentication.principal.owner}">
-        <h3>Events I'm Attending</h3>
-        <div th:each="ticket : ${user.eventTickets}">
-            <p th:text="${ticket.event_id.name}"></p>
-            <p th:text="${ticket.event_id.start_date}"></p>
-            <p th:text="${ticket.event_id.end_date}"></p>
-            <p th:text="${ticket.event_id.location}"></p>
-            <p th:href="${ticket.event_id.url}"></p>
-        </div>
-    </th:block>
-</div>
-
+<nav th:replace="partials/navbar :: navbar"></nav>
+    <div class="container-fluid">
+        <img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}"  alt="" />
+            <main class="container">
+                <h2><span th:text="${user.firstname}+' '+${user.lastname}"></span></h2>
+                    <div th:if="${#authorization.expression('isAuthenticated()')}">
+                        <h3 class="nav-item" th:if="${#authentication.principal.owner}">
+                            Events I've Created
+                        </h3>
+                        <div th:unless="${#authentication.principal.owner}">
+                            <h3>Events I'm attending</h3>
+                        </div>
+                        <div class="container-fluid foreground">
+                            <div class="row">
+                                <th:block th:each="event : ${user.events}">
+                                    <div class="col-xs-12 col-sm-6 col-lg-4">
+                                        <div class="card">
+                                            <img class="card-img-top" th:src="${event.media_location}" alt="Event Banner"/>
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${event.name}"></h5>
+                                                <h6 class="card-subtitle mb-2 text-muted"
+                                                    th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                                                <br/>
+                                                <a class="btn btn-outline-primary" role="button" th:href="@{/events/__${event.id}__}">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+    </div>
 </body>
 </html>
