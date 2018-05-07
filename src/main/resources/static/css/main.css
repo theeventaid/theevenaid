@@ -8,10 +8,12 @@ body {
 }
 
 /*navbar white  P.S  we want just the letters to turn white*/
-.bg-navbar-white{
-    background-color:  white ;
-    color: white;
-}
+/*.bg-navbar-white{*/
+    /*background-color:  white ;*/
+    /*color: white;*/
+/*}*/
+
+.navbar-custom a { color: white !important; }
 
 /*Styling for font.  Mockup font is League Gothic*/
 #test {
