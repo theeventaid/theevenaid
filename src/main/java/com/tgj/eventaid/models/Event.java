@@ -76,9 +76,12 @@ public class Event {
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<Artist> artists;
+
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List artists) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -93,10 +96,11 @@ public class Event {
         this.event_budget = event_budget;
         this.target_profit = target_profit;
         this.target_spending = target_spending;
+        this.artists = artists;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List artists) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -110,6 +114,15 @@ public class Event {
         this.event_budget = event_budget;
         this.target_profit = target_profit;
         this.target_spending = target_spending;
+        this.artists = artists;
+    }
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 
     public BigDecimal getEvent_budget() {

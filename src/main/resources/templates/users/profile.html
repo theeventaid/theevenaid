@@ -4,7 +4,6 @@
 <head th:replace="partials/navbar :: head('Profile')"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<<<<<<< HEAD
     <div class="container">
         <div sec:authorize="isAuthenticated()">
             <h2><span th:text="${user.firstname}+' '+${user.lastname}"></span></h2>
@@ -29,7 +28,7 @@
                                                     <h6 th:text="'Event budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
                                                     <h6 th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
                                                     <h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
-                                                    <h6 th:text="'Featured Artist: ' + ${artist_name} + '. Cost: $'+ ${artist_cost}"> </h6>
+                                                    <h6 th:text="'Featured Artist: ' + ${event.artists} + '. Cost: $'+ ${event.getArtists()}"> </h6>
                                                     <h6 th:text="'Price per ticket:' + '$' + ${event.tickets_price}"></h6>
                                                     <h6 th:text="'Tickets Available:' + ${event.tickets_available}"></h6>
                                                 </div>
