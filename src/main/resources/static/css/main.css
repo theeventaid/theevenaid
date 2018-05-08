@@ -1,13 +1,12 @@
 body {
     text-align: center;
+    background-color: #F4F4F4;
 }
 
 /*styling for recaptcha on login*/
 #recaptcha{
     transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;
 }
-
-/*navbar white  P.S  we want just the letters to turn white*/
 
 @keyframes fade-in {
     from {
@@ -45,6 +44,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+
+    z-index: -1;
 }
 
 .bg-tr-dark {
@@ -53,6 +54,17 @@ body {
 
 .bg-tr-dark:focus {
     background: rgba(244, 244, 244, 0.7);
+}
+
+.blur {
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
 }
 
 .navbar {

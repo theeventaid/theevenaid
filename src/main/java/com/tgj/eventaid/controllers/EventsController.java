@@ -1,8 +1,6 @@
 package com.tgj.eventaid.controllers;
 
-import com.tgj.eventaid.models.Artist;
-import com.tgj.eventaid.models.Event;
-import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
@@ -35,7 +33,7 @@ public class EventsController {
     }
 
     @GetMapping("/")
-    public String getIndex() {
+    public String getIndex(@RequestHeader("Host") String host) {
         return "index";
     }
 
@@ -56,6 +54,7 @@ public class EventsController {
     @GetMapping("/events/{id}")
     public String getEvent(@PathVariable Long id, Model model) {
         Event event = eventsRepository.findOne(id);
+        event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
         model.addAttribute("event", event);
         return "events/index";
     }

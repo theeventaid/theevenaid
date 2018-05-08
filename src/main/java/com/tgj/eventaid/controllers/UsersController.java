@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.HEAD;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -47,25 +48,34 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/profile/{id}")
-    public String showProfile(@PathVariable Long id, Model model){
-        User user = userRepository.findOne(id);
-        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-        Artist artist = artistsRepository.findOne(id);
-        model.addAttribute("user", user);
-        return "users/profile";
-    }
-
+//<<<<<<< HEAD
+//    @GetMapping("/profile/{id}")
+//    public String showProfile(@PathVariable Long id, Model model){
+//        User user = userRepository.findOne(id);
+//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+//        Artist artist = artistsRepository.findOne(id);
+//        model.addAttribute("user", user);
+//        return "users/profile";
+//    }
+//
+//=======
+//>>>>>>> master
     @GetMapping("/profile")
-    public String showProfile(Model model) {
+    public String showProfile(Model model){
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
             return "redirect:/";
-        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-        Artist artist = artistsRepository.findOne(user.getId());
-        model.addAttribute("user", user);
-        model.addAttribute("artist_name", artist.getName());
-        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
+        model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
+//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+//        Budget budget = budgetRepository.findOne(user.getId());
+//        Artist artist = artistsRepository.findOne(user.getId());
+//        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
+//        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
+//        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+//        model.addAttribute("artist_name", artist.getName());
+//        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
+
         return "users/profile";
     }
 
@@ -98,6 +108,7 @@ public class UsersController {
 //            model.addAttribute("user", user);
 //            return "users/reset_password";
 //        }
+
         existingUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(existingUser);
         return "redirect:/ ";
