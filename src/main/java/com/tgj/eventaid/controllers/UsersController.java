@@ -24,7 +24,7 @@ public class UsersController {
     private EventsRepository eventsRepository;
 
     @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UsersController(UserRepository userRepository, EventsRepository eventsRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.eventsRepository = eventsRepository;
@@ -56,9 +56,10 @@ public class UsersController {
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.getEmail());
         if (user == null)
-            return "redirect://";
-        model.addAttribute("user", user);
+            return "redirect:/";
+        model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
         return "users/profile";
     }
 
@@ -91,6 +92,7 @@ public class UsersController {
 //            model.addAttribute("user", user);
 //            return "users/reset_password";
 //        }
+
         existingUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(existingUser);
         return "redirect:/ ";
