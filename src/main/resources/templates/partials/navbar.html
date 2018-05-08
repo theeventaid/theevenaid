@@ -30,7 +30,13 @@
                         <span class="dropdown-header">Enter Your Information</span>
                         <form th:action="@{/login}" th:method="post" class="p-3 text-center">
                             <input type="text" class="form-control mb-2" placeholder="Email" name="email"/>
+                            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >
+                            </div>
+
                             <input type="password" class="form-control mb-2" placeholder="Password" name="password"/>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>

@@ -1,8 +1,10 @@
 package com.tgj.eventaid.models;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.xml.soap.Text;
 import java.util.Date;
 import java.util.List;
@@ -15,27 +17,37 @@ public class Event {
     @GeneratedValue
     private long id;
 
+    @NotBlank(message = "Must have Event Name")
+    @Size(min = 3, message = "An Event Name must be at least 3 characters.")
     @Column(nullable = false)
     private String name;
 
+    @NotBlank(message = "Must have Start Date")
     @Column(nullable = false)
     private Date start_date;
 
+    @NotBlank(message = "Must have End Date")
     @Column(nullable = false)
     private Date end_date;
 
+    @NotBlank(message = "Must have Location for Event")
+    @Size(min = 10, message = "A location must be at least 10 characters.")
     @Column(nullable = false)
     private String location;
 
+    @NotBlank(message = "Must have Description")
     @Column(nullable = false)
     private String description;
 
+    @NotBlank(message = "Must have Ticket Amount")
     @Column(nullable = false)
     private int tickets_available;
 
     @Column(nullable = false)
     private String media_location;
 
+    @NotBlank(message = "Must have Url for Event")
+    @Size(min = 3, message = "A url must be at least 3 characters.")
     @Column(nullable = false)
     private String url;
 

@@ -37,7 +37,10 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser( @Valid  Errors validation, Model model, @ModelAttribute User user) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreated_on(LocalDateTime.now());
 
