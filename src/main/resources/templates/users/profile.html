@@ -4,37 +4,42 @@
 <head th:replace="partials/navbar :: head('Profile')"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="container-fluid">
-    <main class="container">
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
         <h2><span th:text="${user.firstname}+' '+${user.lastname}"></span></h2>
-        <div sec:authorize="isAuthenticated()">
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
             <h3 class="nav-item" th:if="${#authentication.principal.owner}">
                 Events I've Created
             </h3>
             <div th:unless="${#authentication.principal.owner}">
                 <h3>Events I'm attending</h3>
             </div>
-            <div class="container-fluid foreground">
-                <div class="row">
-                    <th:block th:each="event : ${user.events}">
-                        <div class="col-xs-12 col-sm-6 col-lg-4">
-                            <div class="card">
-                                <img class="card-img-top" th:src="${event.media_location}" alt="Event Banner"/>
-                                <div class="card-body">
-                                    <h5 class="card-title" th:text="${event.name}"></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"
-                                        th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
-                                    <br/>
-                                    <a class="btn btn-outline-primary" role="button"
-                                       th:href="@{/events/__${event.id}__}">Details</a>
+            <!--th:if="${#authentication.principal.owner}"-->
+            <div class="row">
+                <th:block th:each="event : ${user.events}">
+                    <div class="col-xs-12 col-sm-6 col-lg-4">
+                        <div class="card">
+                            <img class="card-img-top" th:src="${event.media_location}" alt="Event Banner"/>
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${event.name}"></h5>
+                                <h6 class="card-subtitle mb-2 text-muted"
+                                    th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                                <div class="card-subtitle">
+                                    <h6 th:text="'Budget:' + '$ TODO'"></h6>
+                                    <h6 th:text="'Profit:' + '$ TODO'"></h6>
+                                    <h6 th:text="'Tickets Available: TODO'"></h6>
                                 </div>
+
+                                <br/>
+                                <a class="btn btn-outline-primary" role="button"
+                                   th:href="@{/events/__${event.id}__}">Details</a>
                             </div>
                         </div>
-                    </th:block>
-                </div>
+                    </div>
+                </th:block>
             </div>
         </div>
-    </main>
+    </div>
 </div>
 </body>
 </html>
