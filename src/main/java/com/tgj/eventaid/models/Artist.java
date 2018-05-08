@@ -30,8 +30,16 @@ public class Artist {
     @Column
     private String notes;
 
+    @ManyToOne  // relationship to events.id
+    @JoinColumn (name = "event_id")
+    private Event event;
+
     // in relationship to transportation.artist_id, and schedules.artist_id
 
+    // empty constructor
+    public Artist(){}
+
+    //pull object
     public Artist(long id, String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes) {
         this.id = id;
         this.firstname = firstname;
@@ -42,13 +50,23 @@ public class Artist {
         this.notes = notes;
     }
 
-    public Artist(String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes) {
+    //insert object
+    public Artist(String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes, Event event) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.costs = costs;
         this.contract = contract;
         this.contract_location = contract_location;
         this.notes = notes;
+        this.event = event;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public long getId() {
