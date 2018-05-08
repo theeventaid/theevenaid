@@ -1,152 +1,162 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="partials/navbar :: head('Create an Event')"></head>
-<link rel="stylesheet" th:href="@{/css/profile.css}" />
-
 <body>
-    <div class="container-fluid">
-            <img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}"  alt="" />
-            <div class="register-bg foreground">
-                <nav th:replace="partials/navbar :: navbar"></nav>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <form class ="center" th:action="@{/events/create}" th:method="POST" th:object="${event}">
-                            <fieldset class="registration-Transparency container-fluid">
-                                <div id="legend">
-                                    <legend style="font-size: 2.5em">Create Your Event</legend>
-                                </div>
 
-                                <div class="control-group">
-                                    <!-- Name -->
-                                    <label class="control-label" for="name">Name</label>
-                                    <div class="controls">
-                                        <input placeholder="event name" type="text" id="name" name="name" class="input-xlarge" th:field="*{name}"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <!-- Location-->
-                                    <label class="control-label" for="location">Location</label>
-                                    <div class="controls">
-                                        <input placeholder="event location"  id="location" name="location" class="input-xlarge" th:field="*{location}"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <!-- Start Date -->
-                                    <label class="control-label"  for="start_date">Start Date</label>
-                                    <div class="controls">
-                                        <input  id="start_date" type="date"  placeholder="" class="input-xlarge" th:field="*{start_date}"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <!-- End Date -->
-                                    <label class="control-label" for="end_date">End Date</label>
-                                    <div class="controls">
-                                        <input id="end_date" type="date" placeholder="" class="input-xlarge" th:field="*{end_date}"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="target_budget">Event Budget</label>
-                                    <div class="controls">
-                                        <input type="text" id="target_budget" placeholder="event budget" class="input-xlarge" name="event_budget"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="target_budget">Target Spending</label>
-                                    <div class="controls">
-                                        <input type="text" id="target_spending" placeholder="target spending" class="input-xlarge" name="target_spending"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="target_profit">Target Profit</label>
-                                    <div class="controls">
-                                        <input type="text" id="target_profit" placeholder="target profit" class="input-xlarge" name="target_profit"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label" for="tickets">Available tickets for sale</label>
-                                    <div class="controls">
-                                        <input type="text" id="tickets" placeholder="number of tickets for sale" class="input-xlarge" name="tickets"/>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <!-- Name -->
-                                    <label class="control-label" for="name">Description</label>
-                                    <div class="controls">
-                                        <!--<input type="text" id="name" name="name" class="input-xlarge" th:field="*{description}"/>-->
-                                        <textarea placeholder="Please give us a detailed description of your event"  class="form-control" id="exampleTextarea" rows="3" th:field="*{description}"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <!-- URL -->
-                                    <label class="control-label" for="url">Create your own URL</label>
-                                    <div class="controls">
-                                        <input type="text" id="url" name="url" placeholder="pick your own url" class="input-xlarge" th:field="*{url}"/>
-                                    </div>
-                                </div>
-
-                                <!--upload form-->
-                                <div id="upload_legend ">
-                                    <!--<legend style="font-size: 1.5em">Upload a file </legend>-->
-                                </div>
-
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button onclick="openPicker()" type="button" class="btn btn-secondary btn-outline-light" style="margin-bottom: 1em; margin-top: 1em;" >
-                                            Upload Image</button>
-                                    </div>
-                                </div>
-
-                                <div id="picUrl"></div>
-
-                                <div id="posts" class="container-fluid"></div>
-
-
-                                <div class="control-group">
-                                    <!-- Button -->
-                                    <div class="controls">
-                                        <button class="btn btn-primary">Create Your Event</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="center" th:action="@{/events/create}" th:method="POST" th:object="${event}">
+                <fieldset class="registration-Transparency container-fluid">
+                    <div id="legend">
+                        <legend style="font-size: 2.5em">Create Your Event</legend>
                     </div>
-                </div>
-            </div>
+
+                    <div class="control-group">
+                        <!-- Name -->
+                        <label class="control-label" for="name">Name</label>
+                        <div class="controls">
+                            <input placeholder="event name" type="text" id="name" name="name" class="input-xlarge"
+                                   th:field="*{name}"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- Location-->
+                        <label class="control-label" for="location">Location</label>
+                        <div class="controls">
+                            <input placeholder="event location" id="location" name="location" class="input-xlarge"
+                                   th:field="*{location}"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- Start Date -->
+                        <label class="control-label" for="start_date">Start Date</label>
+                        <div class="controls">
+                            <input id="start_date" type="date" placeholder="" class="input-xlarge"
+                                   th:field="*{start_date}"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- End Date -->
+                        <label class="control-label" for="end_date">End Date</label>
+                        <div class="controls">
+                            <input id="end_date" type="date" placeholder="" class="input-xlarge"
+                                   th:field="*{end_date}"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="target_budget">Event Budget</label>
+                        <div class="controls">
+                            <input type="text" id="target_budget" placeholder="event budget" class="input-xlarge"
+                                   name="event_budget"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="target_budget">Target Spending</label>
+                        <div class="controls">
+                            <input type="text" id="target_spending" placeholder="target spending" class="input-xlarge"
+                                   name="target_spending"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="target_profit">Target Profit</label>
+                        <div class="controls">
+                            <input type="text" id="target_profit" placeholder="target profit" class="input-xlarge"
+                                   name="target_profit"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="tickets">Available tickets for sale</label>
+                        <div class="controls">
+                            <input type="text" id="tickets" placeholder="number of tickets for sale"
+                                   class="input-xlarge" name="tickets"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- Name -->
+                        <label class="control-label" for="name">Description</label>
+                        <div class="controls">
+                            <!--<input type="text" id="name" name="name" class="input-xlarge" th:field="*{description}"/>-->
+                            <textarea placeholder="Please give us a detailed description of your event"
+                                      class="form-control" id="exampleTextarea" rows="3"
+                                      th:field="*{description}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- URL -->
+                        <label class="control-label" for="url">Create your own URL</label>
+                        <div class="controls">
+                            <input type="text" id="url" name="url" placeholder="pick your own url" class="input-xlarge"
+                                   th:field="*{url}"/>
+                        </div>
+                    </div>
+
+                    <!--upload form-->
+                    <div id="upload_legend ">
+                        <!--<legend style="font-size: 1.5em">Upload a file </legend>-->
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button onclick="openPicker()" type="button" class="btn btn-secondary btn-outline-light"
+                                    style="margin-bottom: 1em; margin-top: 1em;">
+                                Upload Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="picUrl"></div>
+
+                    <div id="posts" class="container-fluid"></div>
+
+
+                    <div class="control-group">
+                        <!-- Button -->
+                        <div class="controls">
+                            <button class="btn btn-primary">Create Your Event</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
+</div>
 
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
-<div th:replace="partials/navbar :: scripts" />
+<div th:replace="partials/navbar :: scripts"/>
 
 <script th:inline="javascript">
     // FILESTACK JSON CALL
     var fsClient = filestack.init('An8EGKOh9TGGuI8Vymqonz');
+
     function openPicker() {
         fsClient.pick({
-            fromSources:["local_file_system", "url","imagesearch","facebook","instagram","dropbox"],
-            accept:["image/*"],
-            maxFiles:1
-        }).then(function(response) {
+            fromSources: ["local_file_system", "url", "imagesearch", "facebook", "instagram", "dropbox"],
+            accept: ["image/*"],
+            maxFiles: 1
+        }).then(function (response) {
             // declare this function to handle response
             handleFilestack(response);
         });
     }
 
-    function handleFilestack(response){
-    $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' +response.filesUploaded['0'].url +  '" />');
-    $('#posts').append('<div class="container">');
-    $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
-    $('#posts').append('</div>');
+    function handleFilestack(response) {
+        $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#posts').append('<div class="container">');
+        $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#posts').append('</div>');
 
-    document.getElementById('upload').dataset.handler = response.url;
+        document.getElementById('upload').dataset.handler = response.url;
     }
 
 </script>
