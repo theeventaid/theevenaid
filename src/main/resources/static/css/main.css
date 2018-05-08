@@ -6,193 +6,55 @@ body {
 #recaptcha{
     transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;
 }
-.navbar-custom a { color: white !important; }
-
-/*Styling for font.  Mockup font is League Gothic*/
-#test {
-    margin-top: 5em;
-    font-family: 'Oswald', sans-serif;
-}
 
 /*navbar white  P.S  we want just the letters to turn white*/
-    @media (min-width: 375px) and (max-width: 767.98px) {
-        .bg-navbar-white {
-            background-color: white;
-            color: white;
-        }
-        .mobile-color {
-            fill: white !important;
-            color: white;
-            zoom: 900%;
-        }
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
     }
-
-#test h1{
-    opacity: 0;
-    margin-top: 25px;
-    font-size: 100px;
-    text-align: center;
-    -webkit-text-stroke: 2px white;
+    to {
+        opacity: 100%;
+    }
 }
 
-#test h2{
-    opacity: 0;
-    margin-top: 8px;
-    font-size: x-large;
-    text-align: center;
+@keyframes scale-in {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
-#bgimage-main{
-    opacity: 0;
-    background: url("../img/concert.jpg") center no-repeat;
-    background-size: cover;
+.card {
+    margin-top: 16px;
 }
 
-/* possible colors for app navbar  #5dacaf  ,  #1e52a2  ,  #1e52a2  ,  #244b9d  ,   #547db3*/
+.fade-in {
+    animation: 1.5s ease-in 0s 1 fade-in;
+}
 
+.bg-cover {
+    min-height: 100%;
+    min-width: 1024px;
 
+    width: 100%;
+    height: auto;
 
-/*.nopadding {*/
-/*padding: 0 !important;*/
-/*margin: 0 !important;*/
-/*}*/
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 
-/*.paddingRight{*/
-/*padding-right: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
+.bg-tr-dark {
+    background: rgba(21, 21, 21, 0.7);
+}
 
-/*.paddingLeft{*/
-/*padding-left: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
-/*.paddingMiddle{*/
-/*padding-left: 1% !important;*/
-/*padding-right: 1% !important;*/
-/*margin: 0 !important;*/
-/*}*/
-
-.bg {
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.bg-tr-dark:focus {
+    background: rgba(244, 244, 244, 0.7);
 }
 
 .navbar {
-    /*font-family: 'Oswald', sans-serif;*/
+    font-family: Oswald;
 }
-
-/* for extra small devices less than 544px*/
-/*@media(min-width: 544px) {*/
-
-    /*.navbar .navbar-nav>.nav-item {*/
-        /*float: none;*/
-        /*margin-left: .1rem;*/
-    /*}*/
-
-    /*.navbar .navbar-nav {*/
-        /*float: none !important;*/
-    /*}*/
-
-    /*.navbar .collapse.in, .navbar .collapsing {*/
-        /*clear: both;*/
-    /*}*/
-    /*#test {*/
-        /*margin-top: 70em;*/
-        /*font-family: 'Oswald', sans-serif;*/
-    /*}*/
-
-    /*#test h1{*/
-        /*opacity: 0;*/
-        /*margin-top: 25px;*/
-        /*font-size: 100px;*/
-        /*text-align: center;*/
-        /*-webkit-text-stroke: 2px white;*/
-    /*}*/
-
-    /*#test h2{*/
-        /*opacity: 0;*/
-        /*margin-top: 8px;*/
-        /*font-size: x-large;*/
-        /*text-align: center;*/
-    /*}*/
-/*}*/
-
-/*!* for small devices less than 768 *!*/
-/*@media(min-width: 767px) {*/
-    /*#test {*/
-        /*margin-top: 30%;*/
-        /*font-family: 'Oswald', sans-serif;*/
-        /*zoom: 150%;*/
-    /*}*/
-
-    /*#test h1{*/
-        /*opacity: 0;*/
-        /*margin-top: 25px;*/
-        /*font-size: 100px;*/
-        /*text-align: center;*/
-        /*-webkit-text-stroke: 2px white;*/
-    /*}*/
-
-    /*#test h2{*/
-        /*opacity: 0;*/
-        /*margin-top: 8px;*/
-        /*font-size: x-large;*/
-        /*text-align: center;*/
-    /*}*/
-/*}*/
-
-/*!* for medium devices less than 992 *!*/
-/*@media(min-width: 992px) {*/
-    /*#test {*/
-        /*margin-top: 40%;*/
-        /*font-family: 'Oswald', sans-serif;*/
-        /*zoom: 100%;*/
-    /*}*/
-
-    /*#test h1{*/
-        /*opacity: 0;*/
-        /*margin-top: 25px;*/
-        /*font-size: 100px;*/
-        /*text-align: center;*/
-        /*-webkit-text-stroke: 2px white;*/
-    /*}*/
-
-    /*#test h2{*/
-        /*opacity: 0;*/
-        /*margin-top: 8px;*/
-        /*font-size: x-large;*/
-        /*text-align: center;*/
-    /*}*/
-/*}*/
-
-/*!* for large devices less than 1200*!*/
-/*@media(min-width: 1200px) {*/
-    /*#test {*/
-        /*margin-top: 10%;*/
-        /*font-family: 'Oswald', sans-serif;*/
-        /*zoom: 100%;*/
-    /*}*/
-
-    /*#test h1{*/
-        /*opacity: 0;*/
-        /*margin-top: 25px;*/
-        /*font-size: 100px;*/
-        /*text-align: center;*/
-        /*-webkit-text-stroke: 2px white;*/
-    /*}*/
-
-    /*#test h2{*/
-        /*opacity: 0;*/
-        /*margin-top: 8px;*/
-        /*font-size: x-large;*/
-        /*text-align: center;*/
-    /*}*/
-/*}*/
-
-/*  else is extra large */

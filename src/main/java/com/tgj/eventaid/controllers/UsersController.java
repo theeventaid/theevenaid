@@ -6,6 +6,7 @@ import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,17 @@ public class UsersController {
         User user = userRepository.findOne(id);
         DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
         Artist artist = artistsRepository.findOne(id);
+        model.addAttribute("user", user);
+        return "users/profile";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user == null)
+            return "redirect:/";
+        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+        Artist artist = artistsRepository.findOne(user.getId());
         model.addAttribute("user", user);
         model.addAttribute("artist_name", artist.getName());
         model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
