@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.HEAD;
 
 import javax.validation.Valid;
 import java.text.DecimalFormat;
@@ -26,14 +27,13 @@ public class UsersController {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
-    private EventsRepository eventsRepository;
     private BudgetRepository budgetRepository;
     private ArtistsRepository artistsRepository;
 
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;        this.eventsRepository =eventsRepository;
+        this.passwordEncoder = passwordEncoder;
         this.budgetRepository = budgetRepository;
         this.artistsRepository = artistsRepository;
     }
@@ -57,30 +57,22 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/profile/{id}")
-    public String showProfile(@PathVariable Long id, Model model){
-        User user = userRepository.findOne(id);
-        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-//        System.out.println(event.getOwner().getId());
-//        System.out.println("This is the event_id " + event.getOwner());
-        Budget budget = budgetRepository.findOne(id);
-        Artist artist = artistsRepository.findOne(id);
-        System.out.println(budget.getEvent_budget());
-        model.addAttribute("user", user);
-        return "users/profile";
-    }
-
     @GetMapping("/profile")
-    public String showProfile(Model model) {
+    public String showProfile(Model model){
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
             return "redirect:/";
-        model.addAttribute("user", user);
-        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
-        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
-        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
-        model.addAttribute("artist_name", artist.getName());
-        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
+
+        model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
+//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+//        Budget budget = budgetRepository.findOne(user.getId());
+//        Artist artist = artistsRepository.findOne(user.getId());
+//        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
+//        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
+//        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+//        model.addAttribute("artist_name", artist.getName());
+//        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
         return "users/profile";
     }
 
@@ -113,6 +105,7 @@ public class UsersController {
 //            model.addAttribute("user", user);
 //            return "users/reset_password";
 //        }
+
         existingUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(existingUser);
         return "redirect:/ ";

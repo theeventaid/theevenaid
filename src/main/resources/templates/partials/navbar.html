@@ -26,9 +26,9 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                        data-toggle="dropdown">Login</a>
-                    <div class="dropdown-menu bg-tr-dark" style="width: 15rem !important;">
+                    <div class="dropdown-menu bg-tr-dark mx-auto" style="width: 15rem !important;">
                         <span class="dropdown-header">Enter Your Information</span>
-                        <form th:action="@{/login}" th:method="post" class="p-3 text-center">
+                        <form th:action="@{/login}" th:method="post" class="px-3 py-1 text-center">
                             <input type="text" class="form-control mb-2" placeholder="Email" name="email"/>
                             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >
                             </div>
@@ -36,7 +36,8 @@
                             <input type="password" class="form-control mb-2" placeholder="Password" name="password"/>
                             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >
                             </div>
-
+                            <a class="text-primary form-control-plaintext mb-2" th:href="@{/reset-password}">Forgot
+                                Password?</a>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>
@@ -59,8 +60,6 @@
 <div th:fragment="scripts">
     <script th:src="@{/js/jquery-2.2.4.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/primary.js}"></script>
-    <script th:src="@{/js/effects.js}"></script>
 </div>
 
 </body>

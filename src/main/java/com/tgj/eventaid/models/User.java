@@ -64,7 +64,19 @@ public class User {
     public User() {
     }
 
-    //
+    public User(String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner, List<Ticket> eventTickets, List<Event> events) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+        this.created_on = created_on;
+        this.owner = owner;
+        this.eventTickets = eventTickets;
+        this.events = events;
+    }
+
     // Security Config
     public User(User copy) {
         id = copy.id;

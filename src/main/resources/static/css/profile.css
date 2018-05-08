@@ -38,10 +38,6 @@ img {
     max-width: 100%;  /* Responsive */
 }
 
-.blur {
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-}
 
 body{
     background-color: #613e39;
