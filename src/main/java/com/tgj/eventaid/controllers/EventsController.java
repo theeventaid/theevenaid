@@ -5,6 +5,7 @@ import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
+import com.tgj.eventaid.utilities.DomainUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +40,7 @@ public class EventsController {
     }
 
     @GetMapping("/")
-    public String getIndex(@RequestHeader("Host") String host) {
+    public String getIndex() {
         return "index";
     }
 

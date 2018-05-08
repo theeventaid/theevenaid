@@ -11,4 +11,6 @@ public interface EventsRepository extends CrudRepository<Event, Long>{
 
     @Query("select e from Event e where e.name like %?1%")
     Iterable<Event> findAllLikeName(String name);
+
+    Event findByUrl(String url);
 }
