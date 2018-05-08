@@ -61,16 +61,17 @@ public class Event {
     private Venue venue_id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
-    @ManyToMany
-    @JoinTable(
-            name = "users_events",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "users_events",
+//            joinColumns = @JoinColumn(name = "event_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id")
+//    )
+//    private List<User> users;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -81,7 +82,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List artists) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists, User user) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -97,10 +98,11 @@ public class Event {
         this.target_profit = target_profit;
         this.target_spending = target_spending;
         this.artists = artists;
+        this.user = user;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List artists) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -237,13 +239,13 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public User getUser() {
         return user;

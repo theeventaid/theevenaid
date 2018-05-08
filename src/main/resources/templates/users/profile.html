@@ -28,7 +28,7 @@
                                                     <h6 th:text="'Event budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
                                                     <h6 th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
                                                     <h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
-                                                    <h6 th:text="'Featured Artist: ' + ${event.artists} + '. Cost: $'+ ${event.getArtists()}"> </h6>
+                                                    <h6 th:each="artist : ${event.artists}"   th:text="'Featured Artists: ' + ${artist.name} + '. Cost: $'+ ${#numbers.formatDecimal(artist.costs, 0, 'DEFAULT', 2, 'DEFAULT')}"> </h6>
                                                     <h6 th:text="'Price per ticket:' + '$' + ${event.tickets_price}"></h6>
                                                     <h6 th:text="'Tickets Available:' + ${event.tickets_available}"></h6>
                                                 </div>

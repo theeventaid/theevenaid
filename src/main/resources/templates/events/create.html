@@ -126,7 +126,7 @@
 
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input placeholder="artist's name" type="text" id="artists_name" th:field="*{artists}"
+                            <input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"
                                    class="form-control"/>
                         </div>
 
@@ -134,7 +134,7 @@
                             <label for="start_date">Artists' Cost</label>
 
                             <input id="artist_cost" placeholder="artist's cost" class="form-control"
-                                   th:field="*{event.costs}"/>
+                                   name="artist_cost"/>
 
                         </div>
 
@@ -151,7 +151,7 @@
                             <!-- Notes -->
                             <label for="name">Notes</label>
                             <textarea placeholder="Notes on artist (conditions, contract, clause, etc)"
-                                      class="form-control" id="artist_note" th:field="*{artists.notes}" rows="3"></textarea>
+                                      class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>
                         </div>
                     </fieldset>
                 </div>
@@ -199,7 +199,7 @@
     }
 
     function handle(response) {
-        $('#fileUrl').append('<input type="text" id="fileUpload" th:field="*{artists.contract_location}" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
         $('#filePost').append('<div class="container">');
         $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
         $('#filePost').append('</div>');

@@ -1,6 +1,7 @@
 package com.tgj.eventaid.controllers;
 
 import com.tgj.eventaid.models.Artist;
+import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
@@ -15,6 +16,7 @@ import retrofit2.http.HEAD;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class UsersController {
@@ -67,12 +69,11 @@ public class UsersController {
         if (user == null)
             return "redirect:/";
         model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
+
+//        model.addAttribute("events", user.getEvents());
+//        model.addAttribute("artists", artistsRepository.findAllByEvent());
 //        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-//        Budget budget = budgetRepository.findOne(user.getId());
-//        Artist artist = artistsRepository.findOne(user.getId());
-//        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
-//        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
-//        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+
 //        model.addAttribute("artist_name", artist.getName());
 //        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
 

@@ -29,7 +29,7 @@ public class Artist {
 
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
-    private Event event;
+    public Event event;
 
     // in relationship to transportation.artist_id, and schedules.artist_id
 

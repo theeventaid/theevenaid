@@ -68,9 +68,6 @@ public class EventsController {
     @PostMapping("/events/create")
     public String saveEvent(@ModelAttribute Event event,
                             @RequestParam ("upload") String picture,
-                            @RequestParam ("event_budget") BigDecimal event_budget,
-                            @RequestParam ("target_profit") BigDecimal target_profit,
-                            @RequestParam ("target_spending") BigDecimal target_spending,
                             @ModelAttribute Artist artist,
                             @RequestParam("artist_name") String artist_name,
                             @RequestParam("artist_cost") BigDecimal artist_cost,
