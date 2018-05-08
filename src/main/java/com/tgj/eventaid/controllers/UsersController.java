@@ -1,7 +1,11 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Artist;
+import com.tgj.eventaid.models.Budget;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.ArtistsRepository;
+import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -22,12 +27,15 @@ public class UsersController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private EventsRepository eventsRepository;
+    private BudgetRepository budgetRepository;
+    private ArtistsRepository artistsRepository;
 
     @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.eventsRepository = eventsRepository;
+        this.passwordEncoder = passwordEncoder;        this.eventsRepository =eventsRepository;
+        this.budgetRepository = budgetRepository;
+        this.artistsRepository = artistsRepository;
     }
 
     @GetMapping("/register")
@@ -50,8 +58,14 @@ public class UsersController {
     }
 
     @GetMapping("/profile/{id}")
-    public String showProfileId(@PathVariable Long id, Model model) {
-        User user = userRepository.findById(id);
+    public String showProfile(@PathVariable Long id, Model model){
+        User user = userRepository.findOne(id);
+        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+//        System.out.println(event.getOwner().getId());
+//        System.out.println("This is the event_id " + event.getOwner());
+        Budget budget = budgetRepository.findOne(id);
+        Artist artist = artistsRepository.findOne(id);
+        System.out.println(budget.getEvent_budget());
         model.addAttribute("user", user);
         return "users/profile";
     }
@@ -60,8 +74,13 @@ public class UsersController {
     public String showProfile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
-            return "redirect://";
+            return "redirect:/";
         model.addAttribute("user", user);
+        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
+        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
+        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+        model.addAttribute("artist_name", artist.getName());
+        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
         return "users/profile";
     }
 

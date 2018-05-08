@@ -56,13 +56,11 @@
                     <div class="form-group">
                         <!-- Telephone -->
                         <label for="telephone">Mobile</label>
-
                         <input type="text" id="telephone" name="telephone" placeholder="" class="form-control"
                                th:field="*{telephone}"/>
                         <small class="form-text text-muted">Please provide your mobile number</small>
-
                     </div>
-
+    
                     <div class="form-group">
                         <!-- Address -->
                         <label for="address">Address</label>
@@ -72,23 +70,21 @@
                         <small class="form-text text-muted">Please provide your address</small>
 
                     </div>
-
+                    
                     <div class="form-check">
                         <label for="isOrganizer">Organizer</label>
                         <input id="isOrganizer" th:field="*{owner}" type="checkbox" value="1"/>
                     </div>
-                    <!--<input type="text" class="form-control" aria-label="Text input with checkbox" />-->
-
+                    
                     <div class="form-group">
-                        <div id="recaptcha" class="g-recaptcha" data-theme="light"
-                             data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
+                        <div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
+                        <!--<div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6LdWzFYUAAAAAF9mCnmEXve2vyyboveiRDmMnbrz"></div>-->
                         <!-- Button -->
                         <div class="controls">
-                            <small class="form-text text-muted">Please sign in after registering!</small>
+                            <p class="help-block">Please sign in after registering!</p>
                             <button class="btn btn-primary">Register</button>
                         </div>
-                    </div>
-
+                   </div>
                 </form>
             </div>
         </div>

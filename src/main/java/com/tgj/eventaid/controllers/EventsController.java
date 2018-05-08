@@ -1,8 +1,10 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Artist;
 import com.tgj.eventaid.models.Budget;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
@@ -30,11 +32,13 @@ public class EventsController {
     public EventsRepository eventsRepository;
     public BudgetRepository budgetRepository;
     public UserRepository userRepository;
+    public ArtistsRepository artistsRepository;
 
-    public EventsController(EventsRepository eventsRepository, BudgetRepository budgetRepository, UserRepository userRepository) {
+    public EventsController(EventsRepository eventsRepository, BudgetRepository budgetRepository, UserRepository userRepository, ArtistsRepository artistsRepository) {
         this.eventsRepository = eventsRepository;
         this.budgetRepository = budgetRepository;
         this.userRepository = userRepository;
+        this.artistsRepository = artistsRepository;
     }
 
     @GetMapping("/")
@@ -75,7 +79,13 @@ public class EventsController {
                             @ModelAttribute Budget budget,
                             @RequestParam ("event_budget") BigDecimal event_budget,
                             @RequestParam ("target_profit") BigDecimal target_profit,
-                            @RequestParam ("target_spending") BigDecimal target_spending){
+                            @RequestParam ("target_spending") BigDecimal target_spending,
+                            @ModelAttribute Artist artist,
+                            @RequestParam("artist_name") String artist_name,
+                            @RequestParam("artist_cost") BigDecimal artist_cost,
+                            @RequestParam("fileUpload") String fileUpload,
+                            @RequestParam("artist_note") String artist_note){
+        //saving info to events table
         event.setMedia_location(picture);
         User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findById(authdUser.getId());
@@ -88,8 +98,15 @@ public class EventsController {
         budget.setTarget_profit(target_profit);
         budget.setTarget_spending(target_spending);
         budgetRepository.save(budget);
+        //saving info to artists table
+        artist.setEvent(event);
+        artist.setName(artist_name);
+        artist.setCosts(artist_cost);
+        artist.setContract_location(fileUpload);
+        artist.setNotes(artist_note);
+        artistsRepository.save(artist);
 
-        return "redirect:/events";
+        return "redirect:/profile";
     }
 
     @InitBinder
