@@ -54,12 +54,14 @@ public class UsersController {
     public String showProfile(@PathVariable Long id, Model model){
         User user = userRepository.findOne(id);
         DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+//        System.out.println(event.getOwner().getId());
+//        System.out.println("This is the event_id " + event.getOwner());
         Budget budget = budgetRepository.findOne(id);
+        System.out.println(budget.getEvent_budget());
         model.addAttribute("user", user);
         model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
         model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
         model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
-//        model.addAttribute("budget", budget);
         return "users/profile";
     }
 
