@@ -9,6 +9,7 @@ import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +33,7 @@ public class UsersController {
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.eventsRepository =eventsRepository;
+        this.passwordEncoder = passwordEncoder;        this.eventsRepository =eventsRepository;
         this.budgetRepository = budgetRepository;
         this.artistsRepository = artistsRepository;
     }
@@ -63,6 +63,15 @@ public class UsersController {
         Budget budget = budgetRepository.findOne(id);
         Artist artist = artistsRepository.findOne(id);
         System.out.println(budget.getEvent_budget());
+        model.addAttribute("user", user);
+        return "users/profile";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user == null)
+            return "redirect:/";
         model.addAttribute("user", user);
         model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
         model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
