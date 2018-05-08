@@ -43,6 +43,19 @@ public class Event {
     @Column(nullable = false)
     private String url;
 
+    // included budget info in table
+
+    @Column(nullable = false)
+    private BigDecimal event_budget;
+
+    @Column(nullable = false)
+    private BigDecimal target_spending;
+
+    @Column(nullable = false)
+    private BigDecimal target_profit;
+
+    // end of budget info
+
     @OneToOne  // relationship to events.id
     @JoinColumn(name = "venue_id")
     private Venue venue_id;
@@ -65,7 +78,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -76,10 +89,14 @@ public class Event {
         this.media_location = media_location;
         this.tickets_available = tickets_available;
         this.description = description;
+        this.tickets_price = tickets_price;
+        this.event_budget = event_budget;
+        this.target_profit = target_profit;
+        this.target_spending = target_spending;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -90,6 +107,33 @@ public class Event {
         this.tickets_available = tickets_available;
         this.description = description;
         this.tickets_price = tickets_price;
+        this.event_budget = event_budget;
+        this.target_profit = target_profit;
+        this.target_spending = target_spending;
+    }
+
+    public BigDecimal getEvent_budget() {
+        return event_budget;
+    }
+
+    public void setEvent_budget(BigDecimal event_budget) {
+        this.event_budget = event_budget;
+    }
+
+    public BigDecimal getTarget_spending() {
+        return target_spending;
+    }
+
+    public void setTarget_spending(BigDecimal target_spending) {
+        this.target_spending = target_spending;
+    }
+
+    public BigDecimal getTarget_profit() {
+        return target_profit;
+    }
+
+    public void setTarget_profit(BigDecimal target_profit) {
+        this.target_profit = target_profit;
     }
 
     public BigDecimal getTickets_price() {

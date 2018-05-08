@@ -25,11 +25,11 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" th:text="${event.name}"></h5>
                                                 <h6 class="card-subtitle mb-2 text-muted"
-                                                    th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                                                    th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                                                 <div class="card-subtitle">
-                                                    <h6 th:text="'Event budget:' + '$' + ${event_budget}"></h6>
-                                                    <h6 th:text="'Target Profit:' + '$' + ${target_profit}"></h6>
-                                                    <h6 th:text="'Target Spending:' + '$' + ${target_spending}"></h6>
+                                                    <h6 th:text="'Event budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
+                                                    <h6 th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
+                                                    <h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'DEFAULT', 2, 'DEFAULT')}"></h6>
                                                     <h6 th:text="'Featured Artist: ' + ${artist_name} + '. Cost: $'+ ${artist_cost}"> </h6>
                                                     <h6 th:text="'Price per ticket:' + '$' + ${event.tickets_price}"></h6>
                                                     <h6 th:text="'Tickets Available:' + ${event.tickets_available}"></h6>

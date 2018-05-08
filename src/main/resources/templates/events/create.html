@@ -62,35 +62,35 @@
                             <div class="control-group">
                                 <label class="control-label" for="target_budget">Event Budget</label>
                                 <div class="controls">
-                                    <input type="text" id="target_budget" placeholder="event budget" class="input-xlarge" name="event_budget"/>
+                                    <input type="number" id="target_budget" placeholder="event budget" class="input-xlarge" th:field="*{event_budget}"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="target_budget">Target Spending</label>
                                 <div class="controls">
-                                    <input type="text" id="target_spending" placeholder="target spending" class="input-xlarge" name="target_spending"/>
+                                    <input type="number" id="target_spending" placeholder="target spending" class="input-xlarge" th:field="*{target_spending}"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="target_profit">Target Profit</label>
                                 <div class="controls">
-                                    <input type="text" id="target_profit" placeholder="target profit" class="input-xlarge" name="target_profit"/>
+                                    <input type="number" id="target_profit" placeholder="target profit" class="input-xlarge" th:field="*{target_profit}"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="tickets">Available tickets for sale</label>
                                 <div class="controls">
-                                    <input type="text" id="tickets" placeholder="number of tickets for sale" class="input-xlarge" name="tickets"/>
+                                    <input type="number" id="tickets" placeholder="number of tickets for sale" class="input-xlarge" th:field="*{tickets_available}"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="tickets">Price per Ticket</label>
+                                <label class="control-label" for="ticket_price">Price per Ticket</label>
                                 <div class="controls">
-                                    <input type="text" id="price per ticket" placeholder="price per ticket" class="input-xlarge" th:field="*{tickets_price}"/>
+                                    <input type="text" id="ticket_price" placeholder="price per ticket" class="input-xlarge" th:field="*{tickets_price}"/>
                                 </div>
                             </div>
 
@@ -217,7 +217,8 @@
     function handle(response){
         $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' +response.filesUploaded['0'].url +  '" />');
         $('#filePost').append('<div class="container">');
-        $('#filePost').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        // $('#filePost').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
         $('#filePost').append('</div>');
 
         document.getElementById('upload_file').dataset.handler = response.url;
