@@ -88,6 +88,13 @@
                             </div>
 
                             <div class="control-group">
+                                <label class="control-label" for="tickets">Price per Ticket</label>
+                                <div class="controls">
+                                    <input type="text" id="price per ticket" placeholder="price per ticket" class="input-xlarge" th:field="*{tickets_price}"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <label class="control-label" for="name">Description</label>
                                 <div class="controls">
                                     <textarea placeholder="Please give us a detailed description of your event"  class="form-control" id="exampleTextarea" rows="3" th:field="*{description}"></textarea>
@@ -132,16 +139,9 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="name">First Name</label>
+                                <label class="control-label" for="name">Name</label>
                                 <div class="controls">
-                                    <input placeholder="artist's first name" type="text" id="artists_firstname" name="artist_firstname" class="input-xlarge"/>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label" for="location">Lastname</label>
-                                <div class="controls">
-                                    <input placeholder="artist's last name"  id="artist_lastname" name="artist_lastname" class="input-xlarge"/>
+                                    <input placeholder="artist's name" type="text" id="artists_name" name="artist_name" class="input-xlarge"/>
                                 </div>
                             </div>
 
@@ -198,7 +198,7 @@
     function handleFilestack(response){
     $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' +response.filesUploaded['0'].url +  '" />');
     $('#posts').append('<div class="container">');
-    $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+    $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 60%; margin-bottom: 1em;\" />');
     $('#posts').append('</div>');
 
     document.getElementById('upload').dataset.handler = response.url;

@@ -13,10 +13,7 @@ public class Artist {
     private long id;
 
     @Column(nullable = false)
-    private String firstname;
-
-    @Column(nullable = false)
-    private String lastname;
+    private String name;
 
     @Column(nullable = false)
     private BigDecimal costs;
@@ -40,10 +37,9 @@ public class Artist {
     public Artist(){}
 
     //pull object
-    public Artist(long id, String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes) {
+    public Artist(long id, String name, BigDecimal costs, boolean contract, String contract_location, String notes) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.name = name;
         this.costs = costs;
         this.contract = contract;
         this.contract_location = contract_location;
@@ -51,9 +47,8 @@ public class Artist {
     }
 
     //insert object
-    public Artist(String firstname, String lastname, BigDecimal costs, boolean contract, String contract_location, String notes, Event event) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Artist(String name, BigDecimal costs, boolean contract, String contract_location, String notes, Event event) {
+        this.name = name;
         this.costs = costs;
         this.contract = contract;
         this.contract_location = contract_location;
@@ -77,20 +72,12 @@ public class Artist {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getCosts() {

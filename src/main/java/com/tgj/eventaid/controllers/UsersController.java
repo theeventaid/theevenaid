@@ -1,8 +1,10 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Artist;
 import com.tgj.eventaid.models.Budget;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
+import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
@@ -25,13 +27,15 @@ public class UsersController {
     private PasswordEncoder passwordEncoder;
     private EventsRepository eventsRepository;
     private BudgetRepository budgetRepository;
+    private ArtistsRepository artistsRepository;
 
     @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.eventsRepository =eventsRepository;
         this.budgetRepository = budgetRepository;
+        this.artistsRepository = artistsRepository;
     }
 
     @GetMapping("/register")
@@ -57,11 +61,14 @@ public class UsersController {
 //        System.out.println(event.getOwner().getId());
 //        System.out.println("This is the event_id " + event.getOwner());
         Budget budget = budgetRepository.findOne(id);
+        Artist artist = artistsRepository.findOne(id);
         System.out.println(budget.getEvent_budget());
         model.addAttribute("user", user);
         model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
         model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
         model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
+        model.addAttribute("artist_name", artist.getName());
+        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
         return "users/profile";
     }
 

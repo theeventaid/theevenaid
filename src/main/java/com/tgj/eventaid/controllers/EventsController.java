@@ -74,8 +74,7 @@ public class EventsController {
                             @RequestParam ("target_profit") BigDecimal target_profit,
                             @RequestParam ("target_spending") BigDecimal target_spending,
                             @ModelAttribute Artist artist,
-                            @RequestParam("artist_firstname") String artist_firstname,
-                            @RequestParam("artist_lastname") String artists_lastname,
+                            @RequestParam("artist_name") String artist_name,
                             @RequestParam("artist_cost") BigDecimal artist_cost,
                             @RequestParam("fileUpload") String fileUpload,
                             @RequestParam("artist_note") String artist_note){
@@ -94,8 +93,7 @@ public class EventsController {
         budgetRepository.save(budget);
         //saving info to artists table
         artist.setEvent(event);
-        artist.setFirstname(artist_firstname);
-        artist.setLastname(artists_lastname);
+        artist.setName(artist_name);
         artist.setCosts(artist_cost);
         artist.setContract_location(fileUpload);
         artist.setNotes(artist_note);

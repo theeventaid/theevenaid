@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.xml.soap.Text;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public class Event {
 
     @Column(nullable = false)
     private int tickets_available;
+
+    @Column(nullable = false)
+    private BigDecimal tickets_price;
 
     @Column(nullable = false)
     private String media_location;
@@ -75,7 +79,7 @@ public class Event {
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -85,6 +89,15 @@ public class Event {
         this.media_location = media_location;
         this.tickets_available = tickets_available;
         this.description = description;
+        this.tickets_price = tickets_price;
+    }
+
+    public BigDecimal getTickets_price() {
+        return tickets_price;
+    }
+
+    public void setTickets_price(BigDecimal tickets_price) {
+        this.tickets_price = tickets_price;
     }
 
     public String getDescription() {
