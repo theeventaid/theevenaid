@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-lg-4 offset-lg-4">
-                <form class="center" th:action="@{/register}" method="POST" th:object="${user}">
+                <form class="center" th:action="@{/api/register}" method="POST" th:object="${user}">
                     <!--<div id="legend">-->
                     <!--<legend style="font-size: 2.5em">Register</legend>-->
                     <!--</div>-->
@@ -77,13 +77,16 @@
                     </div>
                     
                     <div class="form-group">
+                        <div id="responseHandler"></div>
                         <div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
+                        <!--key below is for production, please un-comment before deploying-->
                         <!--<div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6LdWzFYUAAAAAF9mCnmEXve2vyyboveiRDmMnbrz"></div>-->
                         <!-- Button -->
                         <div class="controls">
                             <p class="help-block">Please sign in after registering!</p>
                             <button class="btn btn-primary">Register</button>
                         </div>
+
                    </div>
                 </form>
             </div>
@@ -93,6 +96,14 @@
 
 <div th:replace="partials/navbar :: scripts"/>
 <script src='https://www.google.com/recaptcha/api.js'></script>
+
+<script th:inline="javascript">
+        var error = "http://localhost:8080/register?recaptcha_error";
+            if(window.location.href == error){
+                $('#responseHandler').append('<a style="color: red">Please check on the Captcha</a>');
+            }
+
+</script>
 
 </body>
 </html>
