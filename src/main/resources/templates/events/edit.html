@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head(${event.getName()})"></head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <img class="card-img-top card-img-h50" th:src="@{ __${event.media_location}__ }" alt="Event Banner"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${event.name}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"
+                        th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    Description
+                </div>
+                <div class="card-body">
+                    <p class="text-muted" th:inline="text">
+                        <em>[[${event.description}]]</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Details
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Address</h5>
+                        <h6 class="text-muted">TODO - Need Venues</h6>
+                    </li>
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Ticket Price</h5>
+                        <h6 class="text-muted">$[[${event.tickets_price}]]</h6>
+                    </li>
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Event Organizer</h5>
+                        <h6 class="text-muted">[[${event.owner.firstname}]] [[${event.owner.lastname}]]</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Map
+                </div>
+                <div id="map" class="card-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="partials/navbar :: scripts"></script>
+</body>
+</html>

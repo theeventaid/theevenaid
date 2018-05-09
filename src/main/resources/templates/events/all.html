@@ -23,7 +23,7 @@
                         <a class="btn btn-outline-primary d-block mb-3" role="button"
                            th:href="@{/events/__${event.id}__}">Details</a>
                         <a class="btn btn-outline-primary d-block" role="button"
-                           href="#">Purchase Tickets</a>
+                           href="#" th:if="${!#authentication.principal.owner}">Purchase Tickets</a>
                     </div>
                 </div>
             </div>

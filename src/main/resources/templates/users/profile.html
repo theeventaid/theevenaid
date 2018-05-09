@@ -6,15 +6,13 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
     <div sec:authorize="isAuthenticated()">
-        <h2><span th:text="${user.firstname}+' '+${user.lastname}"></span></h2>
         <div th:if="${#authorization.expression('isAuthenticated()')}">
             <h3 class="nav-item" th:if="${#authentication.principal.owner}">
-                Events I've Created
+                My Events
             </h3>
             <div th:unless="${#authentication.principal.owner}">
                 <h3>Events I'm attending</h3>
             </div>
-            <!--th:if="${#authentication.principal.owner}"-->
             <div class="row">
                 <th:block th:each="event : ${user.events}">
                     <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -31,7 +29,11 @@
                                 </div>
                                 <br/>
                                 <a class="btn btn-outline-primary" role="button"
-                                   th:href="@{/events/__${event.id}__}">Details</a>
+                                   th:href="@{/events/__${event.id}__}">View</a>
+                                <a class="btn btn-outline-primary" role="button"
+                                   th:href="@{/events/__${event.id}__}">Edit</a>
+                                <a class="btn btn-outline-primary" role="button"
+                                   th:href="@{/events/__${event.id}__}">Delete</a>
                             </div>
                         </div>
                     </div>
