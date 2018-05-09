@@ -38,10 +38,10 @@ public class EventsController {
         return new User();
     }
 
-    @GetMapping("/")
-    public String getIndex() {
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String getIndex() {
+//        return "index";
+//    }
 
     @GetMapping("/events")
     public String getAll(Model model) {

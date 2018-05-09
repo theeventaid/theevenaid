@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.HEAD;
 
@@ -37,6 +39,12 @@ public class UsersController {
         this.passwordEncoder = passwordEncoder;
         this.eventsRepository =eventsRepository;
         this.artistsRepository = artistsRepository;
+    }
+
+    @GetMapping("/")
+    public String validLogin(@RequestHeader("Host") String host, Model model){
+        model.addAttribute("host", host);
+        return "index";
     }
 
     @GetMapping("/register")
