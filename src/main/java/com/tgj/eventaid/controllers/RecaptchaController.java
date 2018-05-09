@@ -46,13 +46,9 @@ public class RecaptchaController {
             Map<String, Object> response = new HashMap<>();
             response.put("message", captchaVerifyMessage);
 
-            System.out.println(response);
-
-//            model.addAttribute("recaptcha_error", ResponseEntity.badRequest()
-//                    .body(response));
-            model.addAttribute("recaptcha_error", "Please verify your identity with the Captcha");
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Location", "/register");
+            System.out.println("This is the recaptcha's message: " + captchaVerifyMessage);
+            headers.add("Location", "/register?recaptcha_error");
             return new ResponseEntity<String>(headers,HttpStatus.FOUND);
 
 //            return  ResponseEntity.badRequest().body(response);

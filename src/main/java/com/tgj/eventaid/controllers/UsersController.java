@@ -40,6 +40,7 @@ public class UsersController {
         return "/users/register";
     }
 
+    //  Registering now is executed in the Recaptcha Controller
 //    @PostMapping("/register")
 //    public String saveUser(@ModelAttribute User user) {
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
