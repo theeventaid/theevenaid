@@ -4,282 +4,142 @@
 
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div class="container-fluid">
-    <!--<img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}" alt=""/>-->
-    <div class="register-bg foreground">
-        <!--TITLE-->
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center">Create Your Event</h1>
+<!--<img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}" alt=""/>-->
+<!--TITLE-->
+<form th:action="@{/events/create}" th:method="POST" th:object="${event}" class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <div>
+                <legend style="font-size: 1.5em">Event Information</legend>
             </div>
+
+            <div class="form-group">
+                <!-- Name -->
+                <label for="name">Name</label>
+                <input placeholder="event name" type="text" id="name" name="name" class="form-control"
+                       th:field="*{name}"/>
+            </div>
+
+            <div class="form-group">
+                <!-- Location-->
+                <label for="location">Location</label>
+                <input placeholder="event location" id="location" name="location" class="form-control"
+                       th:field="*{location}"/>
+            </div>
+
+            <div class="form-group">
+                <!-- Start Date -->
+                <label for="start_date">Start Date</label>
+                <input id="start_date" type="date" placeholder="" class="form-control"
+                       th:field="*{start_date}"/>
+            </div>
+
+            <div class="form-group">
+                <!-- End Date -->
+                <label for="end_date">End Date</label>
+                <input id="end_date" type="date" placeholder="" class="form-control"
+                       th:field="*{end_date}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="target_budget">Event Budget</label>
+                <input type="text" id="target_budget" placeholder="event budget" class="form-control"
+                       name="event_budget"/>
+            </div>
+
+            <div class="form-group">
+                <label for="target_budget">Target Spending</label>
+                <input type="text" id="target_spending" placeholder="target spending"
+                       class="form-control" name="target_spending"/>
+            </div>
+
+            <div class="form-group">
+                <label for="target_profit">Target Profit</label>
+                <input type="text" id="target_profit" placeholder="target profit" class="form-control"
+                       name="target_profit"/>
+            </div>
+
+            <div class="form-group">
+                <label for="tickets">Available tickets for sale</label>
+                <input type="text" id="tickets" placeholder="number of tickets for sale"
+                       class="form-control" name="tickets"/>
+            </div>
+
+            <div class="form-group">
+                <label for="tickets">Price per Ticket</label>
+                <input type="text" placeholder="price per ticket"
+                       class="form-control" th:field="*{tickets_price}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Description</label>
+                <textarea placeholder="Please give us a detailed description of your event"
+                          class="form-control" id="exampleTextarea" rows="3"
+                          th:field="*{description}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="url">Create your own URL</label>
+                <input type="text" id="url" name="url" placeholder="pick your own url"
+                       class="form-control" th:field="*{url}"/>.theeventaid.com
+            </div>
+
+            <div class="form-group">
+                <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
+                    Upload Image
+                </button>
+            </div>
+
+            <div id="picUrl"></div>
+            <div id="posts"></div>
         </div>
 
-
-        <form class="center" th:action="@{/events/create}" th:method="POST" th:object="${event}">
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">
-                    <fieldset class="registration-Transparency container-fluid">
-                        <div>
-                            <legend style="font-size: 1.5em">Event Information</legend>
-                        </div>
-
-                        <div class="form-group">
-                            <!-- Name -->
-                            <label for="name">Name</label>
-                            <input placeholder="event name" type="text" id="name" name="name" class="form-control"
-                                   th:field="*{name}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <!-- Location-->
-                            <label for="location">Location</label>
-                            <input placeholder="event location" id="location" name="location" class="form-control"
-                                   th:field="*{location}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <!-- Start Date -->
-                            <label for="start_date">Start Date</label>
-                            <input id="start_date" type="date" placeholder="" class="form-control"
-                                   th:field="*{start_date}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <!-- End Date -->
-                            <label for="end_date">End Date</label>
-                            <input id="end_date" type="date" placeholder="" class="form-control"
-                                   th:field="*{end_date}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="target_budget">Event Budget</label>
-                            <input type="text" id="target_budget" placeholder="event budget" class="form-control"
-                                   th:field="*{event_budget}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="target_budget">Target Spending</label>
-                            <input type="text" id="target_spending" placeholder="target spending"
-                                   class="form-control" th:field="*{target_spending}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="target_profit">Target Profit</label>
-                            <input type="text" id="target_profit" placeholder="target profit" class="form-control"
-                                   th:field="*{target_profit}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tickets">Available tickets for sale</label>
-                            <input type="text" id="tickets" placeholder="number of tickets for sale"
-                                   class="form-control" th:field="*{tickets_available}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tickets">Price per Ticket</label>
-                            <input type="text" placeholder="price per ticket"
-                                   class="form-control" th:field="*{tickets_price}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Description</label>
-                            <textarea placeholder="Please give us a detailed description of your event"
-                                      class="form-control" id="exampleTextarea" rows="3"
-                                      th:field="*{description}"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="url">Create your own URL</label>
-                            <input type="text" id="url" name="url" placeholder="pick your own url"
-                                   class="form-control" th:field="*{url}"/>.theeventaid.com
-                        </div>
-
-                        <div class="form-group">
-                            <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
-                                Upload Image
-                            </button>
-                        </div>
-
-                        <div id="picUrl" style="display: none"></div>
-
-                        <div id="posts" class="container-fluid"></div>
-                    </fieldset>
-                </div>
-
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <!-- Button -->
-                        <div class="controls">
-                            <button class="btn btn-primary">Create Your Event</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!--ARTISTS INPUT STARTS HERE-->
-                <div class="col-sm-4">
-                    <!--another row here-->
-                    <!--Modal starts here-->
-
-                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="addArtist1">Add Artist</button>-->
-
-                    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-                        <!--<div class="modal-dialog" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<h5 class="modal-title" id="exampleModalLabel">New Artist</h5>-->
-                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                                        <!--<span aria-hidden="true">&times;</span>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body">-->
-                                    <!--<form>-->
-
-                                        <!--<fieldset class="registration-Transparency container-fluid">-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="name">Name</label>-->
-                                                <!--<input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"-->
-                                                       <!--class="form-control"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="start_date">Artists' Cost</label>-->
-
-                                                <!--<input id="artist_cost" placeholder="artist's cost" class="form-control"-->
-                                                       <!--name="artist_cost"/>-->
-
-                                            <!--</div>-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--<button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">-->
-                                                    <!--Upload Contract-->
-                                                <!--</button>-->
-                                            <!--</div>-->
-
-                                            <!--<div id="fileUrl" style="display: none"></div>-->
-                                            <!--<div id="filePost"></div>-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--&lt;!&ndash; Notes &ndash;&gt;-->
-                                                <!--<label for="name">Notes</label>-->
-                                                <!--<textarea placeholder="Notes on artist (conditions, contract, clause, etc)"-->
-                                                          <!--class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>-->
-                                            <!--</div>-->
-                                        <!--</fieldset>-->
-
-                                    <!--</form>-->
-                                <!--</div>-->
-                                <!--<div class="modal-footer">-->
-                                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--Modal ends here-->
-
-                    <fieldset class="registration-Transparency container-fluid">
-                        <div id="add_artists">
-                            <legend style="font-size: 1.5em">Add Artists</legend>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"
-                                   class="form-control"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="start_date">Artists' Cost</label>
-
-                            <input id="artist_cost" placeholder="artist's cost" class="form-control"
-                                   name="artist_cost"/>
-
-                        </div>
-
-                        <div class="form-group">
-                            <button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">
-                                Upload Contract
-                            </button>
-                        </div>
-
-                        <div id="fileUrl" style="display: none"></div>
-                        <div id="filePost"></div>
-
-                        <div class="form-group">
-                            <!-- Notes -->
-                            <label for="name">Notes</label>
-                            <textarea placeholder="Notes on artist (conditions, contract, clause, etc)"
-                                      class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>
-                        </div>
-                    </fieldset>
-
-                    <!-- Venue Modal -->
-                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="addArtist1">Add Venue</button>-->
-
-                    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-                        <!--<div class="modal-dialog" role="document">-->
-                            <!--<div class="modal-content">-->
-                                <!--<div class="modal-header">-->
-                                    <!--<h5 class="modal-title" id="exampleModalLabel" style="text-align: center">Add Event Venue Information</h5>-->
-                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                                        <!--<span aria-hidden="true">&times;</span>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="modal-body">-->
-                                    <!--<form>-->
-                                        <!--<fieldset class="registration-Transparency container-fluid">-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--&lt;!&ndash; Location&ndash;&gt;-->
-                                                <!--<label for="location">Venue Address</label>-->
-                                                <!--<input placeholder="event location" id="venue_address" class="form-control"-->
-                                                       <!--name="venue_address" />-->
-                                            <!--</div>-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="start_date">Venue Cost</label>-->
-
-                                                <!--<input id="venue_cost" placeholder="artist's cost" class="form-control"-->
-                                                       <!--name="venue_cost"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="form-check">-->
-                                                <!--<label for="isOrganizer">Do you have a contract?</label>-->
-                                                <!--<input id="isOrganizer" name="contract_yes" type="checkbox" value="1"/>-->
-                                            <!--</div>-->
-
-                                            <!--<div class="form-group">-->
-                                                <!--<button onclick="eventPicker()" type="button" class="btn btn-outline btn-outline-primary">-->
-                                                    <!--Upload Contract-->
-                                                <!--</button>-->
-                                            <!--</div>-->
-
-                                            <!--<div id="venueUrl" style="display: none"></div>-->
-                                            <!--<div id="venueContract"></div>-->
-
-                                        <!--</fieldset>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                                <!--<div class="modal-footer">-->
-                                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!-- venue info-->
-                <!-- modal here -->
-                </div>
-
-
-                <div class="col-sm-1"></div>
+        <!--ARTISTS INPUT STARTS HERE-->
+        <div class="col-xs-12 col-lg-6">
+            <!--another row here-->
+            <div id="add_artists">
+                <legend style="font-size: 1.5em">Add Artists</legend>
             </div>
-        </form>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input placeholder="artist's name" type="text" id="artists_name" name="artist_name" class="form-control"/>
+            </div>
+                <div class="col-sm-1"></div>
+        </div>
+
+            <div class="form-group">
+                <label for="start_date">Artists' Cost</label>
+                <input id="artist_cost" placeholder="artist's cost" class="form-control"
+                       name="artist_cost"/>
+            </div>
+
+            <div class="form-group">
+                <button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">
+                    Upload Contract
+                </button>
+            </div>
+
+            <div id="fileUrl"></div>
+            <div id="filePost"></div>
+
+            <div class="form-group">
+                <!-- Notes -->
+                <label for="name">Notes</label>
+                <textarea placeholder="Notes on artist (conditions, contract, clause, etc)"
+                          class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <!-- Button -->
+                <div class="controls">
+                    <button class="btn btn-primary">Create Your Event</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+        </div>
     </div>
-</div>
+</form>
 
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div th:replace="partials/navbar :: scripts"/>
@@ -350,4 +210,4 @@
 </script>
 
 </body>
-</html>
+</html>t

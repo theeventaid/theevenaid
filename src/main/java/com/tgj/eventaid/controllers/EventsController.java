@@ -2,17 +2,16 @@ package com.tgj.eventaid.controllers;
 
 import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.*;
+import com.tgj.eventaid.utilities.DomainUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,9 +30,9 @@ public class EventsController {
         this.artistsRepository = artistsRepository;
     }
 
-    @GetMapping("/")
-    public String getIndex(@RequestHeader("Host") String host) {
-        return "index";
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
     }
 
     @GetMapping("/events")

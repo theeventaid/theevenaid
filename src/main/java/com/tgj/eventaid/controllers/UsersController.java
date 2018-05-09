@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.HEAD;
 
@@ -26,12 +28,23 @@ public class UsersController {
     private EventsRepository eventsRepository;
     private ArtistsRepository artistsRepository;
 
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
+    }
+
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.eventsRepository =eventsRepository;
         this.artistsRepository = artistsRepository;
+    }
+
+    @GetMapping("/")
+    public String validLogin(@RequestHeader("Host") String host, Model model){
+        model.addAttribute("host", host);
+        return "index";
     }
 
     @GetMapping("/register")
@@ -41,13 +54,13 @@ public class UsersController {
     }
 
     //  Registering now is executed in the Recaptcha Controller
-//    @PostMapping("/register")
-//    public String saveUser(@ModelAttribute User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setCreated_on(LocalDateTime.now());
-//        userRepository.save(user);
-//        return "redirect:/";
-//    }
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreated_on(LocalDateTime.now());
+        userRepository.save(user);
+        return "redirect:/";
+    }
 
     @GetMapping("/profile")
     public String showProfile(Model model){
