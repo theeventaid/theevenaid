@@ -3,30 +3,32 @@
     - [x] Security - _T_
     - [ ] Organizer
         - [ ] Dashboard View
-            - [ ] Event Listings
+            - [x] Event Listings
             - [ ] Gross Revenue
-        - [ ] Event CRUD
-    - [ ] Artist
-        - [ ] Dashboard View
-            - [ ] Schedule
-            - [ ] Uber Ride Info
     - [ ] Customer
         - [ ] Dashboard View
             - [ ] Purchased Tickets
-            - [ ] Event Attendance
-        - [ ] Ticket CRUD 
+            - [x] Event Attendance
+        - [x] Ticket CRUD
+        - [x] Ticket Purchase With Stripe API
 
+- [x] Events
+    - [x] CRUD
+    - [x] Searchable
+    - [x] Details Page
+    - [x] Event Directory
+    
 # Additional Features
-- [ ] File Upload
-    - [ ] Artists Can Upload Backing Tracks
-    - [ ] FileStack API
+- [x] File Upload
+    - [x] Artist Contracts
+    - [x] FileStack API
 - [ ] Organizer Analytics
     - [ ] Google Visualization API
     - [ ] Budget Analysis
 - [ ] Transportation Arrangement
     -  Schedule Rides With Uber API
 
-# Debatable Features
+# Potential Features
 - [ ] Hotel Booking - _Can't find any free APIs that can do booking, just listings._
 - [ ] Flight Tracking - _Found a free API, doesn't appear to be maintained so it may be more effort than it's worth._
 
