@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${event.name}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"
-                        th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                        th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                 </div>
             </div>
         </div>

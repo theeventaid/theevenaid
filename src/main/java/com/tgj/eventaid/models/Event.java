@@ -43,29 +43,46 @@ public class Event {
     @Column(nullable = false)
     private String url;
 
+    // included budget info in table
+
+    @Column(nullable = false)
+    private BigDecimal event_budget;
+
+    @Column(nullable = false)
+    private BigDecimal target_spending;
+
+    @Column(nullable = false)
+    private BigDecimal target_profit;
+
+    // end of budget info
+
     @OneToOne  // relationship to events.id
     @JoinColumn(name = "venue_id")
     private Venue venue_id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     // id must be in relationship to the users_events pivot table, and event_id on event_tickets
-    @ManyToMany
-    @JoinTable(
-            name = "users_events",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "users_events",
+//            joinColumns = @JoinColumn(name = "event_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id")
+//    )
+//    private List<User> users;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<Artist> artists;
+
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists, User user) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -76,10 +93,16 @@ public class Event {
         this.media_location = media_location;
         this.tickets_available = tickets_available;
         this.description = description;
+        this.tickets_price = tickets_price;
+        this.event_budget = event_budget;
+        this.target_profit = target_profit;
+        this.target_spending = target_spending;
+        this.artists = artists;
+        this.user = user;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -90,6 +113,42 @@ public class Event {
         this.tickets_available = tickets_available;
         this.description = description;
         this.tickets_price = tickets_price;
+        this.event_budget = event_budget;
+        this.target_profit = target_profit;
+        this.target_spending = target_spending;
+        this.artists = artists;
+    }
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
+    }
+
+    public BigDecimal getEvent_budget() {
+        return event_budget;
+    }
+
+    public void setEvent_budget(BigDecimal event_budget) {
+        this.event_budget = event_budget;
+    }
+
+    public BigDecimal getTarget_spending() {
+        return target_spending;
+    }
+
+    public void setTarget_spending(BigDecimal target_spending) {
+        this.target_spending = target_spending;
+    }
+
+    public BigDecimal getTarget_profit() {
+        return target_profit;
+    }
+
+    public void setTarget_profit(BigDecimal target_profit) {
+        this.target_profit = target_profit;
     }
 
     public BigDecimal getTickets_price() {
@@ -180,13 +239,13 @@ public class Event {
         this.venue_id = venue_id;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
     public User getUser() {
         return user;

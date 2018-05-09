@@ -92,7 +92,6 @@
 
             <div id="picUrl"></div>
             <div id="posts"></div>
-
         </div>
 
         <!--ARTISTS INPUT STARTS HERE-->
@@ -112,10 +111,8 @@
 
             <div class="form-group">
                 <label for="start_date">Artists' Cost</label>
-
                 <input id="artist_cost" placeholder="artist's cost" class="form-control"
                        name="artist_cost"/>
-
             </div>
 
             <div class="form-group">
@@ -185,7 +182,7 @@
     function handle(response) {
         $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
         $('#filePost').append('<div class="container">');
-        $('#filePost').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
         $('#filePost').append('</div>');
 
         document.getElementById('upload_file').dataset.handler = response.url;
@@ -194,4 +191,4 @@
 </script>
 
 </body>
-</html>
+</html>t

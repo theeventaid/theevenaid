@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<!--<head th:replace="partials/navbar :: head"></head>-->
-
 <head th:replace="partials/navbar :: head('Create an Account')"></head>
-
 <body>
-
 <nav th:replace="partials/navbar :: navbar"/>
 <div class="container">
     <form id="register-form" th:action="@{/register}" method="POST" th:object="${user}">
@@ -26,7 +21,6 @@
                 </small>
             </div>
         </div>
-
         <div class="form-row">
             <div class="form-group col-xs-12 col-md-6">
                 <input type="text" id="email" name="email" placeholder="Email" class="form-control"
@@ -39,7 +33,6 @@
                 <small class="form-text text-muted">Please Provide Your Address</small>
             </div>
         </div>
-
         <div class="form-row">
             <div class="form-group col-xs-12 col-md-6">
                 <input type="password" id="password" name="password" placeholder="Password" class="form-control"
@@ -67,13 +60,13 @@
         </div>
     </form>
 </div>
-
 <div th:replace="partials/navbar :: scripts"/>
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<script>
-    (function () {
-
-    })();
+<script th:inline="javascript">
+    var error = "http://localhost:8080/register?recaptcha_error";
+    if (window.location.href == error) {
+        $('#responseHandler').append('<a style="color: red">Please Click The Captcha!</a>');
+    }
 </script>
 
 </body>
