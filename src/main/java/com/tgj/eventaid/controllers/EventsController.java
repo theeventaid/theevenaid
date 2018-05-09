@@ -1,9 +1,7 @@
 package com.tgj.eventaid.controllers;
 
 import com.tgj.eventaid.models.*;
-import com.tgj.eventaid.repositories.ArtistsRepository;
-import com.tgj.eventaid.repositories.EventsRepository;
-import com.tgj.eventaid.repositories.UserRepository;
+import com.tgj.eventaid.repositories.*;
 import com.tgj.eventaid.utilities.DomainUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +22,9 @@ public class EventsController {
     public EventsRepository eventsRepository;
     public UserRepository userRepository;
     public ArtistsRepository artistsRepository;
+    public VenueRepository venueRepository;
 
-    public EventsController(EventsRepository eventsRepository, UserRepository userRepository, ArtistsRepository artistsRepository) {
+    public EventsController(EventsRepository eventsRepository, UserRepository userRepository, ArtistsRepository artistsRepository, VenueRepository venueRepository) {
         this.eventsRepository = eventsRepository;
         this.userRepository = userRepository;
         this.artistsRepository = artistsRepository;
@@ -37,11 +34,6 @@ public class EventsController {
     public User newUser() {
         return new User();
     }
-
-//    @GetMapping("/")
-//    public String getIndex() {
-//        return "index";
-//    }
 
     @GetMapping("/events")
     public String getAll(Model model) {
@@ -74,25 +66,42 @@ public class EventsController {
     @PostMapping("/events/create")
     public String saveEvent(@ModelAttribute Event event,
                             @RequestParam ("upload") String picture,
-                            @ModelAttribute Artist artist,
                             @RequestParam("artist_name") String artist_name,
                             @RequestParam("artist_cost") BigDecimal artist_cost,
                             @RequestParam("fileUpload") String fileUpload,
-                            @RequestParam("artist_note") String artist_note){
+                            @RequestParam("artist_note") String artist_note
+//                            @RequestParam("venue_name") String venue_address,
+//                            @RequestParam("venue_cost") BigDecimal venue_cost,
+//                            @RequestParam("contract_yes") Boolean contract_yes,
+//                            @RequestParam("venueUpload") String venue_upload
+    )
+    {
         //saving info to events table
+//        Venue venue = new Venue();
+//        venue.setAddress(venue_address);
+//        venue.setCosts(venue_cost);
+//        venue.setContract(contract_yes);
+//        venue.setContract_location(venue_upload);
+//        venueRepository.save(venue);
+
+//        event.setVenue_id(venue);
         event.setMedia_location(picture);
         User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findById(authdUser.getId());
         event.setUser(user);
         event.setOwner(user);
+
         eventsRepository.save(event);
+
         //saving info to artists table
+        Artist artist = new Artist();
         artist.setEvent(event);
         artist.setName(artist_name);
         artist.setCosts(artist_cost);
         artist.setContract_location(fileUpload);
         artist.setNotes(artist_note);
         artistsRepository.save(artist);
+//        Saving Venue info
 
         return "redirect:/profile";
     }
