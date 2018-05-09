@@ -1,5 +1,7 @@
 package com.tgj.eventaid.models;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;

@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"/>
 <div class="container">
-    <form id="register-form" th:action="@{/register}" method="POST" th:object="${user}">
+    <form id="register-form" th:action="@{/api/register}" method="POST" th:object="${user}">
         <div class="form-row">
             <div class="form-group col-xs-12 col-md-6">
                 <input type="text" id="firstname" name="firstname" placeholder="First Name" class="form-control"

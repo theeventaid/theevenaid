@@ -33,6 +33,11 @@ public class EventsController {
         this.artistsRepository = artistsRepository;
     }
 
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
+    }
+
     @GetMapping("/")
     public String getIndex() {
         return "index";

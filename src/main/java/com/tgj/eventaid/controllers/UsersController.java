@@ -26,6 +26,11 @@ public class UsersController {
     private EventsRepository eventsRepository;
     private ArtistsRepository artistsRepository;
 
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
+    }
+
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
@@ -41,13 +46,13 @@ public class UsersController {
     }
 
     //  Registering now is executed in the Recaptcha Controller
-//    @PostMapping("/register")
-//    public String saveUser(@ModelAttribute User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setCreated_on(LocalDateTime.now());
-//        userRepository.save(user);
-//        return "redirect:/";
-//    }
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreated_on(LocalDateTime.now());
+        userRepository.save(user);
+        return "redirect:/";
+    }
 
     @GetMapping("/profile")
     public String showProfile(Model model){
