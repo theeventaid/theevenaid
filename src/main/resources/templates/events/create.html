@@ -232,12 +232,6 @@
                                         <fieldset class="registration-Transparency container-fluid">
 
                                             <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input placeholder="artist's name" type="text" id="venue_name"  name="venue_name"
-                                                       class="form-control"/>
-                                            </div>
-
-                                            <div class="form-group">
                                                 <!-- Location-->
                                                 <label for="location">Venue Address</label>
                                                 <input placeholder="event location" id="venue_address" class="form-control"
@@ -257,7 +251,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">
+                                                <button onclick="eventPicker()" type="button" class="btn btn-outline btn-outline-primary">
                                                     Upload Contract
                                                 </button>
                                             </div>
@@ -332,8 +326,19 @@
         document.getElementById('upload_file').dataset.handler = response.url;
     }
 
-    function handle(response) {
-        $('#venueUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
+    function eventPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
+            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
+        }).then(function (response) {
+            // declare this function to handle response
+            eventHandle(response);
+        });
+    }
+
+
+    function eventHandle(response) {
+        $('#venueUrl').append('<input type="text" id="fileUpload" name="venueUpload" value=" ' + response.filesUploaded['0'].url + '" />');
         $('#venueContract').append('<div class="container">');
         $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
         $('#venueContract').append('</div>');

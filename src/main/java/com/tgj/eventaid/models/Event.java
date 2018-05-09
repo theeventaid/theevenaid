@@ -58,6 +58,7 @@ public class Event {
 
     @OneToOne  // relationship to events.id
     @JoinColumn(name = "venue_id")
+//    @MapsId
     private Venue venue_id;
 
     @ManyToOne
