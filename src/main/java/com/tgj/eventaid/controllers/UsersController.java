@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.HEAD;
@@ -38,6 +39,18 @@ public class UsersController {
         this.artistsRepository = artistsRepository;
     }
 
+//    @GetMapping(value={"/", "/index"})
+    @GetMapping("/")
+    public String validLogin(@RequestHeader("Host") String host, Model model){
+        User user = new User();
+//        if(bindingResult.hasErrors()) {
+//            return "/";
+//        }
+        model.addAttribute("host", host);
+        model.addAttribute("user", user);
+        return "index";
+    }
+
     @GetMapping("/register")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
@@ -45,9 +58,11 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String saveUser( @Valid  Errors validation, Model model, @ModelAttribute User user) {
+    public String saveUser(@Valid User user, Errors validation, Model model) {
         if (validation.hasErrors()) {
+            model.addAttribute("user", user);
             model.addAttribute("errors", validation);
+            return "users/register";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreated_on(LocalDateTime.now());

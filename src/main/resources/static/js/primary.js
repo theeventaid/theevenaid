@@ -65,3 +65,11 @@ function callMe(){
         alert( "Data Saved: " + msg );
     });
 }
+console.log("here");
+let urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("error")) {
+    console.log("error");
+    document.getElementsByClassName("fade-in").removeProperty("animation");
+    // document.getElementsByClassName("dropdown-toggle").enableProperty("");
+    document.getElementById("error").innerHTML = "Invalid Login";
+}

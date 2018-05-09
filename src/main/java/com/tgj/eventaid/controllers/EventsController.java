@@ -38,10 +38,11 @@ public class EventsController {
         this.artistsRepository = artistsRepository;
     }
 
-    @GetMapping("/")
-    public String getIndex(@RequestHeader("Host") String host) {
-        return "index";
-    }
+    // this is being handled in the UsersController...
+//    @GetMapping("/")
+//    public String getIndex() {
+//        return "index";
+//    }
 
     @GetMapping("/events")
     public String getAll(Model model) {
