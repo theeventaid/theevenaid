@@ -44,25 +44,25 @@
             <div class="form-group">
                 <label for="target_budget">Event Budget</label>
                 <input type="text" id="target_budget" placeholder="event budget" class="form-control"
-                       name="event_budget"/>
+                       th:field="*{event_budget}"/>
             </div>
 
             <div class="form-group">
                 <label for="target_budget">Target Spending</label>
                 <input type="text" id="target_spending" placeholder="target spending"
-                       class="form-control" name="target_spending"/>
+                       class="form-control" th:field="*{target_spending}"/>
             </div>
 
             <div class="form-group">
                 <label for="target_profit">Target Profit</label>
                 <input type="text" id="target_profit" placeholder="target profit" class="form-control"
-                       name="target_profit"/>
+                       th:field="*{target_profit}"/>
             </div>
 
             <div class="form-group">
                 <label for="tickets">Available tickets for sale</label>
                 <input type="text" id="tickets" placeholder="number of tickets for sale"
-                       class="form-control" name="tickets"/>
+                       class="form-control" th:field="*{tickets_available}"/>
             </div>
 
             <div class="form-group">

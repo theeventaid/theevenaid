@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.soap.Text;
 import java.math.BigDecimal;
@@ -23,11 +24,11 @@ public class Event {
     @Column(nullable = false)
     private String name;
 
-    @NotBlank(message = "Must have Start Date")
+    @NotNull(message = "Must have Start Date")
     @Column(nullable = false)
     private Date start_date;
 
-    @NotBlank(message = "Must have End Date")
+    @NotNull(message = "Must have End Date")
     @Column(nullable = false)
     private Date end_date;
 
@@ -40,7 +41,7 @@ public class Event {
     @Column(nullable = false)
     private String description;
 
-    @NotBlank(message = "Must have Ticket Amount")
+    @NotNull(message = "Must have Ticket Amount")
     @Column(nullable = false)
     private int tickets_available;
 
