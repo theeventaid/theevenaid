@@ -1,6 +1,9 @@
 package com.tgj.eventaid.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,21 +15,33 @@ public class User {
     @GeneratedValue
     private long id;
 
+    @NotBlank(message = "Must have First Name")
+    @Size(min = 3, message = "First name must be at least 3 characters.")
     @Column(nullable = false)
     private String firstname;
 
+    @NotBlank(message = "Must have Last Name")
+    @Size(min = 3, message = "Last Name must be at least 3 characters.")
     @Column(nullable = false)
     private String lastname;
 
+    @NotBlank(message = "Must have an address")
+    @Size(min = 10, message = "An address must be at least 10 characters.")
     @Column(nullable = false)
     private String address;
 
+    @NotBlank(message = "Must have Email")
+    @Size(min = 11, message = "An email must be at least 11 characters.")
     @Column(nullable = false)
     private String email;
 
+    @NotBlank(message = "Must have Password")
+    @Size(min = 8, message = "A password must be at least 8 characters.")
     @Column(nullable = false)
     private String password;
 
+    @NotBlank(message = "Must have Phone number")
+    @Size(min = 7, message = "A phone number must be at least 7 characters.")
     @Column(nullable = false)
     private String telephone;
 

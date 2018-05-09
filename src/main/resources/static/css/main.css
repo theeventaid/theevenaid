@@ -25,6 +25,9 @@ body {
         transform: scale(1);
     }
 }
+.stay-open{
+    display: block !important;
+}
 
 .card {
     margin-top: 16px;
