@@ -40,28 +40,14 @@ public class UsersController {
         return "/users/register";
     }
 
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCreated_on(LocalDateTime.now());
-
-
-        userRepository.save(user);
-        return "redirect:/";
-    }
-
-//<<<<<<< HEAD
-//    @GetMapping("/profile/{id}")
-//    public String showProfile(@PathVariable Long id, Model model){
-//        User user = userRepository.findOne(id);
-//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-//        Artist artist = artistsRepository.findOne(id);
-//        model.addAttribute("user", user);
-//        return "users/profile";
+//    @PostMapping("/register")
+//    public String saveUser(@ModelAttribute User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setCreated_on(LocalDateTime.now());
+//        userRepository.save(user);
+//        return "redirect:/";
 //    }
-//
-//=======
-//>>>>>>> master
+
     @GetMapping("/profile")
     public String showProfile(Model model){
 
@@ -69,14 +55,6 @@ public class UsersController {
         if (user == null)
             return "redirect:/";
         model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
-
-//        model.addAttribute("events", user.getEvents());
-//        model.addAttribute("artists", artistsRepository.findAllByEvent());
-//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-
-//        model.addAttribute("artist_name", artist.getName());
-//        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
-
         return "users/profile";
     }
 
