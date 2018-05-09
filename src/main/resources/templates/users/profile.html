@@ -25,8 +25,9 @@
                                 <h6 class="card-subtitle mb-2 text-muted"
                                     th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
                                 <div class="card-subtitle">
-                                    <h6 th:text="'Budget:' + '$' + ${event.event_budget}"></h6>
-                                    <h6 th:text="'Target Profit:' + '$' + ${event.target_profit}"></h6>
+                                    <h6 th:text="'Budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'COMMA', 2, 'POINT')}"></h6>
+                                    <h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'COMMA', 2, 'POINT')}"></h6>
+                                    <h6 th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'COMMA', 2, 'POINT')}"></h6>
                                     <h6 th:text="'Tickets Available: ' + ${event.tickets_available}"></h6>
                                 </div>
                                 <br/>
