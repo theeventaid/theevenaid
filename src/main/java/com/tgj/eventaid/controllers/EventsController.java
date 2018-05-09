@@ -4,6 +4,7 @@ import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
+import com.tgj.eventaid.utilities.DomainUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,11 @@ public class EventsController {
         this.artistsRepository = artistsRepository;
     }
 
-    // this is being handled in the UsersController...
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
+    }
+
 //    @GetMapping("/")
 //    public String getIndex() {
 //        return "index";

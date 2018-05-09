@@ -5,36 +5,15 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
+    <div class="row mb-5">
+        <div class="col-12">
             <div class="card">
-                <img class="card-img-top" th:src="${event.media_location}" alt="Event Banner"/>
+                <img class="card-img-top card-img-h50" th:src="@{ __${event.media_location}__ }" alt="Event Banner"/>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${event.name}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"
                         th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    Details
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Address</h5>
-                        <h6 class="text-muted">[[${event.location}]]</h6>
-                    </li>
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Ticket Price</h5>
-                        <h6 class="text-muted">$[[${event.tickets_price}]]</h6>
-                    </li>
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Event Organizer</h5>
-                        <h6 class="text-muted">[[${event.owner.firstname}]] [[${event.owner.lastname}]]</h6>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="col-12">
@@ -49,9 +28,47 @@
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Details
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Address</h5>
+                        <h6 class="text-muted">TODO - Need Venues</h6>
+                    </li>
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Ticket Price</h5>
+                        <h6 class="text-muted">$[[${event.tickets_price}]]</h6>
+                    </li>
+                    <li class="list-group-item" th:inline="text">
+                        <h5>Event Organizer</h5>
+                        <h6 class="text-muted">[[${event.owner.firstname}]] [[${event.owner.lastname}]]</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Map
+                </div>
+                <div id="map" class="card-body"></div>
+            </div>
+        </div>
     </div>
 </div>
-
 <script th:replace="partials/navbar :: scripts"></script>
+<script>
+    var map;
+    window.onload = function () {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 10
+        });
+    };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDdKaYMRw2i50cmbUMnWqhTgalT33KA40"></script>
 </body>
 </html>

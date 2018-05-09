@@ -33,11 +33,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .loginPage("/")
+                .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .failureUrl("/?error")
                 .defaultSuccessUrl("/profile")
+                .failureUrl("/?error")
                 .permitAll()
                 .and()
                 .logout()

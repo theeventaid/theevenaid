@@ -66,10 +66,21 @@ body {
 
 .card-img-top {
     width: 100%;
-    height: 25vh;
     object-fit: cover;
+}
+
+.card-img-h25 {
+    height: 25vh;
+}
+
+.card-img-h50 {
+    height: 50vh;
 }
 
 .navbar {
     font-family: Oswald;
+}
+
+#map {
+    min-height: 30vh;
 }

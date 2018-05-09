@@ -28,6 +28,11 @@ public class UsersController {
     private EventsRepository eventsRepository;
     private ArtistsRepository artistsRepository;
 
+    @ModelAttribute("user")
+    public User newUser() {
+        return new User();
+    }
+
     @Autowired
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
@@ -36,15 +41,9 @@ public class UsersController {
         this.artistsRepository = artistsRepository;
     }
 
-//    @GetMapping(value={"/", "/index"})
     @GetMapping("/")
     public String validLogin(@RequestHeader("Host") String host, Model model){
-        User user = new User();
-//        if(bindingResult.hasErrors()) {
-//            return "/";
-//        }
         model.addAttribute("host", host);
-        model.addAttribute("user", user);
         return "index";
     }
 
@@ -55,13 +54,13 @@ public class UsersController {
     }
 
     //  Registering now is executed in the Recaptcha Controller
-//    @PostMapping("/register")
-//    public String saveUser(@ModelAttribute User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setCreated_on(LocalDateTime.now());
-//        userRepository.save(user);
-//        return "redirect:/";
-//    }
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreated_on(LocalDateTime.now());
+        userRepository.save(user);
+        return "redirect:/";
+    }
 
     @GetMapping("/profile")
     public String showProfile(Model model){
