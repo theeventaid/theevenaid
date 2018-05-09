@@ -119,6 +119,66 @@
                 <!--ARTISTS INPUT STARTS HERE-->
                 <div class="col-sm-4">
                     <!--another row here-->
+                    <!--Modal starts here-->
+
+                    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="addArtist1">Add Artist</button>-->
+
+                    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<h5 class="modal-title" id="exampleModalLabel">New Artist</h5>-->
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                        <!--<span aria-hidden="true">&times;</span>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<form>-->
+
+                                        <!--<fieldset class="registration-Transparency container-fluid">-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="name">Name</label>-->
+                                                <!--<input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"-->
+                                                       <!--class="form-control"/>-->
+                                            <!--</div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<label for="start_date">Artists' Cost</label>-->
+
+                                                <!--<input id="artist_cost" placeholder="artist's cost" class="form-control"-->
+                                                       <!--name="artist_cost"/>-->
+
+                                            <!--</div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--<button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">-->
+                                                    <!--Upload Contract-->
+                                                <!--</button>-->
+                                            <!--</div>-->
+
+                                            <!--<div id="fileUrl" style="display: none"></div>-->
+                                            <!--<div id="filePost"></div>-->
+
+                                            <!--<div class="form-group">-->
+                                                <!--&lt;!&ndash; Notes &ndash;&gt;-->
+                                                <!--<label for="name">Notes</label>-->
+                                                <!--<textarea placeholder="Notes on artist (conditions, contract, clause, etc)"-->
+                                                          <!--class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>-->
+                                            <!--</div>-->
+                                        <!--</fieldset>-->
+
+                                    <!--</form>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--Modal ends here-->
+
                     <fieldset class="registration-Transparency container-fluid">
                         <div id="add_artists">
                             <legend style="font-size: 1.5em">Add Artists</legend>
@@ -154,7 +214,72 @@
                                       class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>
                         </div>
                     </fieldset>
+
+                    <!-- Venue Modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="addArtist1">Add Venue</button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="text-align: center">Add Event Venue Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <fieldset class="registration-Transparency container-fluid">
+
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input placeholder="artist's name" type="text" id="venue_name"  name="venue_name"
+                                                       class="form-control"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <!-- Location-->
+                                                <label for="location">Venue Address</label>
+                                                <input placeholder="event location" id="venue_address" class="form-control"
+                                                       name="venue_address" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="start_date">Venue Cost</label>
+
+                                                <input id="venue_cost" placeholder="artist's cost" class="form-control"
+                                                       name="venue_cost"/>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <label for="isOrganizer">Do you have a contract?</label>
+                                                <input id="isOrganizer" name="contract_yes" type="checkbox" value="1"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">
+                                                    Upload Contract
+                                                </button>
+                                            </div>
+
+                                            <div id="venueUrl" style="display: none"></div>
+                                            <div id="venueContract"></div>
+
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- venue info-->
+                <!-- modal here -->
+
+
                 <div class="col-sm-1"></div>
             </div>
         </form>
@@ -203,6 +328,15 @@
         $('#filePost').append('<div class="container">');
         $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
         $('#filePost').append('</div>');
+
+        document.getElementById('upload_file').dataset.handler = response.url;
+    }
+
+    function handle(response) {
+        $('#venueUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#venueContract').append('<div class="container">');
+        $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#venueContract').append('</div>');
 
         document.getElementById('upload_file').dataset.handler = response.url;
     }
