@@ -8,11 +8,11 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6">
             <div class="card">
-                <img class="card-img-top" th:src="@{/img/turntable.jpg}" alt="Event Banner"/>
+                <img class="card-img-top" th:src="${event.media_location}" alt="Event Banner"/>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${event.name}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"
-                        th:text="${event.start_date.toLocaleString()} + ' @ ' + ${event.location}"></h6>
+                        th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                 </div>
             </div>
         </div>
@@ -24,11 +24,11 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:inline="text">
                         <h5>Address</h5>
-                        <h6 class="text-muted">[[${event.venue_id.address}]]</h6>
+                        <h6 class="text-muted">[[${event.location}]]</h6>
                     </li>
                     <li class="list-group-item" th:inline="text">
                         <h5>Ticket Price</h5>
-                        <h6 class="text-muted">TODO</h6>
+                        <h6 class="text-muted">$[[${event.tickets_price}]]</h6>
                     </li>
                     <li class="list-group-item" th:inline="text">
                         <h5>Event Organizer</h5>

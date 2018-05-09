@@ -1,11 +1,9 @@
 package com.tgj.eventaid.controllers;
 
 import com.tgj.eventaid.models.Artist;
-import com.tgj.eventaid.models.Budget;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.ArtistsRepository;
-import com.tgj.eventaid.repositories.BudgetRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +11,28 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.*;
 import retrofit2.http.HEAD;
 
-import javax.validation.Valid;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class UsersController {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
-    private BudgetRepository budgetRepository;
+    private EventsRepository eventsRepository;
     private ArtistsRepository artistsRepository;
 
     @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, BudgetRepository budgetRepository, ArtistsRepository artistsRepository) {
+    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.budgetRepository = budgetRepository;
+        this.eventsRepository =eventsRepository;
         this.artistsRepository = artistsRepository;
     }
 
@@ -57,20 +54,14 @@ public class UsersController {
         return "/users/register";
     }
 
-    @PostMapping("/register")
-    public String saveUser(@Valid User user, Errors validation, Model model) {
-        if (validation.hasErrors()) {
-            model.addAttribute("user", user);
-            model.addAttribute("errors", validation);
-            return "users/register";
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCreated_on(LocalDateTime.now());
-
-
-        userRepository.save(user);
-        return "redirect:/";
-    }
+    //  Registering now is executed in the Recaptcha Controller
+//    @PostMapping("/register")
+//    public String saveUser(@ModelAttribute User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setCreated_on(LocalDateTime.now());
+//        userRepository.save(user);
+//        return "redirect:/";
+//    }
 
     @GetMapping("/profile")
     public String showProfile(Model model){
@@ -78,16 +69,7 @@ public class UsersController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
             return "redirect:/";
-
         model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
-//        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
-//        Budget budget = budgetRepository.findOne(user.getId());
-//        Artist artist = artistsRepository.findOne(user.getId());
-//        model.addAttribute("event_budget", dFormat.format(budget.getEvent_budget()));
-//        model.addAttribute("target_spending", dFormat.format(budget.getTarget_spending()));
-//        model.addAttribute("target_profit", dFormat.format(budget.getTarget_profit()));
-//        model.addAttribute("artist_name", artist.getName());
-//        model.addAttribute("artist_cost", dFormat.format(artist.getCosts()));
         return "users/profile";
     }
 

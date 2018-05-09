@@ -20,7 +20,8 @@ public class RecaptchaService {
     @Value("${google.recaptcha.secret}") String recaptchaSecret;
     private static final String GOOGLE_RECAPTCHA_VERIFY_URL =
             "https://www.google.com/recaptcha/api/siteverify";
-    @Autowired RestTemplateBuilder restTemplateBuilder;
+    @Autowired
+    RestTemplateBuilder restTemplateBuilder;
 
     public String verifyRecaptcha(String ip, String recaptchaResponse){
         Map<String, String> body = new HashMap<>();
