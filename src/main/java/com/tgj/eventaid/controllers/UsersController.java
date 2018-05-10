@@ -54,13 +54,13 @@ public class UsersController {
     }
 
     //  Registering now is executed in the Recaptcha Controller
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCreated_on(LocalDateTime.now());
-        userRepository.save(user);
-        return "redirect:/";
-    }
+//    @PostMapping("/register")
+//    public String saveUser(@ModelAttribute User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setCreated_on(LocalDateTime.now());
+//        userRepository.save(user);
+//        return "redirect:/";
+//    }
 
     @GetMapping("/profile")
     public String showProfile(Model model){
