@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/navbar :: head('Purchase Confirmation')"></head>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="partials/navbar :: head(${event.getName()})"></head>
 <body>
-    <form th:action="@{/charge}" th:method="POST" id='checkout-form'>
-        <input type='hidden' th:value='${amount}' name='amount' />
-            <label>Price:<span th:text='${amount}' /></label>
-        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-            <script
-                src='https://checkout.stripe.com/checkout.js'
-                class='stripe-button'
-                th:attr='data-key=${stripePublicKey},
-                data-amount=${amount},
-                data-currency=${currency}'
-                data-name='The Event Aid'
-                data-description='Your event name Here'
-                data-image
-                        ='img/fabicon_temp.png'
-                data-zip-code='true'>
-            </script>
-    </form>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<form th:action="@{/charge}" th:method="POST" id='checkout-form'>
+<input type='hidden' th:value='${amount}' name='amount' />
+<label>Price:<span th:text='${amount}' /></label>
+<!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+<script
+src='https://checkout.stripe.com/checkout.js'
+class='stripe-button'
+th:attr='data-key=${stripePublicKey},
+data-amount=${amount},
+data-currency=${currency}'
+data-name='The Event Aid'
+data-description='Your event name Here'
+data-image
+='img/fabicon_temp.png'
+data-zip-code='true'>
+</script>
+</form>
+
+<script th:replace="partials/navbar :: scripts"></script>
 </body>
 </html>
-
-<!--http://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'-->

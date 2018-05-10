@@ -48,7 +48,7 @@ public class User {
     @Column
     private LocalDateTime created_on;
 
-    @Column(nullable = false)
+    @Column() // switched this to nullable
     private boolean owner;
 
     @OneToMany(mappedBy = "user_id")
