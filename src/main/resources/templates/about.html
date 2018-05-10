@@ -9,22 +9,23 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="fluid-container mx-4">
-    <div class="row">
+    <div class="row d-flex">
         <div class="col-12">
             <h1 class="display-4">About Us</h1>
         </div>
-    </div>
-    <div class="row d-flex">
         <div class="col-xs-12 col-lg-4 d-flex">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/img/TristanCrawford.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <img th:src="@{/img/TristanCrawford.jpg}" class="w-50 rounded-circle"/>
+                    <hr/>
                     <h5 class="card-title text-primary">Tristan Crawford</h5>
-                    <p class="card-text text-left">Tristan began coding when he was 8 years old.<br/>He's a fast learner
-                        and
-                        a problem
-                        solver who's always eager to work with new technologies.<br/>And best of all, <em
-                                class="text-success">he's available for hire!</em></p>
+                    <hr/>
+                    <p class="card-text text-left text-muted">
+                        Tristan has been coding as a hobbyist since he was 8 years old. His hunger for learning is
+                        matched only by his unrelenting drive to solve problems.<br/><br/>Tristan loves working with new
+                        technologies and finding ways to maximize his efficiency. <small class="font-weight-light">That's why he uses Vim!</small><br/><br/>And best of
+                        all, he's available for hire!
+                    </p>
                 </div>
                 <div class="card-footer">
                     <a target="_blank" href="https://www.linkedin.com/in/tristanthtcrawford/">
@@ -42,10 +43,16 @@
         <div class="col-xs-12 col-lg-4 d-flex">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/img/EdwinGonzales.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <img th:src="@{/img/EdwinGonzales.jpg}" class="w-50 rounded-circle"/>
+                    <hr/>
                     <h5 class="card-title text-primary">Edwin Gonzales</h5>
-                    <p class="card-text text-left">
-                        Fill Me In!
+                    <hr/>
+                    <p class="card-text text-left text-muted">
+                        Edwin is both a veteran and a prior Systems Software Engineer. He takes pride in his training
+                        and his technical accumen and strives to learn new things on a daily basis.<br/><br/>His experience has
+                        given him the tools necessary to solve real-world business problems with clean and concise code;
+                        so much so that he has recently taken on a job at Oracle as a Systems Platform Engineer, and he's
+                        ready to take on the world!
                     </p>
                 </div>
                 <div class="card-footer">
@@ -55,7 +62,7 @@
                     <a target="_blank" href="https://github.com/edwin-gonzales-n">
                         <i class="fa fa-2x fa-github-square"></i>
                     </a>
-                    <a target="_blank" href="#">
+                    <a target="_blank" href="mailto:edwin.gonzales.n@gmail.com">
                         <i class="fa fa-2x fa-envelope"></i>
                     </a>
                 </div>
@@ -64,12 +71,16 @@
         <div class="col-xs-12 col-lg-4 d-flex">
             <div class="card">
                 <div class="card-body">
-                    <img th:src="@{/img/JamesFowler.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <img th:src="@{/img/JamesFowler.jpg}" class="w-50 rounded-circle"/>
+                    <hr/>
                     <h5 class="card-title text-primary">James Fowler</h5>
-                    <p class="card-text text-left">
-                        A tenacious Software Developer with ambition for furthering his knowledge. He adapts well to
+                    <hr/>
+                    <p class="card-text text-left text-muted">
+                        A tenacious Software Developer with ambition for furthering his knowledge.<br/><br/>He adapts
+                        well to
                         various
-                        environments and pushes to excel in any situation presented. James is ready to actualize his
+                        environments and pushes to excel in any situation presented.<br/><br/>James is ready to
+                        actualize his
                         potential in
                         a challenging career and contribute constructively to an organization.
                     </p>
@@ -89,5 +100,6 @@
         </div>
     </div>
 </div>
+<script th:replace="partials/navbar :: scripts"></script>
 </body>
 </html>
