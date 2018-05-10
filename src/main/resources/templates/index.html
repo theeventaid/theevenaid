@@ -21,6 +21,7 @@
     </div>
 </div>
 <!--<script th:src="@{/js/jquery-2.2.4.min.js}"></script>-->
+<div th:replace="partials/navbar :: scripts"/>
 <script>
     let urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("error")) {
@@ -37,10 +38,15 @@
         let dropdown = document.querySelector(".dropdown-menu");
         dropdown.className += " show";
     }
-
-
 </script>
-<div th:replace="partials/navbar :: scripts"/>
+
+<script th:inline="javascript">
+    var error = "http://localhost:8080/?recaptcha_error";
+    if (window.location.href == error) {
+        $('#registerDrop li a:eq(1)').trigger('click');
+        $('#responseHandler').append('<a style="color: red">Please Click The Captcha!</a>');
+    }
+</script>
 
 </body>
 </html>

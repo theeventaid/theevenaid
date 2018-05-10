@@ -18,10 +18,10 @@ public class Venue {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column()
     private boolean contract;
 
-    @Column(nullable = false)
+    @Column()
     private String contract_location;
 
     // venues.id is foreign key to events.venue_id

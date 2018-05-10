@@ -30,6 +30,7 @@ public class EventsController {
 		this.eventsRepository = eventsRepository;
 		this.userRepository = userRepository;
 		this.artistsRepository = artistsRepository;
+		this.venueRepository = venueRepository;
 	}
 
 	@ModelAttribute("user")
@@ -54,7 +55,6 @@ public class EventsController {
 	@GetMapping("/events/{id}")
 	public String getEvent(@PathVariable Long id, Model model) {
 		Event event = eventsRepository.findOne(id);
-		event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
 		model.addAttribute("event", event);
 		return "events/index";
 	}
@@ -67,26 +67,41 @@ public class EventsController {
 
 	@PostMapping("/events/create")
 	public String saveEvent(@ModelAttribute Event event,
-							@RequestParam(value = "upload", required = false) String picture) {
-		//saving info to events table
-//        Venue venue = new Venue();
-//        venue.setAddress(venue_address);
-//        venue.setCosts(venue_cost);
-//        venue.setContract(contract_yes);
-//        venue.setContract_location(venue_upload);
-//        venueRepository.save(venue);
+		@RequestParam (value = "upload", required = false) String picture,
+//			@RequestParam("artist_name") String artist_name,
+//			@RequestParam("artist_cost") BigDecimal artist_cost,
+//			@RequestParam("fileUpload") String fileUpload,
+//			@RequestParam("artist_note") String artist_note,
+		@RequestParam("venue_address") String venue_address,
+		@RequestParam("venue_cost") BigDecimal venue_cost,
+		@RequestParam(value = "contract_yes", required = false) Boolean contract_yes,
+		@RequestParam(value = "venue_Upload", required = false) String venue_upload
+)
+	{
 
-//        event.setVenue_id(venue);
-		if (picture != null)
-			event.setMedia_location(picture);
+		System.out.println(venue_address);
+		System.out.println(venue_cost);
+//        saving info to events table
+		Venue venue = new Venue();
+		venue.setAddress(venue_address);
+		venue.setCosts(venue_cost);
+		if(contract_yes != null && venue_upload != null) {
+			venue.setContract(contract_yes);
+			venue.setContract_location(venue_upload);
+		}
+		venueRepository.save(venue);
 
-		User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user = userRepository.findById(authdUser.getId());
-		event.setUser(user);
-		event.setOwner(user);
-		eventsRepository.save(event);
+	event.setVenue_id(venue);
+	if (picture != null)
+		event.setMedia_location(picture);
 
-		//saving info to artists table
+	User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	User user = userRepository.findById(authdUser.getId());
+	event.setUser(user);
+	event.setOwner(user);
+	eventsRepository.save(event);
+
+	//saving info to artists table
 //        Artist artist = new Artist();
 //        artist.setEvent(event);
 //        artist.setName(artist_name);

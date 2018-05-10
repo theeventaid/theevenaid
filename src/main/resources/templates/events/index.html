@@ -11,6 +11,7 @@
                 <img class="card-img-top card-img-h50" th:src="@{ __${event.media_location}__ }" alt="Event Banner"/>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${event.name}"></h5>
+                    <h5 class="card-title" th:each="artist : ${event.artists}" th:text="${artist.name}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"
                         th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                 </div>
@@ -43,7 +44,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:inline="text">
                         <h5>Address</h5>
-                        <h6 class="text-muted" id="location">[[${event.location}]]</h6>
+                        <h6 id="location" class="text-muted">[[${event.venue_id.address}]]</h6>
                     </li>
                     <li class="list-group-item" th:inline="text">
                         <h5>Ticket Price</h5>
@@ -71,10 +72,12 @@
     </div>
 </div>
 <script th:replace="partials/navbar :: scripts"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDdKaYMRw2i50cmbUMnWqhTgalT33KA40"></script>
 <script>
     window.onload = function () {
 
         var location = document.getElementById('location').innerText;
+        console.log(location);
 
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -34.397, lng: 150.644},
@@ -95,6 +98,5 @@
         })
     };
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDdKaYMRw2i50cmbUMnWqhTgalT33KA40"></script>
 </body>
 </html>

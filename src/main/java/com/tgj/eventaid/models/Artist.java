@@ -18,10 +18,10 @@ public class Artist {
     @Column(nullable = false)
     private BigDecimal costs;
 
-    @Column(nullable = false)
+    @Column()
     private boolean contract;
 
-    @Column(nullable = false)
+    @Column()
     private String contract_location;
 
     @Column

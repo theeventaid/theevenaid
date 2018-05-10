@@ -20,6 +20,7 @@
                         <div class="card-header text-muted" th:text="${event.getDateString()} + ' @ ' + ${event.location}"></div>
                         <div class="card-body">
                             <h5 class="card-title" th:text="${event.name}"></h5>
+                            <h5 class="card-title" th:each="artist : ${event.artists}" th:text="${artist.name}"></h5>
                             <div class="card-text">
                                 <h6 th:text="'Budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'COMMA', 2, 'POINT')}"></h6>
                                 <h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'COMMA', 2, 'POINT')}"></h6>

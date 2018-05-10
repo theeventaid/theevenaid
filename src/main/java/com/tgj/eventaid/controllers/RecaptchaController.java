@@ -48,7 +48,7 @@ public class RecaptchaController {
 
             HttpHeaders headers = new HttpHeaders();
             System.out.println("This is the recaptcha's message: " + captchaVerifyMessage);
-            headers.add("Location", "/register?recaptcha_error");
+            headers.add("Location", "/?recaptcha_error");
             return new ResponseEntity<String>(headers,HttpStatus.FOUND);
 
 //            return  ResponseEntity.badRequest().body(response);
