@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.soap.Text;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,68 +17,65 @@ import java.util.List;
 @Table(name = "events")
 public class Event {
 
-    @Id
-    @GeneratedValue
-    private long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    @NotBlank(message = "Must have Event Name")
-    @Size(min = 3, message = "An Event Name must be at least 3 characters.")
-    @Column(nullable = false)
-    private String name;
+	@NotBlank(message = "Must have Event Name")
+	@Size(min = 3, message = "An Event Name must be at least 3 characters.")
+	@Column(nullable = false)
+	private String name;
 
-    @NotNull(message = "Must have Start Date")
-    @Column(nullable = false)
-    private Date start_date;
+	@NotNull(message = "Must have Start Date")
+	@Column(nullable = false)
+	private Date start_date;
 
-    @NotNull(message = "Must have End Date")
-    @Column(nullable = false)
-    private Date end_date;
+	@NotNull(message = "Must have End Date")
+	@Column(nullable = false)
+	private Date end_date;
 
-    @NotBlank(message = "Must have Location for Event")
-    @Size(min = 10, message = "A location must be at least 10 characters.")
-    @Column(nullable = false)
-    private String location;
+	@NotBlank(message = "Must have Location for Event")
+	@Column(nullable = false)
+	private String location;
 
-    @NotBlank(message = "Must have Description")
-    @Column(nullable = false)
-    private String description;
+	@NotBlank(message = "Must have Description")
+	@Column(nullable = false)
+	private String description;
 
-    @NotNull(message = "Must have Ticket Amount")
-    @Column(nullable = false)
-    private int tickets_available;
+	@NotNull(message = "Must have Ticket Amount")
+	@Column(nullable = false)
+	private int tickets_available;
 
-    @Column(nullable = false)
-    private BigDecimal tickets_price;
+	@Column(nullable = false)
+	private BigDecimal tickets_price;
 
-    @Column(nullable = false)
-    private String media_location;
+	@Column(nullable = false)
+	private String media_location = "/img/turntable.jpg";
 
-    @NotBlank(message = "Must have Url for Event")
-    @Size(min = 3, message = "A url must be at least 3 characters.")
-    @Column(nullable = false)
-    private String url;
+	@Column()
+	private String url;
 
-    // included budget info in table
+	// included budget info in table
 
-    @Column(nullable = false)
-    private BigDecimal event_budget;
+	@Column(nullable = false)
+	private BigDecimal event_budget;
 
-    @Column(nullable = false)
-    private BigDecimal target_spending;
+	@Column(nullable = false)
+	private BigDecimal target_spending;
 
-    @Column(nullable = false)
-    private BigDecimal target_profit;
+	@Column(nullable = false)
+	private BigDecimal target_profit;
 
-    // end of budget info
+	// end of budget info
 
-    @OneToOne  // relationship to events.id
-    @JoinColumn(name = "venue_id")
+	@OneToOne  // relationship to events.id
+	@JoinColumn(name = "venue_id")
 //    @MapsId
-    private Venue venue_id;
+	private Venue venue_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -220,43 +219,48 @@ public class Event {
         this.end_date = end_date;
     }
 
-    public String getLocation() {
-        return location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public String getUrl() {
+		return url;
+	}
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-    public Venue getVenue_id() {
-        return venue_id;
-    }
+	public Venue getVenue_id() {
+		return venue_id;
+	}
 
-    public void setVenue_id(Venue venue_id) {
-        this.venue_id = venue_id;
-    }
+	public void setVenue_id(Venue venue_id) {
+		this.venue_id = venue_id;
+	}
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public User getOwner() {
-        return owner;
-    }
+	public User getOwner() {
+		return owner;
+	}
 
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public String getDateString() {
+		DateFormat formatter = new SimpleDateFormat();
+		return formatter.format(this.start_date);
+	}
 }
