@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,64 +21,54 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class EventsController {
 
-    public EventsRepository eventsRepository;
-    public UserRepository userRepository;
-    public ArtistsRepository artistsRepository;
-    public VenueRepository venueRepository;
+	public EventsRepository eventsRepository;
+	public UserRepository userRepository;
+	public ArtistsRepository artistsRepository;
+	public VenueRepository venueRepository;
 
-    public EventsController(EventsRepository eventsRepository, UserRepository userRepository, ArtistsRepository artistsRepository, VenueRepository venueRepository) {
-        this.eventsRepository = eventsRepository;
-        this.userRepository = userRepository;
-        this.artistsRepository = artistsRepository;
-    }
+	public EventsController(EventsRepository eventsRepository, UserRepository userRepository, ArtistsRepository artistsRepository, VenueRepository venueRepository) {
+		this.eventsRepository = eventsRepository;
+		this.userRepository = userRepository;
+		this.artistsRepository = artistsRepository;
+	}
 
-    @ModelAttribute("user")
-    public User newUser() {
-        return new User();
-    }
+	@ModelAttribute("user")
+	public User newUser() {
+		return new User();
+	}
 
-    @GetMapping("/events")
-    public String getAll(Model model) {
-        Iterable<Event> events = eventsRepository.findAll();
-        model.addAttribute("events", events);
-        return "events/all";
-    }
+	@GetMapping("/events")
+	public String getAll(Model model) {
+		Iterable<Event> events = eventsRepository.findAll();
+		model.addAttribute("events", events);
+		return "events/all";
+	}
 
-    @PostMapping("/search")
-    public String searchEvents(@RequestParam String query, Model model) {
-        Iterable<Event> events = eventsRepository.findAllLikeName(query);
-        model.addAttribute("events", events);
-        return "events/all";
-    }
+	@PostMapping("/search")
+	public String searchEvents(@RequestParam String query, Model model) {
+		Iterable<Event> events = eventsRepository.findAllLikeName(query);
+		model.addAttribute("events", events);
+		return "events/all";
+	}
 
-    @GetMapping("/events/{id}")
-    public String getEvent(@PathVariable Long id, Model model) {
-        Event event = eventsRepository.findOne(id);
-        event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
-        model.addAttribute("event", event);
-        return "events/index";
-    }
+	@GetMapping("/events/{id}")
+	public String getEvent(@PathVariable Long id, Model model) {
+		Event event = eventsRepository.findOne(id);
+		event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
+		model.addAttribute("event", event);
+		return "events/index";
+	}
 
-    @GetMapping("/events/create")
-    public String getCreateForm(Model model) {
-        model.addAttribute("event", new Event());
-        return "/events/create";
-    }
+	@GetMapping("/events/create")
+	public String getCreateForm(Model model) {
+		model.addAttribute("event", new Event());
+		return "/events/create";
+	}
 
-    @PostMapping("/events/create")
-    public String saveEvent(@ModelAttribute Event event,
-                            @RequestParam ("upload") String picture,
-                            @RequestParam("artist_name") String artist_name,
-                            @RequestParam("artist_cost") BigDecimal artist_cost,
-                            @RequestParam("fileUpload") String fileUpload,
-                            @RequestParam("artist_note") String artist_note
-//                            @RequestParam("venue_name") String venue_address,
-//                            @RequestParam("venue_cost") BigDecimal venue_cost,
-//                            @RequestParam("contract_yes") Boolean contract_yes,
-//                            @RequestParam("venueUpload") String venue_upload
-    )
-    {
-        //saving info to events table
+	@PostMapping("/events/create")
+	public String saveEvent(@ModelAttribute Event event,
+							@RequestParam(value = "upload", required = false) String picture) {
+		//saving info to events table
 //        Venue venue = new Venue();
 //        venue.setAddress(venue_address);
 //        venue.setCosts(venue_cost);
@@ -85,41 +77,62 @@ public class EventsController {
 //        venueRepository.save(venue);
 
 //        event.setVenue_id(venue);
-        event.setMedia_location(picture);
-        User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findById(authdUser.getId());
-        event.setUser(user);
-        event.setOwner(user);
+		if (picture != null)
+			event.setMedia_location(picture);
 
-        eventsRepository.save(event);
+		User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userRepository.findById(authdUser.getId());
+		event.setUser(user);
+		event.setOwner(user);
+		eventsRepository.save(event);
 
-        //saving info to artists table
-        Artist artist = new Artist();
-        artist.setEvent(event);
-        artist.setName(artist_name);
-        artist.setCosts(artist_cost);
-        artist.setContract_location(fileUpload);
-        artist.setNotes(artist_note);
-        artistsRepository.save(artist);
+		//saving info to artists table
+//        Artist artist = new Artist();
+//        artist.setEvent(event);
+//        artist.setName(artist_name);
+//        artist.setCosts(artist_cost);
+//        artist.setContract_location(fileUpload);
+//        artist.setNotes(artist_note);
+//        artistsRepository.save(artist);
 //        Saving Venue info
 
-        return "redirect:/profile";
-    }
+		return "redirect:/events/" + event.getId();
+	}
 
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+	@GetMapping("/events/edit/{id}")
+	public String editEventPage(@PathVariable Long id, Model model) {
+		Event event = eventsRepository.findOne(id);
+		model.addAttribute("event", event);
+		return "events/edit";
+	}
 
-    @GetMapping("/upload")
-    public String upload() {
-        return "users/upload";
-    }
+	@PostMapping("/events/edit/{id}")
+	public String updateEvent(@PathVariable Long id, @ModelAttribute Event event) {
+		event.setId(id);
+		eventsRepository.save(event);
+		return "redirect:/events";
+	}
 
-    @PostMapping("/upload")
-    public String uploadFile(@ModelAttribute Event event) {
-        return "/";
-    }
+	@PostMapping("/events/delete/{id}")
+	public String deleteEvent(@PathVariable Long id) {
+		eventsRepository.delete(id);
+		return "redirect:/profile";
+	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+
+	@GetMapping("/upload")
+	public String upload() {
+		return "users/upload";
+	}
+
+	@PostMapping("/upload")
+	public String uploadFile(@ModelAttribute Event event) {
+		return "/";
+	}
 }
