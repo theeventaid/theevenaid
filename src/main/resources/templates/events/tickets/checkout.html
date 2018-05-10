@@ -3,25 +3,21 @@
 <head th:replace="partials/navbar :: head(${event.getName()})"></head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-
-<form th:action="@{/charge}" th:method="POST" id='checkout-form'>
-<input type='hidden' th:value='${amount}' name='amount' />
-<label>Price:<span th:text='${amount}' /></label>
-<!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-<script
-src='https://checkout.stripe.com/checkout.js'
-class='stripe-button'
-th:attr='data-key=${stripePublicKey},
-data-amount=${amount},
-data-currency=${currency}'
-data-name='The Event Aid'
-data-description='Your event name Here'
-data-image
-='img/fabicon_temp.png'
-data-zip-code='true'>
-</script>
-</form>
-
-<script th:replace="partials/navbar :: scripts"></script>
+    <form th:action="@{/charge}" th:method="POST" id='checkout-form' th:object="${event}">
+        <input type='hidden' th:value='${amount}' name='amount' />
+            <label>Price:<span th:text='${amount}' /></label>
+        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+            <script
+                src='https://checkout.stripe.com/checkout.js'
+                class='stripe-button'
+                th:attr='data-key=${stripePublicKey}'
+                th:data-amount='*{tickets_price}'
+                data-currency='currency'
+                data-name='The Event Aid'
+                th:data-description='*{name}'
+                data-image ='img/fabicon_temp.png'
+                data-zip-code='true'>
+            </script>
+    </form>
 </body>
 </html>
