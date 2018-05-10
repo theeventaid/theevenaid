@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head('Uh Oh...')"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card text-white bg-danger">
+                <div class="card-header">
+                    <th:block th:text="'Error - ' + ${error}"></th:block>
+                </div>
+                <div class="card-img-top embed-responsive embed-responsive-16by9">
+                    <iframe src="https://www.youtube.com/embed/u9Dg-g7t2l4?start=21&amp;autoplay=1" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/}" class="btn btn-outline-light">Return To Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
