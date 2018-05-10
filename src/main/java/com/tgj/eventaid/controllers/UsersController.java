@@ -37,12 +37,12 @@ public class UsersController {
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.eventsRepository =eventsRepository;
+        this.eventsRepository = eventsRepository;
         this.artistsRepository = artistsRepository;
     }
 
     @GetMapping("/")
-    public String validLogin(@RequestHeader("Host") String host, Model model){
+    public String validLogin(@RequestHeader("Host") String host, Model model) {
         model.addAttribute("host", host);
         return "index";
     }
@@ -63,7 +63,7 @@ public class UsersController {
 //    }
 
     @GetMapping("/profile")
-    public String showProfile(Model model){
+    public String showProfile(Model model) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
@@ -82,8 +82,8 @@ public class UsersController {
 
     @PostMapping("/reset-password")
     public String setNewPassword(@RequestParam(name = "email", required = false) String email,
-                                 @RequestParam(name= "password", required = false) String newPassword,
-                                 @RequestParam(name= "newPasswordConfirm") String passwordConfirm) {
+                                 @RequestParam(name = "password", required = false) String newPassword,
+                                 @RequestParam(name = "newPasswordConfirm") String passwordConfirm) {
 
         System.out.println("get here too");
         System.out.println(email);
@@ -105,6 +105,11 @@ public class UsersController {
         existingUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(existingUser);
         return "redirect:/ ";
+    }
+
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";
     }
 }
 

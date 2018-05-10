@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head('About Us')"></head>
+<style>
+    .rounded-circle, .card {
+        box-shadow: #808080 2px 2px 6px;
+    }
+</style>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="fluid-container mx-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4">About Us</h1>
+        </div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-xs-12 col-lg-4 d-flex">
+            <div class="card">
+                <div class="card-body">
+                    <img th:src="@{/img/TristanCrawford.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <h5 class="card-title text-primary">Tristan Crawford</h5>
+                    <p class="lead text-left">Tristan began coding when he was 8 years old.<br/>He's a fast learner and
+                        a problem
+                        solver who's always eager to work with new technologies.<br/>And best of all, <em class="text-success">he's available for hire!</em></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#">
+                        <i class="fa fa-2x fa-linkedin-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-github-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-4 d-flex">
+            <div class="card">
+                <div class="card-body">
+                    <img th:src="@{/img/EdwinGonzales.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <h5 class="card-title text-primary">Edwin Gonzales</h5>
+                    <p class="lead text-left">
+                        Fill Me In!
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#">
+                        <i class="fa fa-2x fa-linkedin-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-github-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-4 d-flex">
+            <div class="card">
+                <div class="card-body">
+                    <img th:src="@{/img/JamesFowler.jpg}" class="w-50 mb-5 rounded-circle"/>
+                    <h5 class="card-title text-primary">James Fowler</h5>
+                    <p class="lead text-left">
+                        Fill Me In!
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#">
+                        <i class="fa fa-2x fa-linkedin-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-github-square"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-2x fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
