@@ -78,15 +78,6 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // id must be in relationship to the users_events pivot table, and event_id on event_tickets
-//    @ManyToMany
-//    @JoinTable(
-//            name = "users_events",
-//            joinColumns = @JoinColumn(name = "event_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id")
-//    )
-//    private List<User> users;
-
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
@@ -252,14 +243,6 @@ public class Event {
     public void setVenue_id(Venue venue_id) {
         this.venue_id = venue_id;
     }
-
-//    public List<User> getUsers() {
-//        return users;
-//    }
-
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
 
     public User getUser() {
         return user;

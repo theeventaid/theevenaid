@@ -28,6 +28,7 @@ public class EventsController {
         this.eventsRepository = eventsRepository;
         this.userRepository = userRepository;
         this.artistsRepository = artistsRepository;
+        this.venueRepository = venueRepository;
     }
 
     @ModelAttribute("user")
@@ -52,7 +53,7 @@ public class EventsController {
     @GetMapping("/events/{id}")
     public String getEvent(@PathVariable Long id, Model model) {
         Event event = eventsRepository.findOne(id);
-        event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
+//        event.setVenue_id(new Venue()); // TODO Only A Temporary Fix
         model.addAttribute("event", event);
         return "events/index";
     }
@@ -69,22 +70,22 @@ public class EventsController {
                             @RequestParam("artist_name") String artist_name,
                             @RequestParam("artist_cost") BigDecimal artist_cost,
                             @RequestParam("fileUpload") String fileUpload,
-                            @RequestParam("artist_note") String artist_note
-//                            @RequestParam("venue_name") String venue_address,
-//                            @RequestParam("venue_cost") BigDecimal venue_cost,
-//                            @RequestParam("contract_yes") Boolean contract_yes,
-//                            @RequestParam("venueUpload") String venue_upload
+                            @RequestParam("artist_note") String artist_note,
+                            @RequestParam("venue_address") String venue_address,
+                            @RequestParam("venue_cost") BigDecimal venue_cost,
+                            @RequestParam("contract_yes") Boolean contract_yes,
+                            @RequestParam("venue_Upload") String venue_upload
     )
     {
-        //saving info to events table
-//        Venue venue = new Venue();
-//        venue.setAddress(venue_address);
-//        venue.setCosts(venue_cost);
-//        venue.setContract(contract_yes);
-//        venue.setContract_location(venue_upload);
-//        venueRepository.save(venue);
+//        saving info to events table
+        Venue venue = new Venue();
+        venue.setAddress(venue_address);
+        venue.setCosts(venue_cost);
+        venue.setContract(contract_yes);
+        venue.setContract_location(venue_upload);
+        venueRepository.save(venue);
 
-//        event.setVenue_id(venue);
+        event.setVenue_id(venue);
         event.setMedia_location(picture);
         User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findById(authdUser.getId());
@@ -101,7 +102,6 @@ public class EventsController {
         artist.setContract_location(fileUpload);
         artist.setNotes(artist_note);
         artistsRepository.save(artist);
-//        Saving Venue info
 
         return "redirect:/profile";
     }
