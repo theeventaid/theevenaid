@@ -1,64 +1,190 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/navbar :: head(${event.getName()})"></head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/navbar :: head('Create an Event')"></head>
+
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
+<!--<img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}" alt=""/>-->
+<!--TITLE-->
+<form th:action="@{/events/edit/__${event.id}__}" th:method="POST" th:object="${event}" class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-4 offset-lg-4">
+            <div>
+                <legend style="font-size: 1.5em">Event Information</legend>
+            </div>
 
-<div class="container">
-    <div class="row mb-5">
-        <div class="col-12">
-            <div class="card">
-                <img class="card-img-top card-img-h50" th:src="@{ __${event.media_location}__ }" alt="Event Banner"/>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${event.name}"></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"
-                        th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
-                </div>
+            <div class="form-group">
+                <!-- Name -->
+                <input placeholder="Event Name" type="text" class="form-control"
+                       th:field="*{name}" th:maxlength="50"/>
+                <small class="form-text text-muted">Enter The Name Of Your Event</small>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    Description
-                </div>
-                <div class="card-body">
-                    <p class="text-muted" th:inline="text">
-                        <em>[[${event.description}]]</em>
-                    </p>
-                </div>
+
+            <div class="form-group">
+                <textarea placeholder="Event Description"
+                          class="form-control" rows="3"
+                          th:field="*{description}"></textarea>
+                <small class="form-text text-muted">Tell Us A Little About Your Event</small>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    Details
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Address</h5>
-                        <h6 class="text-muted">TODO - Need Venues</h6>
-                    </li>
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Ticket Price</h5>
-                        <h6 class="text-muted">$[[${event.tickets_price}]]</h6>
-                    </li>
-                    <li class="list-group-item" th:inline="text">
-                        <h5>Event Organizer</h5>
-                        <h6 class="text-muted">[[${event.owner.firstname}]] [[${event.owner.lastname}]]</h6>
-                    </li>
-                </ul>
+
+            <div class="form-group">
+                <input type="url" placeholder="Event Url"
+                       class="form-control" th:field="*{url}"/>
+                <small class="form-text text-muted">Give Us A Link To Your Event Homepage</small>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    Map
-                </div>
-                <div id="map" class="card-body"></div>
+
+
+            <div class="form-group">
+                <!-- Location-->
+                <input placeholder="Event Address" id="location" name="location" class="form-control"
+                       th:field="*{location}" th:maxlength="50"/>
+                <small class="form-text text-muted">Where Will Your Event Be Held?</small>
             </div>
+
+            <div class="form-group">
+                <!-- Start Date -->
+                <input id="start_date" type="date" placeholder="" class="form-control"
+                       th:field="*{start_date}"/>
+                <small class="form-text text-muted">Event Start Date</small>
+            </div>
+
+            <div class="form-group">
+                <!-- End Date -->
+                <input id="end_date" type="date" placeholder="" class="form-control"
+                       th:field="*{end_date}"/>
+                <small class="form-text text-muted">Event End Date</small>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_budget" placeholder="Budget" class="form-control"
+                           th:field="*{event_budget}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">What Is Your Budget For This Event?</small>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_spending" placeholder="Target Spending"
+                           class="form-control" th:field="*{target_spending}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Are You Willing To Spend On This Event?</small>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_profit" placeholder="Target Profit" class="form-control"
+                           th:field="*{target_profit}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Would You Like To Make From This Event?</small>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" placeholder="Price Per Ticket"
+                           class="form-control" th:field="*{tickets_price}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Will A Ticket Be?</small>
+            </div>
+
+            <div class="form-group">
+                <input type="number" placeholder="Tickets Available"
+                       class="form-control" th:field="*{tickets_available}" th:min="1"/>
+                <small class="form-text text-muted">Number Of Available Tickets</small>
+            </div>
+
+            <div class="form-group">
+                <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
+                    Upload Banner Image
+                </button>
+            </div>
+
+            <button class="btn btn-primary">Update Event</button>
+            <div id="picUrl" style="display: none"></div>
+            <div id="posts"></div>
         </div>
     </div>
-</div>
-<script th:replace="partials/navbar :: scripts"></script>
+</form>
+
+<script src="https://static.filestackapi.com/v3/filestack.js"></script>
+<div th:replace="partials/navbar :: scripts"/>
+
+<script th:inline="javascript">
+    // FILESTACK JSON CALL
+    var fsClient = filestack.init('An8EGKOh9TGGuI8Vymqonz');
+
+    function openPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "facebook", "instagram", "googledrive", "dropbox", "flickr", "box", "gmail", "picasa"],
+            accept: ["image/*"],
+            maxFiles: 1
+        }).then(function (response) {
+            // declare this function to handle response
+            handleFilestack(response);
+        });
+    }
+
+    function handleFilestack(response) {
+        $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#posts').append('<div class="container">');
+        $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 60%; margin-bottom: 1em;\" />');
+        $('#posts').append('</div>');
+
+        document.getElementById('upload').dataset.handler = response.url;
+    }
+
+    function filePicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
+            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
+        }).then(function (response) {
+            // declare this function to handle response
+            handle(response);
+        });
+    }
+
+    function handle(response) {
+        $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#filePost').append('<div class="container">');
+        $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#filePost').append('</div>');
+
+        document.getElementById('upload_file').dataset.handler = response.url;
+    }
+
+    function eventPicker() {
+        fsClient.pick({
+            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
+            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
+        }).then(function (response) {
+            // declare this function to handle response
+            eventHandle(response);
+        });
+    }
+
+
+    function eventHandle(response) {
+        $('#venueUrl').append('<input type="text" id="fileUpload" name="venueUpload" value=" ' + response.filesUploaded['0'].url + '" />');
+        $('#venueContract').append('<div class="container">');
+        $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+        $('#venueContract').append('</div>');
+
+        document.getElementById('upload_file').dataset.handler = response.url;
+    }
+
+</script>
+
 </body>
 </html>

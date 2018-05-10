@@ -6,186 +6,114 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <!--<img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}" alt=""/>-->
 <!--TITLE-->
-<form th:action="@{/events/create}" th:method="POST" th:object="${event}" class="container-fluid">
+<form th:action="@{/events/create}" th:method="POST" th:object="${event}" class="container">
     <div class="row">
-        <div class="col-xs-12 col-lg-6">
+        <div class="col-xs-12 col-lg-4 offset-lg-4">
             <div>
                 <legend style="font-size: 1.5em">Event Information</legend>
             </div>
 
             <div class="form-group">
                 <!-- Name -->
-                <label for="name">Name</label>
-                <input placeholder="event name" type="text" id="name" name="name" class="form-control"
-                       th:field="*{name}"/>
+                <input placeholder="Event Name" type="text" class="form-control"
+                       th:field="*{name}" th:maxlength="50"/>
+                <small class="form-text text-muted">Enter The Name Of Your Event</small>
             </div>
 
             <div class="form-group">
+                <textarea placeholder="Event Description"
+                          class="form-control" rows="3"
+                          th:field="*{description}"></textarea>
+                <small class="form-text text-muted">Tell Us A Little About Your Event</small>
+            </div>
+
+            <div class="form-group">
+                <input type="url" placeholder="Event Url"
+                       class="form-control" th:field="*{url}"/>
+                <small class="form-text text-muted">Give Us A Link To Your Event Homepage</small>
+            </div>
+
+
+            <div class="form-group">
                 <!-- Location-->
-                <label for="location">Location</label>
-                <input placeholder="event location" id="location" name="location" class="form-control"
-                       th:field="*{location}"/>
+                <input placeholder="Event Address" id="location" name="location" class="form-control"
+                       th:field="*{location}" th:maxlength="50"/>
+                <small class="form-text text-muted">Where Will Your Event Be Held?</small>
             </div>
 
             <div class="form-group">
                 <!-- Start Date -->
-                <label for="start_date">Start Date</label>
                 <input id="start_date" type="date" placeholder="" class="form-control"
                        th:field="*{start_date}"/>
+                <small class="form-text text-muted">Event Start Date</small>
             </div>
 
             <div class="form-group">
                 <!-- End Date -->
-                <label for="end_date">End Date</label>
                 <input id="end_date" type="date" placeholder="" class="form-control"
                        th:field="*{end_date}"/>
+                <small class="form-text text-muted">Event End Date</small>
             </div>
 
             <div class="form-group">
-                <label for="target_budget">Event Budget</label>
-
-                <!--<input type="number" id="target_budget" placeholder="event budget" class="form-control" name="event_budget"/>-->
-
-                <input type="text" id="target_budget" placeholder="event budget" class="form-control"
-                       th:field="*{event_budget}"/>
-
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_budget" placeholder="Budget" class="form-control"
+                           th:field="*{event_budget}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">What Is Your Budget For This Event?</small>
             </div>
 
             <div class="form-group">
-                <label for="target_budget">Target Spending</label>
-
-                <!--<input type="number" id="target_spending" placeholder="target spending" class="form-control" name="target_spending"/>-->
-
-                <input type="text" id="target_spending" placeholder="target spending"
-                       class="form-control" th:field="*{target_spending}"/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_spending" placeholder="Target Spending"
+                           class="form-control" th:field="*{target_spending}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Are You Willing To Spend On This Event?</small>
             </div>
 
             <div class="form-group">
-                <label for="target_profit">Target Profit</label>
-
-                <!--<input type="number" id="target_profit" placeholder="target profit" class="form-control" name="target_profit"/>-->
-
-                <input type="text" id="target_profit" placeholder="target profit" class="form-control"
-                       th:field="*{target_profit}"/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" id="target_profit" placeholder="Target Profit" class="form-control"
+                           th:field="*{target_profit}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Would You Like To Make From This Event?</small>
             </div>
 
             <div class="form-group">
-                <label for="tickets">Available tickets for sale</label>
-
-                <!--<input type="number" id="tickets" placeholder="number of tickets for sale" class="form-control" name="tickets"/>-->
-
-                <input type="text" id="tickets" placeholder="number of tickets for sale"
-                       class="form-control" th:field="*{tickets_available}"/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" placeholder="Price Per Ticket"
+                           class="form-control" th:field="*{tickets_price}" th:min="0"/>
+                </div>
+                <small class="form-text text-muted">How Much Will A Ticket Be?</small>
             </div>
 
             <div class="form-group">
-                <label for="tickets">Price per Ticket</label>
-                <input type="number" placeholder="price per ticket"
-                       class="form-control" th:field="*{tickets_price}"/>
-            </div>
-
-            <div class="form-group">
-                <label for="name">Description</label>
-                <textarea placeholder="Please give us a detailed description of your event"
-                          class="form-control" id="exampleTextarea" rows="3"
-                          th:field="*{description}"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="url">Create your own URL</label>
-                <input type="text" id="url" name="url" placeholder="pick your own url"
-                       class="form-control" th:field="*{url}"/>.theeventaid.com
+                <input type="number" placeholder="Tickets Available"
+                       class="form-control" th:field="*{tickets_available}" th:min="1"/>
+                <small class="form-text text-muted">Number Of Available Tickets</small>
             </div>
 
             <div class="form-group">
                 <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
-                    Upload Image
+                    Upload Banner Image
                 </button>
             </div>
 
+            <button class="btn btn-primary">Create Event</button>
             <div id="picUrl" style="display: none"></div>
             <div id="posts"></div>
-        </div>
-
-        <!--ARTISTS INPUT STARTS HERE-->
-        <div class="col-xs-12 col-lg-6">
-
-            <!--another row here-->
-            <!--<div id="add_artists">-->
-                <!--<legend style="font-size: 1.5em">Add Artists</legend>-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="name">Name</label>-->
-                <!--<input placeholder="artist's name" type="text" id="artists_name" name="artist_name" class="form-control"/>-->
-            <!--</div>-->
-
-            <!--<div class="col-sm-1"></div>-->
-
-            <!--<div class="form-group">-->
-                <!--<label for="start_date">Artists' Cost</label>-->
-                <!--<input id="artist_cost" placeholder="artist's cost" class="form-control"-->
-                       <!--name="artist_cost"/>-->
-            <!--</div>-->
-
-            <!--<div class="form-group">-->
-                <!--<button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">-->
-                    <!--Upload Contract-->
-                <!--</button>-->
-            <!--</div>-->
-
-            <!--<div id="fileUrl"></div>-->
-            <!--<div id="filePost"></div>-->
-
-            <!--<div class="form-group">-->
-                <!--&lt;!&ndash; Notes &ndash;&gt;-->
-                <!--<label for="name">Notes</label>-->
-                <!--<textarea placeholder="Notes on artist (conditions, contract, clause, etc)"-->
-                          <!--class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>-->
-            <!--</div>-->
-            <div id="add_artists">
-                <legend style="font-size: 1.5em">Add Artists</legend>
-            </div>
-
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"
-                       class="form-control"/>
-            </div>
-
-            <div class="form-group">
-                <label for="start_date">Artists' Cost</label>
-
-                <input type="number" id="artist_cost" placeholder="artist's cost" class="form-control"
-                       name="artist_cost"/>
-
-            </div>
-
-            <div class="form-group">
-                <button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">
-                    Upload Contract
-                </button>
-            </div>
-
-            <div id="fileUrl" style="display: none"></div>
-            <div id="filePost"></div>
-
-            <div class="form-group">
-                <!-- Notes -->
-                <label for="name">Notes</label>
-                <textarea placeholder="Notes on artist (conditions, contract, clause, etc)"
-                          class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>
-            </div>
-
-
-            <div class="form-group">
-                <!-- Button -->
-                <div class="controls">
-                    <button class="btn btn-primary">Create Your Event</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-lg-4">
         </div>
     </div>
 </form>
@@ -259,4 +187,4 @@
 </script>
 
 </body>
-</html>t
+</html>

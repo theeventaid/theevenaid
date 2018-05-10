@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <head th:replace="partials/navbar :: head('All Events')"></head>
 </head>
@@ -8,9 +8,9 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <th:block th:each="event : ${events}">
-            <div class="col-sm-1e col-lg-6 col-xl-4 d-flex align-items-stretch">
+            <div class="col-sm-1e col-lg-6 col-xl-4 d-flex align-self-stretch">
                 <div class="card">
                     <img class="card-img-top card-img-h25" th:src="${event.media_location}" alt="Event Banner"/>
                     <div class="card-body">
@@ -20,10 +20,10 @@
                         <h6 class="card-subtitle mb-2 text-muted"
                             th:text="'Tickets: $' + ${event.tickets_price} + ' / ' + ${event.tickets_available} + ' left!'"></h6>
                         <br/>
-                        <a class="btn btn-outline-primary d-block mb-3" role="button"
-                           th:href="@{/events/__${event.id}__}">Details</a>
+                    </div>
+                    <div class="card-footer">
                         <a class="btn btn-outline-primary d-block" role="button"
-                           href="#" th:if="${!#authentication.principal.owner}">Purchase Tickets</a>
+                           th:href="@{/events/__${event.id}__}">Details</a>
                     </div>
                 </div>
             </div>
