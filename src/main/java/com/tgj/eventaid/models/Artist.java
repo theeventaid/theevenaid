@@ -12,10 +12,10 @@ public class Artist {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column()
     private String name;
 
-    @Column(nullable = false)
+    @Column()
     private BigDecimal costs;
 
     @Column()

@@ -88,6 +88,8 @@ public class EventsController {
 		@RequestParam(value = "venue_Upload", required = false) String venue_upload
 )
 	{
+
+//        Saving Venue info
 		Venue venue = new Venue();
 		venue.setAddress(venue_address);
 		venue.setCosts(venue_cost);
@@ -97,21 +99,19 @@ public class EventsController {
 		}
 		venueRepository.save(venue);
 
-	event.setVenue_id(venue);
-	if (picture != null)
-		event.setMedia_location(picture);
+        event.setVenue_id(venue);
+        if (picture != null) event.setMedia_location(picture);
 
-	User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	User user = userRepository.findById(authdUser.getId());
+        User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findById(authdUser.getId());
 //	event.setUser(user);
-	event.setOwner(user);
-	eventsRepository.save(event);
+        event.setOwner(user);
+        eventsRepository.save(event);
 
-	//saving info to artists table
+        //saving info to artists table
         Artist artist = new Artist();
         artist.setEvent(event);
         artistsRepository.save(artist);
-//        Saving Venue info
 
 		return "redirect:/events/" + event.getId();
 	}
