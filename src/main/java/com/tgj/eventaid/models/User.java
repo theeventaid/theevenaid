@@ -48,23 +48,22 @@ public class User {
     @Column
     private LocalDateTime created_on;
 
-    @Column()
+    @Column() // switched this to nullable
     private boolean owner;
 
-    @OneToMany(mappedBy = "user_id")
-    // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id")
     private List<Ticket> eventTickets;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Event> userEvents;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Event> events;
 
-//    @ManyToMany (mappedBy = "event_id")
-//    private List<Event> event_id;
-
     public User() {
     }
 
-    public User(String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner, List<Ticket> eventTickets, List<Event> events) {
+    public User(String firstname, String lastname, String address, String email, String password, String telephone, LocalDateTime created_on, boolean owner, List<Ticket> eventTickets, List<Event> events, List<Event> userEvents) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -75,6 +74,7 @@ public class User {
         this.owner = owner;
         this.eventTickets = eventTickets;
         this.events = events;
+        this.userEvents = userEvents;
     }
 
     // Security Config
@@ -90,6 +90,15 @@ public class User {
         owner = copy.owner;
         eventTickets = copy.eventTickets;
         events = copy.events;
+        userEvents = copy.userEvents;
+    }
+
+    public List<Event> getUserEvents() {
+        return userEvents;
+    }
+
+    public void setUserEvents(List<Event> userEvents) {
+        this.userEvents = userEvents;
     }
 
     public long getId() {

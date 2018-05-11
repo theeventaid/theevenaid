@@ -3,12 +3,14 @@ package com.tgj.eventaid.controllers;
 import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.*;
 import com.tgj.eventaid.utilities.DomainUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import com.tgj.eventaid.models.ChargeRequest;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -52,10 +54,18 @@ public class EventsController {
 		return "events/all";
 	}
 
+	@Value("${STRIPE_PUBLIC_KEY}")
+	private String stripePublicKey;
+
 	@GetMapping("/events/{id}")
 	public String getEvent(@PathVariable Long id, Model model) {
 		Event event = eventsRepository.findOne(id);
 		model.addAttribute("event", event);
+
+//		Stripe info
+		model.addAttribute("stripePublicKey", stripePublicKey);
+		model.addAttribute("currency", ChargeRequest.Currency.USD);
+
 		return "events/index";
 	}
 
@@ -73,15 +83,13 @@ public class EventsController {
 //			@RequestParam("fileUpload") String fileUpload,
 //			@RequestParam("artist_note") String artist_note,
 		@RequestParam("venue_address") String venue_address,
-		@RequestParam("venue_cost") BigDecimal venue_cost,
+		@RequestParam(value ="venue_cost", required = false) BigDecimal venue_cost,
 		@RequestParam(value = "contract_yes", required = false) Boolean contract_yes,
 		@RequestParam(value = "venue_Upload", required = false) String venue_upload
 )
 	{
 
-		System.out.println(venue_address);
-		System.out.println(venue_cost);
-//        saving info to events table
+//        Saving Venue info
 		Venue venue = new Venue();
 		venue.setAddress(venue_address);
 		venue.setCosts(venue_cost);
@@ -91,25 +99,19 @@ public class EventsController {
 		}
 		venueRepository.save(venue);
 
-	event.setVenue_id(venue);
-	if (picture != null)
-		event.setMedia_location(picture);
+        event.setVenue_id(venue);
+        if (picture != null) event.setMedia_location(picture);
 
-	User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	User user = userRepository.findById(authdUser.getId());
-	event.setUser(user);
-	event.setOwner(user);
-	eventsRepository.save(event);
+        User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findById(authdUser.getId());
+//	event.setUser(user);
+        event.setOwner(user);
+        eventsRepository.save(event);
 
-	//saving info to artists table
-//        Artist artist = new Artist();
-//        artist.setEvent(event);
-//        artist.setName(artist_name);
-//        artist.setCosts(artist_cost);
-//        artist.setContract_location(fileUpload);
-//        artist.setNotes(artist_note);
-//        artistsRepository.save(artist);
-//        Saving Venue info
+        //saving info to artists table
+        Artist artist = new Artist();
+        artist.setEvent(event);
+        artistsRepository.save(artist);
 
 		return "redirect:/events/" + event.getId();
 	}

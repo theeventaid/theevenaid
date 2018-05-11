@@ -12,10 +12,10 @@ public class Venue {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column()
     private BigDecimal costs;
 
-    @Column(nullable = false)
+    @Column()
     private String address;
 
     @Column()

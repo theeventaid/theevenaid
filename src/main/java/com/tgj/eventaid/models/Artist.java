@@ -12,10 +12,10 @@ public class Artist {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column()
     private String name;
 
-    @Column(nullable = false)
+    @Column()
     private BigDecimal costs;
 
     @Column()
@@ -30,8 +30,6 @@ public class Artist {
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
     public Event event;
-
-    // in relationship to transportation.artist_id, and schedules.artist_id
 
     // empty constructor
     public Artist(){}

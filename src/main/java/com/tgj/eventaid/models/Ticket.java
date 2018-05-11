@@ -13,7 +13,16 @@ public class Ticket {
     private long id;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private String charge_id;
+
+    @Column(nullable = false)
+    private String charge_status;
+
+    @Column(nullable = false)
+    private String balance_transaction_id;
+
+    @Column(nullable = false)
+    private int balance_charged;
 
     @Column(nullable = false)
     private Timestamp purchased_on;
@@ -26,21 +35,62 @@ public class Ticket {
     @JoinColumn (name = "event_id")
     private Event event_id;
 
-    // users_events will be a pivot table between events and users on user_id and events_id
-
     // This is useful to insert users
-    public Ticket(long id, User user_id, BigDecimal price, Timestamp purchased_on, Event event_id) {
+    public Ticket(long id, User user_id, int balance_charged, Timestamp purchased_on, Event event_id, String charge_id, String charge_status, String balance_transaction_id) {
         this.id = id;
-        this.price = price;
+        this.user_id = user_id;
+        this.balance_charged = balance_charged;
         this.purchased_on = purchased_on;
         this.event_id = event_id;
+        this.charge_id = charge_id;
+        this.charge_status = charge_status;
+        this.balance_transaction_id = balance_transaction_id;
     }
 
     // This is useful to get a full user obj
-    public Ticket(User user_id, BigDecimal price, Timestamp purchased_on, Event event_id) {
-        this.price = price;
+    public Ticket(User user_id, int balance_charged, Timestamp purchased_on, Event event_id, String charge_id, String charge_status, String balance_transaction_id) {
+        this.id = id;
+        this.user_id = user_id;
+        this.balance_charged = balance_charged;
         this.purchased_on = purchased_on;
         this.event_id = event_id;
+        this.charge_id = charge_id;
+        this.charge_status = charge_status;
+        this.balance_transaction_id = balance_transaction_id;
+    }
+
+    public Ticket(){}
+
+    public String getCharge_id() {
+        return charge_id;
+    }
+
+    public void setCharge_id(String charge_id) {
+        this.charge_id = charge_id;
+    }
+
+    public String getCharge_status() {
+        return charge_status;
+    }
+
+    public void setCharge_status(String charge_status) {
+        this.charge_status = charge_status;
+    }
+
+    public String getBalance_transaction_id() {
+        return balance_transaction_id;
+    }
+
+    public void setBalance_transaction_id(String balance_transaction_id) {
+        this.balance_transaction_id = balance_transaction_id;
+    }
+
+    public int getBalance_charged() {
+        return balance_charged;
+    }
+
+    public void setBalance_charged(int balance_charged) {
+        this.balance_charged = balance_charged;
     }
 
     public long getId() {
@@ -49,14 +99,6 @@ public class Ticket {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public Timestamp getPurchased_on() {

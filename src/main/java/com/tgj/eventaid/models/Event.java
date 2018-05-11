@@ -70,7 +70,6 @@ public class Event {
 
 	@OneToOne  // relationship to events.id
 	@JoinColumn(name = "venue_id")
-//    @MapsId
 	private Venue venue_id;
 
 	@ManyToOne
@@ -84,9 +83,13 @@ public class Event {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<Artist> artists;
 
+    // tickets added by Edwin
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event_id")
+    private List<Ticket> tickets;
+
     public Event() {}
 
-    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists, User user) {
+    public Event(long id, String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists, User user, List<Ticket> tickets) {
         this.id = id;
         this.name = name;
         this.start_date = start_date;
@@ -103,10 +106,11 @@ public class Event {
         this.target_spending = target_spending;
         this.artists = artists;
         this.user = user;
+        this.tickets = tickets;
     }
 
     // insert new event
-    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists) {
+    public Event(String name, Date start_date, Date end_date, String location, String url, Venue venue_id, String media_location, int tickets_available, String description, BigDecimal tickets_price, BigDecimal event_budget, BigDecimal target_profit, BigDecimal target_spending, List<Artist> artists, List<Ticket> tickets) {
         this.name = name;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -121,6 +125,15 @@ public class Event {
         this.target_profit = target_profit;
         this.target_spending = target_spending;
         this.artists = artists;
+        this.tickets = tickets;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public List<Artist> getArtists() {
