@@ -1,2 +1,2 @@
-BUILD_COMMAND=build.sh
-WAR_FILE=target/eventaid-0.0.1-SNAPSHOT.war
+BUILD_COMMAND=./build.sh
+WAR_FILE=./target/eventaid-0.0.1-SNAPSHOT.war
