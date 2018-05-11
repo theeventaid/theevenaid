@@ -12,10 +12,6 @@ public class Ticket {
     @GeneratedValue
     private long id;
 
-//            model.addAttribute("id", charge.getId());
-//        model.addAttribute("status", charge.getStatus());
-//        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
-
     @Column(nullable = false)
     private String charge_id;
 
@@ -38,8 +34,6 @@ public class Ticket {
     @ManyToOne  // relationship to events.id
     @JoinColumn (name = "event_id")
     private Event event_id;
-
-    // users_events will be a pivot table between events and users on user_id and events_id
 
     // This is useful to insert users
     public Ticket(long id, User user_id, int balance_charged, Timestamp purchased_on, Event event_id, String charge_id, String charge_status, String balance_transaction_id) {

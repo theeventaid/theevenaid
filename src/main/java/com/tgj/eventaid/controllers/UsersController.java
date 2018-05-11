@@ -29,12 +29,12 @@ public class UsersController {
     public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.eventsRepository =eventsRepository;
+        this.eventsRepository = eventsRepository;
         this.artistsRepository = artistsRepository;
     }
 
     @GetMapping("/")
-    public String validLogin(@RequestHeader("Host") String host, Model model){
+    public String validLogin(@RequestHeader("Host") String host, Model model) {
         model.addAttribute("host", host);
         return "index";
     }
@@ -45,17 +45,8 @@ public class UsersController {
         return "/users/register";
     }
 
-    //  Registering now is executed in the Recaptcha Controller
-//    @PostMapping("/register")
-//    public String saveUser(@ModelAttribute User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setCreated_on(LocalDateTime.now());
-//        userRepository.save(user);
-//        return "redirect:/";
-//    }
-
     @GetMapping("/profile")
-    public String showProfile(Model model){
+    public String showProfile(Model model) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null)
@@ -74,8 +65,8 @@ public class UsersController {
 
     @PostMapping("/reset-password")
     public String setNewPassword(@RequestParam(name = "email", required = false) String email,
-                                 @RequestParam(name= "password", required = false) String newPassword,
-                                 @RequestParam(name= "newPasswordConfirm") String passwordConfirm) {
+                                 @RequestParam(name = "password", required = false) String newPassword,
+                                 @RequestParam(name = "newPasswordConfirm") String passwordConfirm) {
 
         System.out.println("get here too");
         System.out.println(email);
@@ -83,23 +74,14 @@ public class UsersController {
         System.out.println(passwordConfirm);
         User existingUser = userRepository.findByEmail(email);
         System.out.println(existingUser.getFirstname());
-
-//        if(!passwordConfirm.equals(user.getPassword())) {
-//            errors.rejectValue("password", "user.password", "Your passwords must match");
-//        }
-//
-//        if(errors.hasErrors()) {
-//            model.addAttribute("errors", errors);
-//            model.addAttribute("user", user);
-//            return "users/reset_password";
-//        }
-
         existingUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(existingUser);
         return "redirect:/ ";
     }
 
-
-
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";
+    }
 }
 

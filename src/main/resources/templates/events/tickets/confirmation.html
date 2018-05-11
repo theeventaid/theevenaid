@@ -9,11 +9,6 @@
 <div class="container">
 <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
 <div th:unless='${error}'>
-    <!--<div>Id.: <span th:text='${id}' /></div>-->
-    <!--<div>Status: <span th:text='${status}' /></div>-->
-    <!--<div>Charge id.: <span th:text='${chargeId}' /></div>-->
-    <!--<div>Balance transaction id.: <span th:text='${balance_transaction}' /></div>-->
-
     <th:block th:unless="${#authentication.principal.owner}">
         <h3>THANK YOU! This is your ticket information!</h3>
         <h5>Your ticket information will always be available on your profile</h5>

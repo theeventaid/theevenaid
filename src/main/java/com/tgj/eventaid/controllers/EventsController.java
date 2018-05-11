@@ -110,7 +110,6 @@ public class EventsController {
 	//saving info to artists table
         Artist artist = new Artist();
         artist.setEvent(event);
-//
         artistsRepository.save(artist);
 //        Saving Venue info
 

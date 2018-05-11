@@ -51,11 +51,6 @@ public class User {
     @Column() // switched this to nullable
     private boolean owner;
 
-//    @OneToMany(mappedBy = "user_id")
-//    // users can get many tickets, many tickets can be owned by one user. mapped by parameter name "user" (see Ticket class)
-//    private List<Ticket> eventTickets;
-    // tickets added by Edwin
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user_id")
     private List<Ticket> eventTickets;
 

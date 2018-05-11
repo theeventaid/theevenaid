@@ -25,15 +25,6 @@
 <script>
     let urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("error")) {
-        // console.log("error");
-        // let fadeIn = document.getElementsByClassName("fade-in");
-        // console.log(fadeIn);
-        // // document.getElementsByClassName("dropdown-toggle").enableProperty("");
-        // document.getElementById("error").innerHTML = "Invalid Login";
-        // fadeIn.disabled = true;
-    // class="dropdown open"
-    //     let dropdown = $('.dropdown-toggle');
-        // dropdown.disable();
         document.querySelector(".fade-in").className = "";
         let dropdown = document.querySelector(".dropdown-menu");
         dropdown.className += " show";

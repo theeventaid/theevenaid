@@ -31,8 +31,6 @@ public class Artist {
     @JoinColumn (name = "event_id")
     public Event event;
 
-    // in relationship to transportation.artist_id, and schedules.artist_id
-
     // empty constructor
     public Artist(){}
 
