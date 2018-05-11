@@ -20,7 +20,33 @@
                     <form th:action="@{/events/delete/__${event.id}__}" th:method="POST" class="d-inline-block" th:if="${event.owner.id == #authentication.principal.id}">
                         <button class="btn btn-outline-danger">Delete Post</button>
                     </form>
-                    <a th:href="@{/checkout}" class="btn btn-outline btn-outline-primary d-inline-block" th:if="${!#authentication.principal.owner}">Purchase Tickets</a>
+
+                    <form th:action="@{/charge}" th:method="POST" class="d-inline-block" th:if="${!#authentication.principal.owner}" id="checkout-form">
+                        <!--<select class="selectpicker">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                            <!--<option>3</option>-->
+                            <!--<option>4</option>-->
+                            <!--<option>4</option>-->
+                        <!--</select>-->
+                        <input type='hidden' th:value="${#numbers.formatInteger(event.tickets_price, 0,'COMMA')}"
+                         name="amount"/>
+                        <label>Price:$<span th:text='*{event.tickets_price}' /></label>
+                        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+                        <script
+                                src='https://checkout.stripe.com/checkout.js'
+                                class='stripe-button'
+                                th:attr='data-key=${stripePublicKey},
+                                         data-amount=*{event.tickets_price*100},
+                                         data-currency=${currency},
+                                         data-description=*{event.description},
+                                         data-image=*{event.media_location},
+                                         data-name=*{event.name}'
+                                data-locale='auto'
+                                data-zip-code='true'>
+                        </script>
+                    </form>
+
                 </div>
             </div>
         </div>

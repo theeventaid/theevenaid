@@ -2,22 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head(${event.getName()})"></head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
+    <nav th:replace="partials/navbar :: navbar"></nav>
     <form th:action="@{/charge}" th:method="POST" id='checkout-form' th:object="${event}">
-        <input type='hidden' th:value='${amount}' name='amount' />
-            <label>Price:<span th:text='${amount}' /></label>
+        <input type='hidden' th:value='${amount}' name="amount"/>
+            <label>Price:$<span th:text='*{tickets_price}' /></label>
         <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-            <script
+        <script
                 src='https://checkout.stripe.com/checkout.js'
                 class='stripe-button'
-                th:attr='data-key=${stripePublicKey}'
-                th:data-amount='*{tickets_price}'
-                data-currency='currency'
+                th:attr='data-key=${stripePublicKey},
+                     data-amount=*{tickets_price*100},
+                     data-currency=${currency},
+                     data-description=*{name}'
                 data-name='The Event Aid'
-                th:data-description='*{name}'
-                data-image ='img/fabicon_temp.png'
+                data-image='/img/fabicon_temp.png'
+                data-locale='auto'
                 data-zip-code='true'>
-            </script>
+        </script>
     </form>
 </body>
 </html>

@@ -3,12 +3,14 @@ package com.tgj.eventaid.controllers;
 import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.*;
 import com.tgj.eventaid.utilities.DomainUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import com.tgj.eventaid.models.ChargeRequest;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -52,10 +54,18 @@ public class EventsController {
 		return "events/all";
 	}
 
+	@Value("${STRIPE_PUBLIC_KEY}")
+	private String stripePublicKey;
+
 	@GetMapping("/events/{id}")
 	public String getEvent(@PathVariable Long id, Model model) {
 		Event event = eventsRepository.findOne(id);
 		model.addAttribute("event", event);
+
+//		Stripe info
+		model.addAttribute("stripePublicKey", stripePublicKey);
+		model.addAttribute("currency", ChargeRequest.Currency.USD);
+
 		return "events/index";
 	}
 
@@ -102,13 +112,10 @@ public class EventsController {
 	eventsRepository.save(event);
 
 	//saving info to artists table
-//        Artist artist = new Artist();
-//        artist.setEvent(event);
-//        artist.setName(artist_name);
-//        artist.setCosts(artist_cost);
-//        artist.setContract_location(fileUpload);
-//        artist.setNotes(artist_note);
-//        artistsRepository.save(artist);
+        Artist artist = new Artist();
+        artist.setEvent(event);
+//
+        artistsRepository.save(artist);
 //        Saving Venue info
 
 		return "redirect:/events/" + event.getId();
