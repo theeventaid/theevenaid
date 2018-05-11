@@ -83,15 +83,11 @@ public class EventsController {
 //			@RequestParam("fileUpload") String fileUpload,
 //			@RequestParam("artist_note") String artist_note,
 		@RequestParam("venue_address") String venue_address,
-		@RequestParam("venue_cost") BigDecimal venue_cost,
+		@RequestParam(value ="venue_cost", required = false) BigDecimal venue_cost,
 		@RequestParam(value = "contract_yes", required = false) Boolean contract_yes,
 		@RequestParam(value = "venue_Upload", required = false) String venue_upload
 )
 	{
-
-		System.out.println(venue_address);
-		System.out.println(venue_cost);
-//        saving info to events table
 		Venue venue = new Venue();
 		venue.setAddress(venue_address);
 		venue.setCosts(venue_cost);
@@ -107,7 +103,7 @@ public class EventsController {
 
 	User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	User user = userRepository.findById(authdUser.getId());
-	event.setUser(user);
+//	event.setUser(user);
 	event.setOwner(user);
 	eventsRepository.save(event);
 

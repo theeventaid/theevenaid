@@ -5,14 +5,50 @@
     <title>Result</title>
 </head>
 <body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
 <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
 <div th:unless='${error}'>
-    <h3 style='color: green;'>Success!</h3>
-    <div>Id.: <span th:text='${id}' /></div>
-    <div>Status: <span th:text='${status}' /></div>
-    <div>Charge id.: <span th:text='${chargeId}' /></div>
-    <div>Balance transaction id.: <span th:text='${balance_transaction}' /></div>
+    <!--<div>Id.: <span th:text='${id}' /></div>-->
+    <!--<div>Status: <span th:text='${status}' /></div>-->
+    <!--<div>Charge id.: <span th:text='${chargeId}' /></div>-->
+    <!--<div>Balance transaction id.: <span th:text='${balance_transaction}' /></div>-->
+
+    <th:block th:unless="${#authentication.principal.owner}">
+        <h3>THANK YOU! This is your ticket information!</h3>
+        <h5>Your ticket information will always be available on your profile</h5>
+    </th:block>
+    <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <th:block th:object="${ticket}">
+            <div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-self-stretch">
+                <div class="card">
+                    <div class="card-header text-muted">
+                        <h5 class="card-text" th:text="'Status: ' + ${ticket.getCharge_status()} ">
+                        </h5>
+                    </div>
+                    <div class="card-text">
+                         <h6 class="card-text" th:text="'Charge ID:' + ${ticket.getCharge_id()}">
+                         </h6>
+                        <h6 class="card-text" th:text="'Balance Transaction: ' + ${ticket.getBalance_transaction_id()}">
+                        </h6>
+                        <h6 class="card-text" th:text="'Balance Charged: ' + ${ticket.getBalance_charged()}">
+                        </h6>
+
+                    </div>
+                    <div class="card-footer">
+                        <!--<a class="btn btn-outline-primary" role="button"-->
+                           <!--th:href="@{/events/__${ticket.event_id.getId()}__}">Back to Event</a>-->
+                        <a class="btn btn-outline-primary" role="button"
+                           th:href="@{/events}">Back to Events</a>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+    </div>
 </div>
-<a href='/checkout.html'>Checkout again</a>
+</div>
 </body>
 </html>
+

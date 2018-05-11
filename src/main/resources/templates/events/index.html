@@ -21,7 +21,7 @@
                         <button class="btn btn-outline-danger">Delete Post</button>
                     </form>
 
-                    <form th:action="@{/charge}" th:method="POST" class="d-inline-block" th:if="${!#authentication.principal.owner}" id="checkout-form">
+                    <form th:action="@{/charge/event/__${event.id}__}" th:method="POST" class="d-inline-block" th:if="${!#authentication.principal.owner}" id="checkout-form">
                         <!--<select class="selectpicker">-->
                             <!--<option>1</option>-->
                             <!--<option>2</option>-->
