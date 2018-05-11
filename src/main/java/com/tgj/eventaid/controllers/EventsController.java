@@ -100,7 +100,10 @@ public class EventsController {
 		venueRepository.save(venue);
 
         event.setVenue_id(venue);
-        if (picture != null) event.setMedia_location(picture);
+//        if (picture != null) event.setMedia_location(picture);
+		if (picture == null) {
+			event.setMedia_location("/img/turntable.jpg");
+		} else event.setMedia_location(picture);
 
         User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findById(authdUser.getId());
@@ -126,9 +129,11 @@ public class EventsController {
 	@PostMapping("/events/edit/{id}")
 	public String updateEvent(@PathVariable Long id,
 							  @ModelAttribute Event event,
-							  @RequestParam (value = "upload", required = false) String picture) {
+							  @RequestParam (value = "media_location", required = false) String picture) {
 		event.setId(id);
-		if (picture != null) event.setMedia_location(picture);
+		if (picture == null) {
+			event.setMedia_location(picture);
+		} else event.setMedia_location(picture);
 		eventsRepository.save(event);
 		return "redirect:/events";
 	}

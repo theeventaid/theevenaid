@@ -130,7 +130,9 @@
                 <input type="text" placeholder="Tickets Available"
                        class="form-control" th:text="${event.venue_id}" th:field="*{venue_id}"/>
             </div>
-            <div id="picUrl" style="display: none"></div>
+            <div id="picUrl" style="display: none">
+                <!--<input type="text" id="fileUpload" name="upload" th:field="*{media_location}" />-->
+            </div>
             <div id="posts"></div>
 
             <button class="btn btn-primary">Update Event</button>
@@ -158,52 +160,52 @@
     }
 
     function handleFilestack(response) {
-        $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' + response.filesUploaded['0'].url + '" />');
+        // $('#fileUpload').val(response.filesUploaded['0'].url);
+        $('#picUrl').append('<input type="text" id="media_location" name="media_location" value=" ' + response.filesUploaded['0'].url + '" />');
         $('#posts').append('<div class="container">');
         $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 60%; margin-bottom: 1em;\" />');
         $('#posts').append('</div>');
 
-        document.getElementById('upload').dataset.handler = response.url;
     }
 
-    function filePicker() {
-        fsClient.pick({
-            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
-            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
-        }).then(function (response) {
-            // declare this function to handle response
-            handle(response);
-        });
-    }
-
-    function handle(response) {
-        $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
-        $('#filePost').append('<div class="container">');
-        $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
-        $('#filePost').append('</div>');
-
-        document.getElementById('upload_file').dataset.handler = response.url;
-    }
-
-    function eventPicker() {
-        fsClient.pick({
-            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
-            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
-        }).then(function (response) {
-            // declare this function to handle response
-            eventHandle(response);
-        });
-    }
-
-
-    function eventHandle(response) {
-        $('#venueUrl').append('<input type="text" id="fileUpload" name="venueUpload" value=" ' + response.filesUploaded['0'].url + '" />');
-        $('#venueContract').append('<div class="container">');
-        $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
-        $('#venueContract').append('</div>');
-
-        document.getElementById('upload_file').dataset.handler = response.url;
-    }
+    // function filePicker() {
+    //     fsClient.pick({
+    //         fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
+    //         accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
+    //     }).then(function (response) {
+    //         // declare this function to handle response
+    //         handle(response);
+    //     });
+    // }
+    //
+    // function handle(response) {
+    //     $('#fileUpload').val(response.filesUploaded['0'].url);
+    //     $('#filePost').append('<div class="container">');
+    //     $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+    //     $('#filePost').append('</div>');
+    //
+    //     document.getElementById('upload_file').dataset.handler = response.url;
+    // }
+    //
+    // function eventPicker() {
+    //     fsClient.pick({
+    //         fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
+    //         accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
+    //     }).then(function (response) {
+    //         // declare this function to handle response
+    //         eventHandle(response);
+    //     });
+    // }
+    //
+    //
+    // function eventHandle(response) {
+    //     $('#venueUrl').append('<input type="text" id="fileUpload" name="venueUpload" value=" ' + response.filesUploaded['0'].url + '" />');
+    //     $('#venueContract').append('<div class="container">');
+    //     $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
+    //     $('#venueContract').append('</div>');
+    //
+    //     document.getElementById('upload_file').dataset.handler = response.url;
+    // }
 
 </script>
 
