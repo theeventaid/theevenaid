@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="head(title)">
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" name="viewport"
+          content="width=device-width, intial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title th:text="${title}"></title>
     <!-- Latest compiled and minified CSS -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{img/fabicon.ico}"/>
@@ -22,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav" id="registerDrop">
             <li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>
-
+            <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
             <th:block sec:authorize="!isAuthenticated()">
                 <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registerModal">Register</a>
                 </li>
@@ -37,7 +38,6 @@
                 <li class="nav-item"><a th:href="@{/profile}" class="nav-link">Profile</a></li>
                 <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
             </th:block>
-            <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
         </ul>
     </div>
 

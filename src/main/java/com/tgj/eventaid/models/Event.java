@@ -49,8 +49,8 @@ public class Event {
 	@Column(nullable = false)
 	private BigDecimal tickets_price;
 
-	@Column(nullable = false)
-	private String media_location = "/img/turntable.jpg";
+	@Column()
+	private String media_location;
 
 	@Column()
 	private String url;
