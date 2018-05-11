@@ -1,0 +1,2 @@
+BUILD_COMMAND=mvn clean && mvn package
+WAR_FILE=target/eventaid-0.0.1-SNAPSHOT.war
