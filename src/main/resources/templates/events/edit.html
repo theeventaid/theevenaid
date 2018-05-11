@@ -36,9 +36,16 @@
 
             <div class="form-group">
                 <!-- Location-->
-                <input placeholder="Event Address" id="location" name="location" class="form-control"
+                <input placeholder="Event Location" id="location" name="location" class="form-control"
                        th:field="*{location}" th:maxlength="50"/>
                 <small class="form-text text-muted">Where Will Your Event Be Held?</small>
+            </div>
+
+            <div class="form-group">
+                <!-- Location-->
+                <input placeholder="Event Address" id="location" name="address" class="form-control"
+                       th:field="*{venue_id.address}" th:maxlength="50"/>
+                <small class="form-text text-muted">Event Address</small>
             </div>
 
             <div class="form-group">
@@ -111,9 +118,23 @@
                 </button>
             </div>
 
-            <button class="btn btn-primary">Update Event</button>
+            <!--set event owner-->
+
+            <div class="form-group" style="display: none">
+                <input type="text" placeholder="Tickets Available"
+                       class="form-control" th:text="${event.owner}" th:field="*{owner}"/>
+            </div>
+
+
+            <div class="form-group" style="display: none">
+                <input type="text" placeholder="Tickets Available"
+                       class="form-control" th:text="${event.venue_id}" th:field="*{venue_id}"/>
+            </div>
             <div id="picUrl" style="display: none"></div>
             <div id="posts"></div>
+
+            <button class="btn btn-primary">Update Event</button>
+
         </div>
     </div>
 </form>
@@ -123,7 +144,7 @@
 
 <script th:inline="javascript">
     // FILESTACK JSON CALL
-    var fsClient = filestack.init('An8EGKOh9TGGuI8Vymqonz');
+    var fsClient = filestack.init('ABJ9cuZvQeyEyxvb0dSl5z');
 
     function openPicker() {
         fsClient.pick({

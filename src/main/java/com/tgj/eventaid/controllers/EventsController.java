@@ -124,8 +124,11 @@ public class EventsController {
 	}
 
 	@PostMapping("/events/edit/{id}")
-	public String updateEvent(@PathVariable Long id, @ModelAttribute Event event) {
+	public String updateEvent(@PathVariable Long id,
+							  @ModelAttribute Event event,
+							  @RequestParam (value = "upload", required = false) String picture) {
 		event.setId(id);
+		if (picture != null) event.setMedia_location(picture);
 		eventsRepository.save(event);
 		return "redirect:/events";
 	}
