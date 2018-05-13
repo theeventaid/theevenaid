@@ -31,7 +31,7 @@
                         <!--</select>-->
                         <input type='hidden' th:value="${#numbers.formatInteger(event.tickets_price, 0,'COMMA')}"
                          name="amount"/>
-                        <label>Price:$<span th:text='*{event.tickets_price}' /></label>
+                        <!--<label>Price:$<span th:text='*{event.tickets_price}' /></label>-->
                         <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
                         <script
                                 src='https://checkout.stripe.com/checkout.js'
@@ -45,6 +45,8 @@
                                 data-locale='auto'
                                 data-zip-code='true'>
                         </script>
+                        <br/>
+                        <small class="text-muted" th:text="'$' + ${event.tickets_price} + ' / Ticket'"></small>
                     </form>
 
                 </div>
@@ -70,7 +72,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:inline="text">
                         <h5>Address</h5>
-                        <h6 id="location" class="text-muted">[[${event.venue_id.address}]]</h6>
+                        <h6 id="location" class="text-muted">[[${event.location}]]</h6>
                     </li>
                     <li class="list-group-item" th:inline="text">
                         <h5>Ticket Price</h5>

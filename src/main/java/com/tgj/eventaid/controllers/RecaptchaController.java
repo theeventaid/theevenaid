@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.Validation;
+
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.UserRepository;
 import com.tgj.eventaid.services.RecaptchaService;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +38,7 @@ public class RecaptchaController {
 
     @PostMapping("/register")
     public ResponseEntity<?> signup(@Valid User user,
+                                    Errors validation,
                                     @RequestParam(name="g-recaptcha-response") String recaptchaResponse,
                                     HttpServletRequest request, Model model){
 
@@ -60,6 +64,8 @@ public class RecaptchaController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/");
 //        return ResponseEntity.ok().build();
+        if(validation.hasErrors())
+            model.addAttribute("errors", validation);
         return new ResponseEntity<String>(headers,HttpStatus.FOUND);
     }
 }

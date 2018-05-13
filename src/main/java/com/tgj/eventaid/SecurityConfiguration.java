@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/events/create", "/profile")
+                .antMatchers("/events/create", "/profile", "/events/edit/*")
                 .authenticated()
         ;
     }
