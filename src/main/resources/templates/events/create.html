@@ -6,204 +6,126 @@
 <nav th:replace="partials/navbar :: navbar"></nav>
 <!--<img class="blur" th:src="@{/img/adult-audience-band-625644.jpg}" alt=""/>-->
 <!--TITLE-->
-<form th:action="@{/events/create}" th:method="POST" th:object="${event}" class="container">
-    <div class="row">
-        <div class="col-xs-12 col-lg-6">
-            <div>
-                <legend style="font-size: 1.5em">Event Information</legend>
-            </div>
+<form th:action="@{/events/create}" th:method="POST" th:object="${event}" class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Create An Event</h5>
+            <div class="row">
+                <!--EVENT INFORMATION-->
+                <div class="col-xs-12 col-lg-6">
+                    <div class="form-group">
+                        <!-- Name -->
+                        <input placeholder="Event Name" type="text" class="form-control"
+                               th:field="*{name}" th:maxlength="50"/>
+                        <small class="form-text text-muted">Enter The Name Of Your Event</small>
+                    </div>
 
-            <div class="form-group">
-                <!-- Name -->
-                <input placeholder="Event Name" type="text" class="form-control"
-                       th:field="*{name}" th:maxlength="50"/>
-                <small class="form-text text-muted">Enter The Name Of Your Event</small>
-            </div>
-
-            <div class="form-group">
+                    <div class="form-group">
                 <textarea placeholder="Event Description"
-                          class="form-control" rows="3"
+                          class="form-control" rows="4"
                           th:field="*{description}"></textarea>
-                <small class="form-text text-muted">Tell Us A Little About Your Event</small>
-            </div>
-
-            <div class="form-group">
-                <input type="url" placeholder="Event Url"
-                       class="form-control" th:field="*{url}"/>
-                <small class="form-text text-muted">Give Us A Link To Your Event Homepage</small>
-            </div>
-
-
-            <div class="form-group">
-                <!-- Location-->
-                <input placeholder="Event Address" id="location" name="location" class="form-control"
-                       th:field="*{location}" th:maxlength="50"/>
-                <small class="form-text text-muted">Where Will Your Event Be Held?</small>
-            </div>
-
-            <div class="form-group">
-                <!-- Start Date -->
-                <input id="start_date" type="date" placeholder="" class="form-control"
-                       th:field="*{start_date}"/>
-                <small class="form-text text-muted">Event Start Date</small>
-            </div>
-
-            <div class="form-group">
-                <!-- End Date -->
-                <input id="end_date" type="date" placeholder="" class="form-control"
-                       th:field="*{end_date}"/>
-                <small class="form-text text-muted">Event End Date</small>
-            </div>
-
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                        <small class="form-text text-muted">Tell Us A Little About Your Event</small>
                     </div>
-                    <input type="number" id="target_budget" placeholder="Budget" class="form-control"
-                           th:field="*{event_budget}" th:min="0"/>
-                </div>
-                <small class="form-text text-muted">What Is Your Budget For This Event?</small>
-            </div>
 
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                    <div class="form-group">
+                        <input type="text" placeholder="Event Url"
+                               class="form-control" th:field="*{url}"/>
+                        <small class="form-text text-muted">Give Us A Link To Your Event Homepage</small>
                     </div>
-                    <input type="number" id="target_spending" placeholder="Target Spending"
-                           class="form-control" th:field="*{target_spending}" th:min="0"/>
-                </div>
-                <small class="form-text text-muted">How Much Are You Willing To Spend On This Event?</small>
-            </div>
 
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+
+                    <div class="form-group">
+                        <!-- Location-->
+                        <input placeholder="Event Address" id="location" name="location" class="form-control"
+                               th:field="*{location}" th:maxlength="50"/>
+                        <small class="form-text text-muted">Where Will Your Event Be Held?</small>
                     </div>
-                    <input type="number" id="target_profit" placeholder="Target Profit" class="form-control"
-                           th:field="*{target_profit}" th:min="0"/>
-                </div>
-                <small class="form-text text-muted">How Much Would You Like To Make From This Event?</small>
-            </div>
 
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                    <div class="form-group">
+                        <!-- Start Date -->
+                        <input id="start_date" type="date" placeholder="" class="form-control"
+                               th:field="*{start_date}"/>
+                        <small class="form-text text-muted">Event Start Date</small>
                     </div>
-                    <input type="number" placeholder="Price Per Ticket"
-                           class="form-control" th:field="*{tickets_price}" th:min="0"/>
-                </div>
-                <small class="form-text text-muted">How Much Will A Ticket Be?</small>
-            </div>
 
-            <div class="form-group">
-                <input type="number" placeholder="Tickets Available"
-                       class="form-control" th:field="*{tickets_available}" th:min="1"/>
-                <small class="form-text text-muted">Number Of Available Tickets</small>
-            </div>
-
-            <div class="form-group">
-                <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
-                    Upload Banner Image
-                </button>
-            </div>
-
-            <!--<button class="btn btn-primary">Create Event</button>-->
-            <div id="picUrl" style="display: none"></div>
-            <div id="posts"></div>
-        </div>
-
-        <!--&lt;!&ndash;ARTISTS INPUT STARTS HERE&ndash;&gt;-->
-        <!--<div class="col-xs-12 col-lg-6">-->
-
-        <!--<div id="add_artists">-->
-        <!--<legend style="font-size: 1.5em">Add Artists</legend>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-        <!--<label for="name">Name</label>-->
-        <!--<input placeholder="artist's name" type="text" id="artists_name"  name="artist_name"-->
-        <!--class="form-control"/>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-        <!--<label for="start_date">Artists' Cost</label>-->
-
-        <!--<input type="number" id="artist_cost" placeholder="artist's cost" class="form-control"-->
-        <!--name="artist_cost"/>-->
-
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-        <!--<button onclick="filePicker()" type="button" class="btn btn-outline btn-outline-primary">-->
-        <!--Upload Contract-->
-        <!--</button>-->
-        <!--</div>-->
-
-        <!--<div id="fileUrl"></div>-->
-        <!--<div id="filePost"></div>-->
-
-        <!--<div class="form-group">-->
-        <!--&lt;!&ndash; Notes &ndash;&gt;-->
-        <!--<label for="name">Notes</label>-->
-        <!--<textarea placeholder="Notes on artist (conditions, contract, clause, etc)"-->
-        <!--class="form-control" id="artist_note" name="artist_note" rows="3"></textarea>-->
-        <!--</div>-->
-
-        <!--Notes for Venue-->
-        <div class="col-xs-12 col-lg-6">
-
-            <div id="add_venue">
-                <legend style="font-size: 1.5em">Venue Information</legend>
-            </div>
-
-            <div class="form-group">
-                <label for="start_date">Venue Address</label>
-                <input type="text" name="venue_address" id="venue_address" placeholder="Full address of event"
-                       class="form-control"/>
-            </div>
-
-            <!--<div class="form-group">-->
-                <!--<label for="venue_cost">Venue Cost</label>-->
-                <!--<input type="number" id="venue_cost" name="venue_cost" placeholder="Total or estimate cost of venue"-->
-                       <!--class="form-control"/>-->
-            <!--</div>-->
-
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                    <div class="form-group">
+                        <!-- End Date -->
+                        <input id="end_date" type="date" placeholder="" class="form-control"
+                               th:field="*{end_date}"/>
+                        <small class="form-text text-muted">Event End Date</small>
                     </div>
-                    <input type="number" id="venue_cost" name="venue_cost" placeholder="Total or estimate cost of venue" class="form-control" th:min="0"/>
                 </div>
-                <small class="form-text text-muted">Venue Cost</small>
-            </div>
 
-            <div class="form-group">
-                <label for="isContract">Click if you have a contract for venue</label>
-                <input id="isContract" name="contract_yes" type="checkbox" value="1"/>
-            </div>
+                <!--BUDGET INFORMATION-->
+                <div class="col-xs-12 col-lg-6">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" id="target_budget" placeholder="Budget" class="form-control"
+                                   th:field="*{event_budget}" th:min="0"/>
+                        </div>
+                        <small class="form-text text-muted">What Is Your Budget For This Event?</small>
+                    </div>
 
-            <div class="form-group">
-                <button onclick="eventPicker()" type="button" class="btn btn-outline btn-outline-primary">
-                    Upload Venue Contract
-                </button>
-            </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" id="target_spending" placeholder="Target Spending"
+                                   class="form-control" th:field="*{target_spending}" th:min="0"/>
+                        </div>
+                        <small class="form-text text-muted">How Much Are You Willing To Spend On This Event?</small>
+                    </div>
 
-            <!--style="display: none"-->
-            <div id="venueUrl" style="display: none"></div>
-            <div id="venueContract"></div>
-            <div class="form-group">
-                <!-- Button -->
-                <div class="controls">
-                    <button class="btn btn-primary">Create Your Event</button>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" id="target_profit" placeholder="Target Profit" class="form-control"
+                                   th:field="*{target_profit}" th:min="0"/>
+                        </div>
+                        <small class="form-text text-muted">How Much Would You Like To Make From This Event?</small>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" placeholder="Price Per Ticket"
+                                   class="form-control" th:field="*{tickets_price}" th:min="0"/>
+                        </div>
+                        <small class="form-text text-muted">How Much Will A Ticket Be?</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" placeholder="Tickets Available"
+                               class="form-control" th:field="*{tickets_available}" th:min="1"/>
+                        <small class="form-text text-muted">Number Of Available Tickets</small>
+                    </div>
+
+                    <div class="form-group">
+                        <button onclick="openPicker()" type="button" class="btn btn-outline btn-outline-primary">
+                            Upload Banner Image
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="controls">
+                            <button class="btn btn-primary">Create Your Event</button>
+                        </div>
+                    </div>
+
+                    <!--<button class="btn btn-primary">Create Event</button>-->
+                    <div id="picUrl" style="display: none"></div>
+                    <div id="posts"></div>
                 </div>
             </div>
         </div>
-
     </div>
 </form>
 
@@ -229,46 +151,10 @@
 
     function handleFilestack(response) {
         $('#picUrl').append('<input type="text" id="upload" name="upload" value=" ' + response.filesUploaded['0'].url + '" />');
-        $('#posts').append('<div class="container">');
-        $('#posts').append('<img src=" ' + response.filesUploaded['0'].url + ' " style="\width: 60%; margin-bottom: 1em;\" />');
+        $('#posts').append('<div>');
+        $('#posts').append('<img class="img-thumbnail" src="' + response.filesUploaded['0'].url + '"/>');
         $('#posts').append('</div>');
     }
-
-    function filePicker() {
-        fsClient.pick({
-            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
-            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
-        }).then(function (response) {
-            // declare this function to handle response
-            handle(response);
-        });
-    }
-
-    function handle(response) {
-        $('#fileUrl').append('<input type="text" id="fileUpload" name="fileUpload" value=" ' + response.filesUploaded['0'].url + '" />');
-        $('#filePost').append('<div class="container">');
-        $('#filePost').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
-        $('#filePost').append('</div>');
-    }
-
-    function eventPicker() {
-        fsClient.pick({
-            fromSources: ["local_file_system", "url", "googledrive", "dropbox", "evernote", "box", "github", "gmail", "onedrive"],
-            accept: [".pdf", ".doc", ".docx", ".docm", "text/plain"]
-        }).then(function (response) {
-            // declare this function to handle response
-            eventHandle(response);
-        });
-    }
-
-    function eventHandle(response) {
-        $('#venueUrl').append('<input type="text" id="venue_Upload" name="venue_Upload" value=" ' + response.filesUploaded['0'].url + '" />');
-        $('#venueContract').append('<div class="container">');
-        $('#venueContract').append('<embed src=" ' + response.filesUploaded['0'].url + ' " style="\width: 40%; margin-bottom: 1em;\" />');
-        $('#venueContract').append('</div>');
-
-    }
-
 </script>
 
 </body>

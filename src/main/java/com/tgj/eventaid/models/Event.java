@@ -22,7 +22,6 @@ public class Event {
 	private long id;
 
 	@NotBlank(message = "Must have Event Name")
-	@Size(min = 3, message = "An Event Name must be at least 3 characters.")
 	@Column(nullable = false)
 	private String name;
 
@@ -50,7 +49,7 @@ public class Event {
 	private BigDecimal tickets_price;
 
 	@Column()
-	private String media_location;
+	private String media_location = "/img/turntable.jpg";
 
 	@Column()
 	private String url;
@@ -273,7 +272,7 @@ public class Event {
 	}
 
 	public String getDateString() {
-		DateFormat formatter = new SimpleDateFormat();
+		DateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
 		return formatter.format(this.start_date);
 	}
 }

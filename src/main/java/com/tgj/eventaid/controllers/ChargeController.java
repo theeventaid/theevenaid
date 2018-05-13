@@ -33,13 +33,8 @@ public class ChargeController {
         this.ticketsRepository = ticketsRepository;
     }
 
-    @ModelAttribute("user")
-    public User newUser() {
-        return new User();
-    }
-
     @PostMapping("/charge/event/{id}")
-    public String charge(@PathVariable Long id, ChargeRequest chargeRequest, Model model)
+    public String charge(@ModelAttribute User user, @PathVariable Long id, ChargeRequest chargeRequest, Model model)
             throws StripeException {
         Event event = eventsRepository.findOne(id);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -48,8 +43,7 @@ public class ChargeController {
         Charge charge = paymentsService.charge(chargeRequest);
         Ticket ticket = new Ticket();
         ticket.setEvent_id(event);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ticket.setUser_id(userRepository.findById(user.getId()));
+        ticket.setUser_id(userRepository.findByEmail(user.getEmail()));
         ticket.setCharge_id(charge.getId());
         ticket.setCharge_status(charge.getStatus());
         ticket.setBalance_transaction_id(charge.getBalanceTransaction());

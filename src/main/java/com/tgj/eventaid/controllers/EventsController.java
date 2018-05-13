@@ -35,11 +35,6 @@ public class EventsController {
 		this.venueRepository = venueRepository;
 	}
 
-	@ModelAttribute("user")
-	public User newUser() {
-		return new User();
-	}
-
 	@GetMapping("/events")
 	public String getAll(Model model) {
 		Iterable<Event> events = eventsRepository.findAll();
@@ -72,49 +67,20 @@ public class EventsController {
 	@GetMapping("/events/create")
 	public String getCreateForm(Model model) {
 		model.addAttribute("event", new Event());
-		return "/events/create";
+		return "events/create";
 	}
 
 	@PostMapping("/events/create")
 	public String saveEvent(@ModelAttribute Event event,
-		@RequestParam (value = "upload", required = false) String picture,
-//			@RequestParam("artist_name") String artist_name,
-//			@RequestParam("artist_cost") BigDecimal artist_cost,
-//			@RequestParam("fileUpload") String fileUpload,
-//			@RequestParam("artist_note") String artist_note,
-		@RequestParam("venue_address") String venue_address,
-		@RequestParam(value ="venue_cost", required = false) BigDecimal venue_cost,
-		@RequestParam(value = "contract_yes", required = false) Boolean contract_yes,
-		@RequestParam(value = "venue_Upload", required = false) String venue_upload
-)
-	{
+							@ModelAttribute User user,
+							@RequestParam(value = "upload", required = false) String picture
+	) {
 
-//        Saving Venue info
-		Venue venue = new Venue();
-		venue.setAddress(venue_address);
-		venue.setCosts(venue_cost);
-		if(contract_yes != null && venue_upload != null) {
-			venue.setContract(contract_yes);
-			venue.setContract_location(venue_upload);
-		}
-		venueRepository.save(venue);
+		if (picture != null)
+			event.setMedia_location(picture);
 
-        event.setVenue_id(venue);
-//        if (picture != null) event.setMedia_location(picture);
-		if (picture == null) {
-			event.setMedia_location("/img/turntable.jpg");
-		} else event.setMedia_location(picture);
-
-        User authdUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findById(authdUser.getId());
-//	event.setUser(user);
-        event.setOwner(user);
-        eventsRepository.save(event);
-
-        //saving info to artists table
-        Artist artist = new Artist();
-        artist.setEvent(event);
-        artistsRepository.save(artist);
+		event.setOwner(user);
+		eventsRepository.save(event);
 
 		return "redirect:/events/" + event.getId();
 	}
@@ -126,16 +92,15 @@ public class EventsController {
 		return "events/edit";
 	}
 
-	@PostMapping("/events/edit/{id}")
-	public String updateEvent(@PathVariable Long id,
-							  @ModelAttribute Event event,
-							  @RequestParam (value = "media_location", required = false) String picture) {
-		event.setId(id);
-		if (picture == null) {
+	@PostMapping("/events/edit")
+	public String updateEvent(@ModelAttribute Event event,
+							  @RequestParam(value = "upload", required = false) String picture) {
+
+		if(picture != null)
 			event.setMedia_location(picture);
-		} else event.setMedia_location(picture);
+
 		eventsRepository.save(event);
-		return "redirect:/events";
+		return "redirect:/events/" + event.getId();
 	}
 
 	@PostMapping("/events/delete/{id}")

@@ -51,9 +51,8 @@
                         <span>&times;</span>
                     </button>
                 </div>
-                <form th:action="@{/}" th:method="POST">
+                <form id="loginForm" th:action="@{/}" th:method="POST">
                     <div class="modal-body">
-                        <small th:if="${invalidLogin}" class="form-text text-danger"></small>
                         <div class="form-group">
                             <input type="email" name="email" placeholder="Email" class="form-control"
                                    th:required="required"/>
@@ -62,6 +61,7 @@
                             <input type="password" name="password" placeholder="Password" class="form-control"
                                    th:required="required"/>
                         </div>
+                        <small th:if="${param.error}" class="form-text text-danger">Invalid Login</small>
                         <a class="text-primary form-control-plaintext mb-2" th:href="@{/reset-password}">Forgot
                             Password?</a>
                     </div>
@@ -83,7 +83,7 @@
                         <span>&times;</span>
                     </button>
                 </div>
-                <form th:action="@{/api/register}" th:method="POST" th:object="${user}">
+                <form th:action="@{/api/register}" th:method="POST" th:if="${user}" th:object="${user}">
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" id="firstname" name="firstname" placeholder="First Name"
@@ -92,6 +92,8 @@
                             <small class="form-text text-muted">
                                 Please Provide Your Legal First Name
                             </small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{firstname}"></small>
                         </div>
                         <div class="form-group">
                             <input type="text" id="lastname" name="lastname" placeholder="Last Name"
@@ -100,28 +102,38 @@
                             <small class="form-text text-muted">
                                 Please Provide Your Legal Last Name
                             </small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{lastname}"></small>
                         </div>
                         <div class="form-group">
                             <input type="text" id="email" name="email" placeholder="Email" class="form-control"
                                    th:field="*{email}" th:required="required"/>
                             <small class="form-text text-muted">Please Provide Your Email</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{email}"></small>
                         </div>
                         <div class="form-group">
                             <input type="text" id="address" name="address" placeholder="Address" class="form-control"
                                    th:field="*{address}" th:required="required"/>
                             <small class="form-text text-muted">Please Provide Your Address</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{address}"></small>
                         </div>
                         <div class="form-group">
                             <input type="password" id="password" name="password" placeholder="Password"
                                    class="form-control"
                                    th:field="*{password}" th:required="required"/>
                             <small class="form-text text-muted">Password Should Be At Least 4 Characters</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{password}"></small>
                         </div>
                         <div class="form-group">
                             <input type="text" id="telephone" name="telephone" placeholder="Mobile Number"
                                    class="form-control"
                                    th:field="*{telephone}" th:required="required"/>
                             <small class="form-text text-muted">Please Provide Your Mobile Number</small>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors()}"
+                                   th:errors="*{telephone}"></small>
                         </div>
                         <div class="form-check">
                             <label for="isOrganizer">I Am An Event Organizer</label>
@@ -130,7 +142,8 @@
 
                         <div class="form-group" style="width: 50%; display: inline-grid">
                             <!--recaptcha site key below for localhost use-->
-                            <div id="recaptcha" class="align-content-center g-recaptcha" data-theme="dark" data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
+                            <div id="recaptcha" class="align-content-center g-recaptcha" data-theme="dark"
+                                 data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
 
                             <!--recaptcha site key below for production use-->
                             <!--<div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Ld0gVgUAAAAAIzQmHR_q-Hag9ncqzYF3c3HWnEW"></div>-->
@@ -154,6 +167,15 @@
 <div th:fragment="scripts">
     <script th:src="@{/js/jquery-2.2.4.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:inline="javascript">
+        $(function () {
+            /*<![CDATA[*/
+            var error = /*[[${param.error}]]*/ null;
+            if(error != null)
+                $('#loginModal').modal('toggle');
+            /*]]>*/
+        });
+    </script>
 </div>
 
 </body>
