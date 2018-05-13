@@ -15,73 +15,56 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UsersController {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-    private EventsRepository eventsRepository;
-    private ArtistsRepository artistsRepository;
+	private UserRepository userRepository;
+	private PasswordEncoder passwordEncoder;
+	private EventsRepository eventsRepository;
+	private ArtistsRepository artistsRepository;
 
-    @ModelAttribute("user")
-    public User newUser() {
-        return new User();
-    }
+	@Autowired
+	public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.eventsRepository = eventsRepository;
+		this.artistsRepository = artistsRepository;
+	}
 
-    @Autowired
-    public UsersController(UserRepository userRepository, PasswordEncoder passwordEncoder, ArtistsRepository artistsRepository) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.eventsRepository = eventsRepository;
-        this.artistsRepository = artistsRepository;
-    }
+	@GetMapping("/")
+	public String validLogin(@RequestHeader("Host") String host, Model model) {
+		model.addAttribute("host", host);
+		return "index";
+	}
 
-    @GetMapping("/")
-    public String validLogin(@RequestHeader("Host") String host, Model model) {
-        model.addAttribute("host", host);
-        return "index";
-    }
+	@GetMapping("/register")
+	public String showSignupForm(Model model) {
+		model.addAttribute("user", new User());
+		return "/users/register";
+	}
 
-    @GetMapping("/register")
-    public String showSignupForm(Model model) {
-        model.addAttribute("user", new User());
-        return "/users/register";
-    }
+	@GetMapping("/profile")
+	public String showProfile(@ModelAttribute User user, Model model) {
+		model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
+		return "users/profile";
+	}
 
-    @GetMapping("/profile")
-    public String showProfile(Model model) {
+	@GetMapping("/reset-password")
+	public String resetPassword() {
+		return "users/reset_password";
+	}
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (user == null)
-            return "redirect:/";
-        model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
-        return "users/profile";
-    }
+	@PostMapping("/reset-password")
+	public String setNewPassword(@RequestParam(name = "email") String email,
+								 @RequestParam(name = "newPassword") String newPassword,
+								 @RequestParam(name = "newPasswordConfirm") String passwordConfirm) {
 
-    @GetMapping("/reset-password")
-    public String resetPassword(Model model) {
-        System.out.println("get here");
-        User user = new User();
-        model.addAttribute("user", user);
-        return "/users/reset_password";
-    }
+		User existingUser = userRepository.findByEmail(email);
+		existingUser.setPassword(passwordEncoder.encode(newPassword));
+		userRepository.save(existingUser);
+		return "redirect:/ ";
+	}
 
-    @PostMapping("/reset-password")
-    public String setNewPassword(@RequestParam(name = "email", required = false) String email,
-                                 @RequestParam(name = "password", required = false) String newPassword,
-                                 @RequestParam(name = "newPasswordConfirm") String passwordConfirm) {
-
-        System.out.println("get here too");
-        System.out.println(email);
-        System.out.println(newPassword); // not getting this
-        System.out.println(passwordConfirm);
-        User existingUser = userRepository.findByEmail(email);
-        System.out.println(existingUser.getFirstname());
-        existingUser.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(existingUser);
-        return "redirect:/ ";
-    }
-
-    @GetMapping("/about")
-    public String aboutPage() {
-        return "about";
-    }
+	@GetMapping("/about")
+	public String aboutPage() {
+		return "about";
+	}
 }
 

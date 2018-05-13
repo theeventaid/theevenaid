@@ -11,7 +11,7 @@
                 src='https://checkout.stripe.com/checkout.js'
                 class='stripe-button'
                 th:attr='data-key=${stripePublicKey},
-                     data-amount=*{tickets_price*100},
+                     data-amount=*{tickets_price * 100},
                      data-currency=${currency},
                      data-description=*{name}'
                 data-name='The Event Aid'

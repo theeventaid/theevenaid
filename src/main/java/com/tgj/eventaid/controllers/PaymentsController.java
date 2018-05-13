@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PaymentsController {
     public EventsRepository eventsRepository;
 
-    @ModelAttribute("user")
-    public User newUser() {
-        return new User();
-    }
-
     // Stripe info will be here
     public PaymentsController(EventsRepository eventsRepository) {
         this.eventsRepository = eventsRepository;
