@@ -106,6 +106,35 @@
                 </th:block>
             </div>
         </th:block>
+<!--<<<<<<< HEAD-->
+
+        <!--<div class="row d-flex justify-content-center">-->
+            <!--<th:block th:each="event : ${user.events}">-->
+                <!--<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-self-stretch">-->
+                    <!--<div class="card">-->
+                        <!--<img class="card-img-top card-img-h25" th:src="${event.media_location}" alt="Event Banner"/>-->
+                        <!--<div class="card-header text-muted"-->
+                             <!--th:text="${event.getDateString()} + ' @ ' + ${event.location}"></div>-->
+                        <!--<div class="card-body">-->
+                            <!--<h5 class="card-title" th:text="${event.name}"></h5>-->
+                            <!--<h5 class="card-title" th:each="artist : ${event.artists}" th:text="${artist.name}"></h5>-->
+                            <!--<div class="card-text">-->
+                                <!--<h6 th:text="'Budget:' + '$' + ${#numbers.formatDecimal(event.event_budget, 0, 'COMMA', 2, 'POINT')}"></h6>-->
+                                <!--<h6 th:text="'Target Spending:' + '$' + ${#numbers.formatDecimal(event.target_spending, 0, 'COMMA', 2, 'POINT')}"></h6>-->
+                                <!--<h6 th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'COMMA', 2, 'POINT')}"></h6>-->
+                                <!--<h6 th:text="'Tickets Available: ' + ${event.tickets_available}"></h6>-->
+                                <!--&lt;!&ndash;<h6 th:text="'Tickets Sold: ' + ${event.}"></h6>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<br/>-->
+                        <!--</div>-->
+                        <!--<div class="card-footer">-->
+                            <!--<a class="btn btn-outline-primary" role="button"-->
+                               <!--th:href="@{/events/__${event.id}__}">View</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</th:block>-->
+        <!--</div>-->
     </th:block>
 </div>
 <script th:replace="partials/navbar :: scripts"></script>

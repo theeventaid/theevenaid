@@ -20,7 +20,7 @@
                         <div class="card">
                             <div class="card-header" th:text="'Transaction ' + ${ticket.balance_transaction_id}"></div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" th:text="'Purchased: ' + ${ticket.purchased_on}"></li>
+                                <li class="list-group-item" th:text="'Purchased: ' + ${#dates.format(ticket.purchased_on, 'dd-MMM-yyyy')}"></li>
                             </ul>
                             <div class="card-footer">
                                 <a class="btn btn-outline-primary" role="button"
