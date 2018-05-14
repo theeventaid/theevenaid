@@ -175,6 +175,12 @@
                 $('#loginModal').modal('toggle');
             /*]]>*/
         });
+
+        var error_recaptcha = "http://localhost:8080/?recaptcha_error";
+        if (window.location.href == error_recaptcha) {
+            $('#registerDrop li a:eq(2)').trigger('click');
+            $('#responseHandler').append('<a style="color: red">Please Click The Captcha!</a>');
+        }
     </script>
 </div>
 

@@ -32,14 +32,5 @@
         dropdown.className += " show";
     }
 </script>
-
-<script th:inline="javascript">
-    var error = "http://localhost:8080/?recaptcha_error";
-    if (window.location.href == error) {
-        $('#registerDrop li a:eq(1)').trigger('click');
-        $('#responseHandler').append('<a style="color: red">Please Click The Captcha!</a>');
-    }
-</script>
-
 </body>
 </html>
