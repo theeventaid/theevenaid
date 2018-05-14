@@ -2,6 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head('Profile')">
+    <script>
+        $('body').on('hidden', function () {
+            $(this).removeData('modal-content');
+        });
+    </script>
 </head>
 <body>
 
@@ -75,7 +80,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">View Ticket</h5>
+                                    <h5 class="modal-title">Your Ticket Barcode</h5>
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span>&times;</span>
                                     </button>
@@ -141,6 +146,7 @@
 <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 <script th:inline="javascript">
     JsBarcode(".barcode").init();
+
 </script>
 </body>
 </html>
