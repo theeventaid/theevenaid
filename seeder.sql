@@ -26,17 +26,17 @@ VALUES ('San Antonio Jazz Festival',
 ('The Hip Hop Reunion',
        '30000', '10300 Cypresswood, Houston Texas', 'https://cdn.filestackcontent.com/jbbk6dJIRKqA1nTGLSsp',
        'A once in a lifetime opportunity to enjoy an old school hip hop reunion', '2018-08-24',
-       '2018-08-25', '20000', '19000','1300','80','http://www.pivycibyv.in', 5
+       '2018-08-25', '20000', '19000','1300','80','http://www.pivycibyv.in', 4
      ),
 ('The New York Latin Show',
        '50000', '1335 6th Ave, New York, NY 10019', 'https://cdn.filestackcontent.com/ioaI7G5eTBSgBphoPSbK',
        'A showcase of artists in the middle of New York City', '2018-07-17',
-       '2018-07-19', '45000', '39000','1000','90','http://www.pivycibyv.in', 6
+       '2018-07-19', '45000', '39000','1000','90','http://www.pivycibyv.in', 4
      ),
 ('The Chicago Country Fest',
        '100000', '720 S Michigan Ave, Chicago, IL 60605', 'https://cdn.filestackcontent.com/H7jVCJZT3ywsqq7WRTJA',
        'This is a fantastic country Festival in downtown Chicago', '2018-08-17',
-       '2018-08-19', '90000', '90000','3000','110','http://www.pivycibyv.in', 7
+       '2018-08-19', '90000', '90000','3000','110','http://www.pivycibyv.in', 4
      ),
 ('The Seatle Latin Jazz Festival',
        '10000', '701 E Heron St, Aberdeen, WA 98520', 'https://cdn.filestackcontent.com/90sbjlhaQryEb3xq51TA',
@@ -84,5 +84,21 @@ VALUES ('San Antonio Jazz Festival',
        '10000', '108 Rue Saint-Lazare, 75008 Paris, France', 'https://cdn.filestackcontent.com/SZp0eV9vRCBmMM09zluZ',
        'Yes, a Fiesta event in the heart of Paris.  This is the second year, and if you were here the first year you know it was a blast.  It is going to be just amazing!  Buy your tickets, flight included!', '2018-09-17',
        '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 7
-     )
+     ),
+
+  ('The Summer Voyage',
+    '10000', 'Platzl 9, 80331 München, Germany', 'http://www.aroundtheworldin80jobs.com/wp-content/uploads/2014/08/tomorrowland-in-europe-festival.jpg',
+    'A Summer festival in the middle of Munich, right next to the Hofbrauhaus.  It is going to be just amazing!  Buy your tickets, flight included!', '2018-09-17',
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+  ),
+  ('The Frankfurt Music Festival',
+    '10000', 'Mailänder Str. 1, 60598 Frankfurt am Main, Germany','https://image.jimcdn.com/app/cms/image/transf/dimension=1190x10000:format=jpg/path/sa6549607c78f5c11/image/idb0f7b65b337efb8/version/1453987028/donauinselfest-festival-best-summer-music-festivals-in-europe.jpg',
+    'Ein Sommerfest mitten in München, direkt neben dem Hofbräuhaus. Es wird einfach unglaublich! Kaufen Sie Ihre Tickets, inklusive Flug!', '2018-09-17',
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+  ),
+  ('The Amsterdam Music Festival',
+    '10000', 'Pr. Irenestraat 30, 1077 WX Amsterdam, Netherlands','https://d49r1np2lhhxv.cloudfront.net/www/magazine/Top20FestivalsinEurope_LL5.jpg',
+    'Een muziekfestival in het hart van Amsterdam. dit evenement zal vol zitten met bands, mooie mensen en heel veel plezier! Doe met ons mee! Vlucht inbegrepen!', '2018-09-17',
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+  )
 ;
