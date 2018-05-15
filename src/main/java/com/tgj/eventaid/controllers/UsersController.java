@@ -1,8 +1,10 @@
 package com.tgj.eventaid.controllers;
 
+import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.ArtistsRepository;
 import com.tgj.eventaid.repositories.EventsRepository;
+import com.tgj.eventaid.repositories.TicketsRepository;
 import com.tgj.eventaid.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,12 +14,16 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Controller
 public class UsersController {
 
 	private UserRepository userRepository;
 	private PasswordEncoder passwordEncoder;
 	private EventsRepository eventsRepository;
+	private TicketsRepository ticketsRepository;
 	private ArtistsRepository artistsRepository;
 
 	@Autowired
@@ -43,6 +49,12 @@ public class UsersController {
 	@GetMapping("/profile")
 	public String showProfile(@ModelAttribute User user, Model model) {
 		model.addAttribute("user", userRepository.findByEmail(user.getEmail()));
+//		Trying to get number of tickets sold.
+//		List<Event> events = user.getEvents();
+//		for (Event event : events){
+//		    model.addAttribute("sold", ticketsRepository.countByEvent_id((int)event.getId()));
+//		}
+
 		return "users/profile";
 	}
 

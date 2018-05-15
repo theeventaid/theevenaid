@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.*;
+
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Controller
@@ -52,6 +54,7 @@ public class ChargeController {
 
         event.setTickets_available(event.getTickets_available() - 1);
         eventsRepository.save(event);
+
         model.addAttribute("ticket", ticket);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());

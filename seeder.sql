@@ -35,7 +35,7 @@ VALUES ('San Antonio Jazz Festival',
      ),
 ('The Chicago Country Fest',
        '100000', '720 S Michigan Ave, Chicago, IL 60605', 'https://cdn.filestackcontent.com/H7jVCJZT3ywsqq7WRTJA',
-       'This is a Jazz Festival in downtown San Antonio', '2018-08-17',
+       'This is a fantastic country Festival in downtown Chicago', '2018-08-17',
        '2018-08-19', '90000', '90000','3000','110','http://www.pivycibyv.in', 7
      ),
 ('The Seatle Latin Jazz Festival',
@@ -58,7 +58,7 @@ VALUES ('San Antonio Jazz Festival',
 
 ('The Miami Dance Convention',
        '10000', '101 Ocean Dr, Miami Beach, FL 33139', 'https://cdn.filestackcontent.com/21YRfBDnRXSpz8IJvZ8P',
-       'A Latin Jazz Festival close to the Seatle shore.  It is going to be just amazing!  Buy!', '2018-06-28',
+       'The Miami Dance Convention is back with us this Summer.  It is going to be just amazing!  Buy!', '2018-06-28',
        '2018-06-30', '10000', '9000','300','120','http://www.pivycibyv.in', 7
      ),
 
@@ -70,19 +70,19 @@ VALUES ('San Antonio Jazz Festival',
 
 ('The Country Festival of Texas',
        '10000', '500 E 4th St, Austin, TX 78701', 'https://cdn.filestackcontent.com/Y6HIxv0ARCW01uqMkFID',
-       'The Country of Festival is back this Summer....be there!.  It is going to be just amazing!  Buy!', '2018-07-17',
+       'The Country Festival is back this Summer....be there!.  It is going to be just amazing!  Buy!', '2018-07-17',
        '2018-07-19', '10000', '9000','300','80','http://www.pivycibyv.in', 5
      ),
 
 ('The New York City DJ Festival',
        '10000', 'Central Park New York City','https://cdn.filestackcontent.com/YiMpr9tsQgKg6SCoxewB',
-       'Back in New York City, the NYC DJ Festival is back!  DO IT!.  It is going to be just amazing!  Buy!', '2018-09-17',
+       'Back in New York City, the NYC DJ Festival!  DO IT!.  It is going to be just amazing!  Buy!', '2018-09-17',
        '2018-09-19', '10000', '9000','300','100','http://www.pivycibyv.in', 6
      ),
 
 ('The Paris Latin Fiesta',
        '10000', '108 Rue Saint-Lazare, 75008 Paris, France', 'https://cdn.filestackcontent.com/SZp0eV9vRCBmMM09zluZ',
-       'A Latin Jazz Festival close to the Seatle shore.  It is going to be just amazing!  Buy!', '2018-09-17',
+       'Yes, a Fiesta event in the heart of Paris.  This is the second year, and if you were here the first year you know it was a blast.  It is going to be just amazing!  Buy your tickets, flight included!', '2018-09-17',
        '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 7
      )
 ;
