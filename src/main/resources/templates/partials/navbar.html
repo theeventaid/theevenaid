@@ -15,32 +15,33 @@
 </head>
 <body>
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-tr-dark w-100 mb-3">
-    <a th:href="@{/}" class="navbar-brand">#TEA</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav" id="registerDrop">
-            <li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>
-            <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
-            <th:block sec:authorize="!isAuthenticated()">
-                <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registerModal">Register</a>
-                </li>
-                <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal"
-                                        data-target="#loginModal">Login</a></li>
-            </th:block>
+<th:block th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-tr-dark w-100 mb-3">
+        <a th:href="@{/}" class="navbar-brand">#TEA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" id="registerDrop">
+                <li class="nav-item"><a th:href="@{/events}" class="nav-link">Events</a></li>
+                <li class="nav-item"><a th:href="@{/about}" class="nav-link">About Us</a></li>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registerModal">Register</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal"
+                                            data-target="#loginModal">Login</a></li>
+                </th:block>
 
-            <th:block sec:authorize="isAuthenticated()">
-                <li class="nav-item" th:if="${#authentication.principal.owner}"><a th:href="@{/events/create}"
-                                                                                   class="nav-link">Create Event</a>
-                </li>
-                <li class="nav-item"><a th:href="@{/profile}" class="nav-link">Profile</a></li>
-                <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
-            </th:block>
-        </ul>
-    </div>
-
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-item" th:if="${#authentication.principal.owner}"><a th:href="@{/events/create}"
+                                                                                       class="nav-link">Create Event</a>
+                    </li>
+                    <li class="nav-item"><a th:href="@{/profile}" class="nav-link">Profile</a></li>
+                    <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
     <!--LOGIN MODAL-->
     <div id="loginModal" class="modal">
         <div class="modal-dialog">
@@ -142,11 +143,11 @@
 
                         <div class="form-group" style="width: 50%; display: inline-grid">
                             <!--recaptcha site key below for localhost use-->
-                            <!--<div id="recaptcha" class="align-content-center g-recaptcha" data-theme="dark"-->
-                                 <!--data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>-->
+                            <div id="recaptcha" class="align-content-center g-recaptcha" data-theme="dark"
+                                 data-sitekey="6Leq0lYUAAAAADnxWDPdAT1g3FznT25yVZN8viFK"></div>
 
                             <!--recaptcha site key below for production use-->
-                            <div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Ld0gVgUAAAAAIzQmHR_q-Hag9ncqzYF3c3HWnEW"></div>
+                            <!--<div id="recaptcha" class="g-recaptcha" data-theme="light" data-sitekey="6Ld0gVgUAAAAAIzQmHR_q-Hag9ncqzYF3c3HWnEW"></div>-->
                         </div>
                         <div id="responseHandler"></div>
                     </div>
@@ -160,7 +161,7 @@
             </div>
         </div>
     </div>
-</nav>
+</th:block>
 <!--</nav>-->
 
 <!--SCRIPTS-->
