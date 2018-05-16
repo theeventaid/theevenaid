@@ -46,6 +46,9 @@ public class ChargeController {
         Ticket ticket = new Ticket();
         ticket.setEvent_id(event);
         ticket.setUser_id(userRepository.findByEmail(user.getEmail()));
+
+        System.out.println("The buying user id is: " + userRepository.findByEmail(user.getEmail()).getId());
+
         ticket.setCharge_id(charge.getId());
         ticket.setCharge_status(charge.getStatus());
         ticket.setBalance_transaction_id(charge.getBalanceTransaction());

@@ -80,6 +80,8 @@ public class EventsController {
 			event.setMedia_location(picture);
 
 		event.setOwner(user);
+		// This should fix the problem with the user
+		event.setUser(user);
 		eventsRepository.save(event);
 
 		return "redirect:/events/" + event.getId();

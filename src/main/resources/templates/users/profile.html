@@ -58,43 +58,54 @@
         <th:block th:unless="${#authentication.principal.owner}">
             <h3>Events I'm Attending</h3>
             <div class="row d-flex justify-content-center">
-                <th:block th:each="event : ${user.eventTickets}">
+                <th:block th:each="ticket : ${user.eventTickets}">
                     <div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-self-stretch">
                         <div class="card">
                             <img class="card-img-top card-img-h25"
-                                 th:src="${event.getEvent_id().media_location}"
+                                 th:src="${ticket.getEvent_id().media_location}"
                                  alt="Event Banner"/>
-                            <div class="card-header" th:text="'Purchased: ' + ${event.purchased_on.toGMTString()}"></div>
+                            <div class="card-header" th:text="'Purchased: ' + ${ticket.purchased_on.toGMTString()}"></div>
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${event.getEvent_id().name}"></h5>
+                                <h5 class="card-title" th:text="${ticket.getEvent_id().name}"></h5>
                                 <p class="card-text text-muted"
-                                     th:text="${event.getEvent_id().getDateString()} + ' @ ' + ${event.getEvent_id().location}"></p>
+                                     th:text="${ticket.getEvent_id().getDateString()} + ' @ ' + ${ticket.getEvent_id().location}"></p>
                             </div>
                             <div class="card-footer">
                                 <a class="btn btn-outline-primary" role="button"
-                                   th:href="@{/events/__${event.event_id.getId()}__}">View Event</a>
-                                <a onclick="test()" href="#" class="btn btn-outline-primary" role="button"
-                                   data-toggle="modal" data-target="#ticketModal">View Ticket</a>
+                                   th:href="@{/events/__${ticket.event_id.getId()}__}">View Event</a>
+                                <input id="event_name" type="hidden" th:value="${ticket.getEvent_id().name}" />
+                                <input id="charge_id" type="hidden" th:value="${ticket.getCharge_id()}" />
+                                <a href="#" class="btn btn-outline-primary viewTicket" role="button"
+                                   data-toggle="modal" id="view" data-target="#ticketModal" onclick="test()">View Ticket</a>
                             </div>
                         </div>
+                        <!--listen for click-->
+                        <!--$('body').on('click', '.viewTicket', function(){-->
+                        <!--$(#ticketModal).data('ticket-event-id');-->
+                        <!--}-->
+                        <!--th:attr="data-ticket-event-id=${ticket.getEvent_id().id}"-->
                     </div>
-
+                    <!--Modal starts here-->
                     <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Your Ticket Barcode</h5>
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        <span>&times;</span>
-                                    </button>
-                                </div>
-                                <form>
-                                    <div class="modal-body">
+                        <th:block >
+                            <form>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!--<h5 class="modal-title">Your Ticket Barcode</h5>-->
+                                        <!--th:text="${ticket.getEvent_id().name}"-->
+                                        <h5 class="modal-title" id="eventNameInModal"> </h5>
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--<form>-->
+                                    <div class="modal-body" id="myModalBody">
                                         <!--barcode here-->
-                                        <svg class="barcode"
+                                        <svg id="svg" class="barcode"
                                              jsbarcode-format="auto"
-                                             th:attr="jsbarcode-value=${event.getCharge_id()}"
+                                             th:attr="jsbarcode-value=${ticket.getCharge_id()}"
                                              jsbarcode-textmargin="0"
                                              jsbarcode-textAlign="center"
                                              jsbarcode-fontsize="10"
@@ -108,9 +119,11 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                    <!--</form>-->
+                                </div>
                             </div>
-                        </div>
+                            </form>
+                        </th:block>
                     </div>
                 </th:block>
             </div>
@@ -121,6 +134,35 @@
 <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 <script th:inline="javascript">
     JsBarcode(".barcode").init();
+
+
+    // $('body').on('click', '.modal-toggle', function (event) {
+    //     event.preventDefault();
+    //     $('.modal-content').empty();
+    //     $('#myModal')
+    //         .removeData('bs.modal')
+    //         .modal({remote: $(this).attr('href') });
+    // });
+
+    /* Fill in modal with content loaded with Ajax */
+    // $(document).ready(function () {
+    //     $('#view').on('click', function (e) {
+    //         $("#ticketModal").modal();
+    //         $("#myModalBody").text("");
+    //         $.ajax({
+    //             url: "signup",
+    //             cache: false
+    //         }).done(function (html) {
+    //             $("#myModalBody").append(html);
+    //         });
+    //     })
+    // });
+
+
+    function test() {
+        $('#eventNameInModal').text($('#event_name').text());
+        $('#charge_id').html();
+    }
 
 </script>
 </body>

@@ -14,91 +14,91 @@ values
 INSERT INTO events (
                name, event_budget, location, media_location, description, start_date,
                end_date, target_profit, target_spending, tickets_available,
-       tickets_price, url, owner_id
+       tickets_price, url, owner_id, user_id
        )
 
 VALUES ('San Antonio Jazz Festival',
        '10000', '300 Navarro Street,San Antonio, Texas', 'https://cdn.filestackcontent.com/N5DCvlDThG20zFzmQb4K',
        'This is a Jazz Festival in downtown San Antonio', '2018-08-17',
-       '2018-08-19', '10000', '9000','300','100','http://www.pivycibyv.in', 4
+       '2018-08-19', '10000', '9000','300','100','http://www.pivycibyv.in', 4, 4
      ),
 
 ('The Hip Hop Reunion',
        '30000', '10300 Cypresswood, Houston Texas', 'https://cdn.filestackcontent.com/jbbk6dJIRKqA1nTGLSsp',
        'A once in a lifetime opportunity to enjoy an old school hip hop reunion', '2018-08-24',
-       '2018-08-25', '20000', '19000','1300','80','http://www.pivycibyv.in', 4
+       '2018-08-25', '20000', '19000','1300','80','http://www.pivycibyv.in', 4,4
      ),
 ('The New York Latin Show',
        '50000', '1335 6th Ave, New York, NY 10019', 'https://cdn.filestackcontent.com/ioaI7G5eTBSgBphoPSbK',
        'A showcase of artists in the middle of New York City', '2018-07-17',
-       '2018-07-19', '45000', '39000','1000','90','http://www.pivycibyv.in', 4
+       '2018-07-19', '45000', '39000','1000','90','http://www.pivycibyv.in', 4,4
      ),
 ('The Chicago Country Fest',
        '100000', '720 S Michigan Ave, Chicago, IL 60605', 'https://cdn.filestackcontent.com/H7jVCJZT3ywsqq7WRTJA',
        'This is a fantastic country Festival in downtown Chicago', '2018-08-17',
-       '2018-08-19', '90000', '90000','3000','110','http://www.pivycibyv.in', 4
+       '2018-08-19', '90000', '90000','3000','110','http://www.pivycibyv.in', 4,4
      ),
 ('The Seatle Latin Jazz Festival',
        '10000', '701 E Heron St, Aberdeen, WA 98520', 'https://cdn.filestackcontent.com/90sbjlhaQryEb3xq51TA',
        'A Latin Jazz Festival close to the Seatle shore.  It is going to be just amazing!  Buy!', '2018-09-17',
-       '2018-09-19', '10000', '9000','300','50','http://www.pivycibyv.in', 4
+       '2018-09-19', '10000', '9000','300','50','http://www.pivycibyv.in', 4,4
      ),
 
 ('The Los Angeles Disco Festival',
        '10000', '2800 Via Cabrillo-Marina, San Pedro, CA 90731', 'https://cdn.filestackcontent.com/FiCYfcCNT25nADM2scQw',
        'The Los Angeles Disco Festival!  It is going to be just amazing!  Buy!', '2018-09-17',
-       '2018-09-19', '10000', '9000','300','90','http://www.pivycibyv.in', 5
+       '2018-09-19', '10000', '9000','300','90','http://www.pivycibyv.in', 5,5
      ),
 
 ('The DC House Festival',
        '10000', '1919 Connecticut Ave NW, Washington, DC 20009', 'https://cdn.filestackcontent.com/7CrUHQnxQDWq38Qo2URk',
        'The DC House Festival comes back this Summer.  Get your tickets in advance and save... It is going to be just amazing!  Buy!', '2018-06-17',
-       '2018-06-19', '10000', '9000','300','100','http://www.pivycibyv.in', 6
+       '2018-06-19', '10000', '9000','300','100','http://www.pivycibyv.in', 6,6
      ),
 
 ('The Miami Dance Convention',
        '10000', '101 Ocean Dr, Miami Beach, FL 33139', 'https://cdn.filestackcontent.com/21YRfBDnRXSpz8IJvZ8P',
        'The Miami Dance Convention is back with us this Summer.  It is going to be just amazing!  Buy!', '2018-06-28',
-       '2018-06-30', '10000', '9000','300','120','http://www.pivycibyv.in', 7
+       '2018-06-30', '10000', '9000','300','120','http://www.pivycibyv.in', 7,7
      ),
 
 ('The New Orleans Jazz Blowout',
        '10000', '2 Poydras St, New Orleans, LA 70130', 'https://cdn.filestackcontent.com/TMhiL0TRnmjLEViL5zJ6',
        'For the very first time in New Orleans, the JAZZ BLOW OUT!  Get your tickets now! It is going to be just amazing!  Buy!', '2018-09-17',
-       '2018-09-19', '10000', '9000','300','80','http://www.pivycibyv.in', 4
+       '2018-09-19', '10000', '9000','300','80','http://www.pivycibyv.in', 4,4
      ),
 
 ('The Country Festival of Texas',
        '10000', '500 E 4th St, Austin, TX 78701', 'https://cdn.filestackcontent.com/Y6HIxv0ARCW01uqMkFID',
        'The Country Festival is back this Summer....be there!.  It is going to be just amazing!  Buy!', '2018-07-17',
-       '2018-07-19', '10000', '9000','300','80','http://www.pivycibyv.in', 5
+       '2018-07-19', '10000', '9000','300','80','http://www.pivycibyv.in', 5,5
      ),
 
 ('The New York City DJ Festival',
        '10000', 'Central Park New York City','https://cdn.filestackcontent.com/YiMpr9tsQgKg6SCoxewB',
        'Back in New York City, the NYC DJ Festival!  DO IT!.  It is going to be just amazing!  Buy!', '2018-09-17',
-       '2018-09-19', '10000', '9000','300','100','http://www.pivycibyv.in', 6
+       '2018-09-19', '10000', '9000','300','100','http://www.pivycibyv.in', 6,6
      ),
 
 ('The Paris Latin Fiesta',
        '10000', '108 Rue Saint-Lazare, 75008 Paris, France', 'https://cdn.filestackcontent.com/SZp0eV9vRCBmMM09zluZ',
        'Yes, a Fiesta event in the heart of Paris.  This is the second year, and if you were here the first year you know it was a blast.  It is going to be just amazing!  Buy your tickets, flight included!', '2018-09-17',
-       '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 7
+       '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 7,7
      ),
 
   ('The Summer Voyage',
     '10000', 'Platzl 9, 80331 München, Germany', 'http://www.aroundtheworldin80jobs.com/wp-content/uploads/2014/08/tomorrowland-in-europe-festival.jpg',
     'A Summer festival in the middle of Munich, right next to the Hofbrauhaus.  It is going to be just amazing!  Buy your tickets, flight included!', '2018-09-17',
-    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4,4
   ),
   ('The Frankfurt Music Festival',
     '10000', 'Mailänder Str. 1, 60598 Frankfurt am Main, Germany','https://image.jimcdn.com/app/cms/image/transf/dimension=1190x10000:format=jpg/path/sa6549607c78f5c11/image/idb0f7b65b337efb8/version/1453987028/donauinselfest-festival-best-summer-music-festivals-in-europe.jpg',
     'Ein Sommerfest mitten in München, direkt neben dem Hofbräuhaus. Es wird einfach unglaublich! Kaufen Sie Ihre Tickets, inklusive Flug!', '2018-09-17',
-    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4,4
   ),
   ('The Amsterdam Music Festival',
     '10000', 'Pr. Irenestraat 30, 1077 WX Amsterdam, Netherlands','https://d49r1np2lhhxv.cloudfront.net/www/magazine/Top20FestivalsinEurope_LL5.jpg',
     'Een muziekfestival in het hart van Amsterdam. dit evenement zal vol zitten met bands, mooie mensen en heel veel plezier! Doe met ons mee! Vlucht inbegrepen!', '2018-09-17',
-    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4
+    '2018-09-19', '10000', '9000','300','980','http://www.pivycibyv.in', 4,4
   )
 ;

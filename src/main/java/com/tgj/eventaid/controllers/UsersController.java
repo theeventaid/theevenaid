@@ -54,7 +54,6 @@ public class UsersController {
 //		for (Event event : events){
 //		    model.addAttribute("sold", ticketsRepository.countByEvent_id((int)event.getId()));
 //		}
-
 		return "users/profile";
 	}
 
