@@ -16,12 +16,12 @@
                         th:text="${#dates.format(event.start_date, 'dd-MMM-yyyy')} + ' @ ' + ${event.location}"></h6>
                 </div>
                 <div class="card-footer" sec:authorize="isAuthenticated()">
-                    <a th:href="@{/events/edit/__${event.id}__}" class="btn btn-outline btn-outline-primary d-inline-block" th:if="${event.owner.id == #authentication.principal.id}">Edit Event</a>
-                    <form th:action="@{/events/delete/__${event.id}__}" th:method="POST" class="d-inline-block" th:if="${event.owner.id == #authentication.principal.id}">
+                    <a th:href="@{/events/edit/__${event.id}__}" class="btn btn-outline btn-outline-primary d-inline-block" th:if="${event.owner.email eq #authentication.principal.email}">Edit Event</a>
+                    <form th:action="@{/events/delete/__${event.id}__}" th:method="POST" class="d-inline-block" th:if="${event.owner.email eq #authentication.principal.email}">
                         <button class="btn btn-outline-danger">Delete Post</button>
                     </form>
 
-                    <form th:action="@{/charge/event/__${event.id}__}" th:method="POST" class="d-inline-block" th:if="${!#authentication.principal.owner}" id="checkout-form">
+                    <form th:action="@{/charge/event/__${event.id}__}" th:method="POST" class="d-inline-block" th:unless="${#authentication.principal.owner}" id="checkout-form">
                         <input type='hidden' th:value="${#numbers.formatInteger(event.tickets_price, 0,'COMMA')}"
                          name="amount"/>
                         <script
@@ -55,8 +55,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="card">
+        <div class="col-xs-12 col-sm-6 d-flex flex-column">
+            <div class="card h-100">
                 <div class="card-header">
                     Details
                 </div>
@@ -80,8 +80,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="card">
+        <div class="col-xs-12 col-sm-6 d-flex flex-column">
+            <div class="card h-100">
                 <div class="card-header">
                     Map
                 </div>

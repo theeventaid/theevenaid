@@ -9,18 +9,15 @@
     </script>
 </head>
 <body>
-
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div class="container">
     <th:block sec:authorize="isAuthenticated()" th:if="${user}">
         <th:block th:if="${#authentication.principal.owner}">
-            <h3 class="nav-item">
-                My Events
-            </h3>
+            <p class="lead">My Events</p>
             <div class="row d-flex justify-content-center">
                 <th:block th:each="event : ${user.events}">
-                    <div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-self-stretch">
-                        <div class="card">
+                    <div class="col-xs-12 col-sm-6 col-lg-4 d-flex flex-column">
+                        <div class="card h-100">
                             <img class="card-img-top card-img-h25" th:src="${event.media_location}" alt="Event Banner"/>
                             <div class="card-header text-muted"
                                  th:text="${event.getDateString()}">
@@ -38,9 +35,9 @@
                                     <li class="list-group-item"
                                         th:text="'Target Profit:' + '$' + ${#numbers.formatDecimal(event.target_profit, 0, 'COMMA', 2, 'POINT')}"></li>
                                     <!--<li class="list-group-item"-->
-                                        <!--th:text="'Percentage to Profit: ' + '%' + ${(event.tickets_price*100)/event.target_profit}"></li>-->
+                                    <!--th:text="'Percentage to Profit: ' + '%' + ${(event.tickets_price*100)/event.target_profit}"></li>-->
                                     <!--<li class="list-group-item"-->
-                                        <!--th:text="'Tickets Sold: ' + '%' + ${sold}"></li>-->
+                                    <!--th:text="'Tickets Sold: ' + '%' + ${sold}"></li>-->
                                     <li class="list-group-item"
                                         th:text="'Tickets Available: ' + ${event.tickets_available}"></li>
                                 </ul>
@@ -52,11 +49,17 @@
                         </div>
                     </div>
                 </th:block>
+                <th:block th:unless="${not #lists.isEmpty(user.events)}">
+                    <div class="center">
+                        <p class="lead">You Haven't Organized Any Events Yet!</p>
+                        <a th:href="@{/events/create}" class="btn btn-outline-primary">Create An Event</a>
+                    </div>
+                </th:block>
             </div>
         </th:block>
         <!--REGULAR USER HERE-->
         <th:block th:unless="${#authentication.principal.owner}">
-            <h3>Events I'm Attending</h3>
+            <p class="lead">Events I'm Attending</p>
             <div class="row d-flex justify-content-center">
                 <th:block th:each="event : ${user.eventTickets}">
                     <div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-self-stretch">
@@ -64,11 +67,12 @@
                             <img class="card-img-top card-img-h25"
                                  th:src="${event.getEvent_id().media_location}"
                                  alt="Event Banner"/>
-                            <div class="card-header" th:text="'Purchased: ' + ${event.purchased_on.toGMTString()}"></div>
+                            <div class="card-header"
+                                 th:text="'Purchased: ' + ${event.purchased_on.toGMTString()}"></div>
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${event.getEvent_id().name}"></h5>
                                 <p class="card-text text-muted"
-                                     th:text="${event.getEvent_id().getDateString()} + ' @ ' + ${event.getEvent_id().location}"></p>
+                                   th:text="${event.getEvent_id().getDateString()} + ' @ ' + ${event.getEvent_id().location}"></p>
                             </div>
                             <div class="card-footer">
                                 <a class="btn btn-outline-primary" role="button"
@@ -111,6 +115,12 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${not #lists.isEmpty(user.eventTickets)}">
+                    <div class="center">
+                        <p class="lead">You Haven't Purchased Any Tickets Yet!</p>
+                        <a th:href="@{/events}" class="btn btn-outline-primary">Browse Events</a>
                     </div>
                 </th:block>
             </div>
