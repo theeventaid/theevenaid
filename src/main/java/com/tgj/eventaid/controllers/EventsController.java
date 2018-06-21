@@ -1,5 +1,6 @@
 package com.tgj.eventaid.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tgj.eventaid.models.*;
 import com.tgj.eventaid.repositories.*;
 import com.tgj.eventaid.utilities.DomainUtils;
@@ -27,6 +28,7 @@ public class EventsController {
 	public UserRepository userRepository;
 	public ArtistsRepository artistsRepository;
 	public VenueRepository venueRepository;
+	public TicketsRepository ticketsRepository;
 
 	public EventsController(EventsRepository eventsRepository, UserRepository userRepository, ArtistsRepository artistsRepository, VenueRepository venueRepository) {
 		this.eventsRepository = eventsRepository;
@@ -63,6 +65,15 @@ public class EventsController {
 
 		return "events/index";
 	}
+
+	//	Mapping modal information for tickets
+	@GetMapping("/findticket")
+	@ResponseBody
+	public Ticket findticket(long id) {
+		System.out.println("This is the ID being passed: " + id);
+		return ticketsRepository.findById(id);
+	}
+
 
 	@GetMapping("/events/create")
 	public String getCreateForm(Model model) {

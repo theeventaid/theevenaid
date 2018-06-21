@@ -1,5 +1,6 @@
 package com.tgj.eventaid.models;
 
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -9,6 +10,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class User {
 
     @Id

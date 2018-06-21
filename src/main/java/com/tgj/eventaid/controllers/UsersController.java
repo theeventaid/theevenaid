@@ -1,5 +1,7 @@
 package com.tgj.eventaid.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.tgj.eventaid.models.Event;
 import com.tgj.eventaid.models.User;
 import com.tgj.eventaid.repositories.ArtistsRepository;
@@ -78,4 +80,3 @@ public class UsersController {
 		return "about";
 	}
 }
-

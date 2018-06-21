@@ -2,11 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="partials/navbar :: head('Profile')">
-    <script>
-        $('body').on('hidden', function () {
-            $(this).removeData('modal-content');
-        });
-    </script>
 </head>
 <body>
 
@@ -69,24 +64,21 @@
                                 <h5 class="card-title" th:text="${ticket.getEvent_id().name}"></h5>
                                 <p class="card-text text-muted"
                                      th:text="${ticket.getEvent_id().getDateString()} + ' @ ' + ${ticket.getEvent_id().location}"></p>
+                                <!--<p class="card-text text-muted" th:text="'User id: ' + ${ticket.user_id.id}"></p>-->
                             </div>
                             <div class="card-footer">
                                 <a class="btn btn-outline-primary" role="button"
-                                   th:href="@{/events/__${ticket.event_id.getId()}__}">View Event</a>
-                                <input id="event_name" type="hidden" th:value="${ticket.getEvent_id().name}" />
-                                <input id="charge_id" type="hidden" th:value="${ticket.getCharge_id()}" />
-                                <a href="#" class="btn btn-outline-primary viewTicket" role="button"
-                                   data-toggle="modal" id="view" data-target="#ticketModal" onclick="test()">View Ticket</a>
+                                   th:href="@{/events/__${ticket.event_id.id}__}">View Event</a>
+                                <!--Button to launch modal-->
+                                <!--role="button" data-toggle="modal" id="view" data-target="#ticketModal"  -->
+                                <!--VIEW TICKETS-->
+                                <a th:href="@{/findticket/(id=${ticket.event_id.id})}" class="btn btn-outline-primary viewTicket" role="button" data-toggle="modal" id="view" data-target="#ticketModal">View Ticket</a>
                             </div>
                         </div>
-                        <!--listen for click-->
-                        <!--$('body').on('click', '.viewTicket', function(){-->
-                        <!--$(#ticketModal).data('ticket-event-id');-->
-                        <!--}-->
-                        <!--th:attr="data-ticket-event-id=${ticket.getEvent_id().id}"-->
                     </div>
+
                     <!--Modal starts here-->
-                    <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog"
+                    <div class="modal fade myModal" id="ticketModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <th:block >
                             <form>
@@ -135,34 +127,18 @@
 <script th:inline="javascript">
     JsBarcode(".barcode").init();
 
+    $(document).ready(function(){
+       $('.card-footer #view').on('click', function(){
+           var href = $(this).attr('href');
+           console.log(href);
+           $.get(href,function (ticket, status) {
+               $('.modal-header h5').append("<span> "+ ticket.eventTickets +"</span>");
+               console.log(ticket);
+           });
+       });
 
-    // $('body').on('click', '.modal-toggle', function (event) {
-    //     event.preventDefault();
-    //     $('.modal-content').empty();
-    //     $('#myModal')
-    //         .removeData('bs.modal')
-    //         .modal({remote: $(this).attr('href') });
-    // });
+    });
 
-    /* Fill in modal with content loaded with Ajax */
-    // $(document).ready(function () {
-    //     $('#view').on('click', function (e) {
-    //         $("#ticketModal").modal();
-    //         $("#myModalBody").text("");
-    //         $.ajax({
-    //             url: "signup",
-    //             cache: false
-    //         }).done(function (html) {
-    //             $("#myModalBody").append(html);
-    //         });
-    //     })
-    // });
-
-
-    function test() {
-        $('#eventNameInModal').text($('#event_name').text());
-        $('#charge_id').html();
-    }
 
 </script>
 </body>

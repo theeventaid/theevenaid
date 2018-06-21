@@ -1,11 +1,15 @@
 package com.tgj.eventaid.models;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "event_tickets")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "event_id")
 public class Ticket {
 
     @Id
