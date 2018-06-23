@@ -129,10 +129,10 @@ public class EventsController {
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 
-	@GetMapping("/upload")
-	public String upload() {
-		return "users/upload";
-	}
+//	@GetMapping("/upload")
+//	public String upload() {
+//		return "users/upload";
+//	}
 
 	@PostMapping("/upload")
 	public String uploadFile(@ModelAttribute Event event) {
